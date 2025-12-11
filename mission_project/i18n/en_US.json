@@ -1,0 +1,13 @@
+{
+  "shared": {
+    "server_communication_error": "server communication error"
+  },
+  "login": {
+    "enter": "enter",
+    "login": "login",
+    "password": "password",
+    "register": "register",
+    "remember_me": "remember me",
+    "username": "username"
+  }
+}
