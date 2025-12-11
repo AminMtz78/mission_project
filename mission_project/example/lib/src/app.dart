@@ -17,5 +17,6 @@ class MyApp extends StatelessWidget {
     locale: StorageHandler.locale == 'fa'
         ? const Locale('en', 'US')
         : const Locale('fa', 'IR'),
+    translationsKeys: LocalizationService.keys,
   );
 }

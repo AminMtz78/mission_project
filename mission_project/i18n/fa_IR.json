@@ -1,7 +1,4 @@
 {
-  "shared": {
-    "server_communication_error": "خطای ارتباط با سرور"
-  },
   "login": {
     "enter": "ورود",
     "login": "ورود",
@@ -9,6 +6,8 @@
     "register": "ثبت نام",
     "remember_me": "مرا به خاطر بسپار",
     "username": "نام کاربری"
+  },
+  "shared": {
+    "server_communication_error": "خطای ارتباط با سرور"
   }
 }
-
