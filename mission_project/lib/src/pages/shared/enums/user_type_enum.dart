@@ -1,6 +1,8 @@
+import 'package:mission_project/generated/locales.g.dart';
+
 enum UserTypeEnum {
-  admin(1, "admin"),
-  hunter(2, "hunter");
+  admin(1, LocaleKeys.shared_admin),
+  hunter(2, LocaleKeys.shared_hunter);
 
   final int id;
   final String title;

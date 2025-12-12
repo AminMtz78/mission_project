@@ -1,5 +1,10 @@
 {
   "users": [
-    
+    {
+      "username": "amin",
+      "password": "amin",
+      "userType": 2,
+      "id": 1
+    }
   ]
 }

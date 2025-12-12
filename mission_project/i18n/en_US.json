@@ -5,9 +5,23 @@
     "password": "password",
     "register": "register",
     "remember_me": "remember me",
-    "username": "username"
+    "username": "username",
+    "Username_cannot_be_empty": "Username cannot be empty.",
+    "Username_must_be_at_least_3_characters": "Username must be at least 3 characters.",
+    "Username_cannot_exceed_20_characters": "Username cannot exceed 20 characters.",
+    "Username_must_start_with_a_letter_and_contain_only_letters": "Username must start with a letter and contain only letters, numbers, and _ .",
+    "Username_cannot_be_only_numbers": "Username cannot be only numbers.",
+    "Password_cannot_be_empty": "Password cannot be empty.",
+    "Password_must_be_at_least_8_characters": "Password must be at least 8 characters.",
+    "At_least_one_uppercase_letter_is_required": "At least one uppercase letter is required.",
+    "At_least_one_number_is_required": "At least one number is required.",
+    "At_least_one_special_character_is_required": "At least one special character is required.",
+    "Password_is_too_weak": "Password is too weak."
   },
   "shared": {
-    "server_communication_error": "server communication error"
+    "server_communication_error": "server communication error",
+    "admin": "admin",
+    "hunter": "hunter",
+    "The_operation_was_successful": "The operation was successful."
   }
 }

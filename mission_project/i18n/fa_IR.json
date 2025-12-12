@@ -5,9 +5,23 @@
     "password": "رمز عبور",
     "register": "ثبت نام",
     "remember_me": "مرا به خاطر بسپار",
-    "username": "نام کاربری"
+    "username": "نام کاربری",
+    "Username_cannot_be_empty": "نام کاربری نمی تواند خالی باشد. ",
+    "Username_must_be_at_least_3_characters": "نام کاربری باید حداقل ۳ کاراکتر باشد. ",
+    "Username_cannot_exceed_20_characters": "کاربری نمی تواند بیشتر از ۲۰ کاراکتر باشد. ",
+    "Username_must_start_with_a_letter_and_contain_only_letters": "نام کاربری باید با حرف شروع شود و فقط شامل حروف، اعداد و _ باشد. ",
+    "Username_cannot_be_only_numbers": "نام کاربری نمی تواند فقط عدد باشد. ",
+    "Password_cannot_be_empty": "رمز عبور نمی تواند خالی باشد. ",
+    "Password_must_be_at_least_8_characters": "رمز عبور باید حداقل ۸ کاراکتر باشد. ",
+    "At_least_one_uppercase_letter_is_required": "حداقل یک حرف بزرگ لازم است. ",
+    "At_least_one_number_is_required": "حداقل یک عدد لازم است. ",
+    "At_least_one_special_character_is_required": "حداقل یک کاراکتر خاص لازم است. ",
+    "Password_is_too_weak": "خیلی ساده است. "
   },
   "shared": {
-    "server_communication_error": "خطای ارتباط با سرور"
+    "server_communication_error": "خطای ارتباط با سرور",
+    "admin": "ادمین ",
+    "hunter": "شکارچی",
+    "The_operation_was_successful": "عملیات با موفقیت انجام شد"
   }
 }
