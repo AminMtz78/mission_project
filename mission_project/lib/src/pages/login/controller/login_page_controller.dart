@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mission_project/src/pages/shared/enums/user_type_enum.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/commons/app_controller.dart';
 import '../../../infrastructure/commons/storage_handler.dart';
 import '../../../infrastructure/routes/route_name.dart';
+import '../../../infrastructure/routes/route_path.dart';
+import '../../shared/enums/user_type_enum.dart';
 import '../../shared/model/view_model/user_view_model.dart';
 import '../../shared/widgets/toast_widget.dart';
 import '../repository/login_page_repository.dart';
@@ -63,9 +64,9 @@ class LoginPageController extends GetxController {
             }
             AppController().setUser = userList.first;
             if (userList.first.userType == UserTypeEnum.admin) {
-              //todo: go to admin page
+              Get.offNamed(RoutePath.adminHomePage);
             } else {
-              //todo: go to mission list for hunter
+              Get.offNamed(RoutePath.missionList);
             }
           } else {
             ToastWidget.show(

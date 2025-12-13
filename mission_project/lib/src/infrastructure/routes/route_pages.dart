@@ -1,11 +1,15 @@
 import 'package:get/get.dart';
-import 'package:mission_project/src/pages/splash/common/splash_page_binding.dart';
-import 'package:mission_project/src/pages/splash/views/splash_page.dart';
 
+import '../../pages/admin_home/common/admin_home_binding.dart';
+import '../../pages/admin_home/views/admin_home_page.dart';
 import '../../pages/login/common/login_page_binding.dart';
 import '../../pages/login/views/login_page.dart';
+import '../../pages/mission_list/common/mission_list_binding.dart';
+import '../../pages/mission_list/views/mission_list_page.dart';
 import '../../pages/register/common/register_page_binding.dart';
 import '../../pages/register/views/register_page.dart';
+import '../../pages/splash/common/splash_page_binding.dart';
+import '../../pages/splash/views/splash_page.dart';
 import 'route_path.dart';
 
 class RoutePages {
@@ -27,6 +31,16 @@ class RoutePages {
           binding: RegisterPageBinding(),
         ),
       ],
+    ),
+    GetPage(
+      name: RoutePath.adminHomePage,
+      page: () => AdminHomePage(),
+      binding: AdminHomeBinding(),
+    ),
+    GetPage(
+      name: RoutePath.missionList,
+      page: () => MissionListPage(),
+      binding: MissionListBinding(),
     ),
   ];
 }
