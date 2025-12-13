@@ -16,7 +16,11 @@
     "At_least_one_uppercase_letter_is_required": "At least one uppercase letter is required.",
     "At_least_one_number_is_required": "At least one number is required.",
     "At_least_one_special_character_is_required": "At least one special character is required.",
-    "Password_is_too_weak": "Password is too weak."
+    "Password_is_too_weak": "Password is too weak.",
+    "this_username_already_exist": "this username already exist",
+    "password_did_not_match": "password did't match",
+    "select_user_type": "select user type",
+    "invalid_username_or_password": "invalid username or password"
   },
   "shared": {
     "server_communication_error": "server communication error",

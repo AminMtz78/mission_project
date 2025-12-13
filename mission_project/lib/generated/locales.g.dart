@@ -38,6 +38,12 @@ class LocaleKeys {
   static const login_At_least_one_special_character_is_required =
       'login_At_least_one_special_character_is_required';
   static const login_Password_is_too_weak = 'login_Password_is_too_weak';
+  static const login_this_username_already_exist =
+      'login_this_username_already_exist';
+  static const login_password_did_not_match = 'login_password_did_not_match';
+  static const login_select_user_type = 'login_select_user_type';
+  static const login_invalid_username_or_password =
+      'login_invalid_username_or_password';
   static const shared_server_communication_error =
       'shared_server_communication_error';
   static const shared_admin = 'shared_admin';
@@ -71,6 +77,10 @@ class Locales {
     'login_At_least_one_special_character_is_required':
         'At least one special character is required.',
     'login_Password_is_too_weak': 'Password is too weak.',
+    'login_this_username_already_exist': 'this username already exist',
+    'login_password_did_not_match': 'password did\'t match',
+    'login_select_user_type': 'select user type',
+    'login_invalid_username_or_password': 'invalid username or password',
     'shared_server_communication_error': 'server communication error',
     'shared_admin': 'admin',
     'shared_hunter': 'hunter',
@@ -101,6 +111,10 @@ class Locales {
     'login_At_least_one_special_character_is_required':
         'حداقل یک کاراکتر خاص لازم است. ',
     'login_Password_is_too_weak': 'خیلی ساده است. ',
+    'login_this_username_already_exist': 'این نام کاربری قبلا ثبت شده',
+    'login_password_did_not_match': 'رمز عبور با تکرار ان مطابقت ندارد',
+    'login_select_user_type': 'نوع کاریر را انتخاب کنید',
+    'login_invalid_username_or_password': 'نام کاربری یا رمز عبور اشتباه است',
     'shared_server_communication_error': 'خطای ارتباط با سرور',
     'shared_admin': 'ادمین ',
     'shared_hunter': 'شکارچی',

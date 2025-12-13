@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class ToastWidget {
   static void show(BuildContext context, String message, {int duration = 3}) {
     final overlay = Overlay.of(context);
-    if (overlay == null) return;
 
     final overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
@@ -25,7 +24,7 @@ class ToastWidget {
 class _ToastMessage extends StatefulWidget {
   final String message;
 
-  const _ToastMessage({required this.message, Key? key}) : super(key: key);
+  const _ToastMessage({required this.message});
 
   @override
   State<_ToastMessage> createState() => _ToastMessageState();
@@ -63,7 +62,7 @@ class _ToastMessageState extends State<_ToastMessage>
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
-            color: Colors.black87,
+            color: Colors.deepPurpleAccent,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(

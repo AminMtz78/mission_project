@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mission_project/generated/locales.g.dart';
+import 'package:mission_project/src/pages/shared/enums/breakpoint.dart';
 import 'package:mission_project/src/pages/shared/enums/user_type_enum.dart';
 import 'package:mission_project/src/pages/shared/widgets/my_button.dart';
 
@@ -17,19 +18,36 @@ class RegisterPage extends GetView<RegisterPageController> {
       body: SingleChildScrollView(
         child: Padding(
           padding: Utils.largePadding,
-          child: Column(
-            children: [
-              _adminAndHunter(),
-              Utils.mediumVerticalSpacer,
-              _usernameAndPassWordWidget(context),
-              Utils.giantVerticalSpacer,
-              _registerButton(context),
-            ],
+          child: Breakpoint.either(
+            context,
+            breakpoint: Breakpoint.phone,
+            before: () => _forSmallSc(context),
+            after: () => _forLargeSc(context),
           ),
         ),
       ),
     );
   }
+
+  Widget _forSmallSc(BuildContext context) => _body(context);
+
+  Widget _forLargeSc(BuildContext context) => Row(
+    children: [
+      Flexible(fit: FlexFit.tight, child: SizedBox()),
+      Flexible(fit: FlexFit.tight, child: _body(context)),
+      Flexible(fit: FlexFit.tight, child: SizedBox()),
+    ],
+  );
+
+  Widget _body(BuildContext context) => Column(
+    children: [
+      _adminAndHunter(),
+      Utils.mediumVerticalSpacer,
+      _usernameAndPassWordWidget(context),
+      Utils.giantVerticalSpacer,
+      _registerButton(context),
+    ],
+  );
 
   Widget _adminAndHunter() {
     return Obx(
@@ -65,10 +83,15 @@ class RegisterPage extends GetView<RegisterPageController> {
         children: [
           Text(LocaleKeys.login_username.tr),
           Utils.smallVerticalSpacer,
-          TextFormField(
-            validator: controller.validateUsername,
-            controller: controller.usernameController,
-            decoration: InputDecoration(border: OutlineInputBorder()),
+          Obx(
+            () => TextFormField(
+              validator: controller.validateUsername,
+              controller: controller.usernameController,
+              decoration: InputDecoration(border: OutlineInputBorder()),
+              autovalidateMode: controller.isSubmitted.value
+                  ? AutovalidateMode.onUserInteraction
+                  : AutovalidateMode.disabled,
+            ),
           ),
           Utils.largeVerticalSpacer,
           Text(LocaleKeys.login_password.tr),
@@ -82,13 +105,16 @@ class RegisterPage extends GetView<RegisterPageController> {
                 border: OutlineInputBorder(),
                 suffixIcon: IconButton(
                   onPressed: () {
-                    controller.isObscure.value = !controller.isObscure.value;
+                    controller.isObscure.toggle();
                   },
                   icon: controller.isObscure.value
                       ? Icon(Icons.visibility_off)
                       : Icon(Icons.visibility),
                 ),
               ),
+              autovalidateMode: controller.isSubmitted.value
+                  ? AutovalidateMode.onUserInteraction
+                  : AutovalidateMode.disabled,
             ),
           ),
           Utils.giantVerticalSpacer,
@@ -96,20 +122,23 @@ class RegisterPage extends GetView<RegisterPageController> {
           Utils.smallVerticalSpacer,
           Obx(
             () => TextFormField(
+              validator: controller.validatePassword,
               obscureText: controller.isObscureRepeat.value,
               controller: controller.repeatPasswordController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 suffixIcon: IconButton(
                   onPressed: () {
-                    controller.isObscureRepeat.value =
-                        !controller.isObscureRepeat.value;
+                    controller.isObscureRepeat.toggle();
                   },
                   icon: controller.isObscureRepeat.value
                       ? Icon(Icons.visibility_off)
                       : Icon(Icons.visibility),
                 ),
               ),
+              autovalidateMode: controller.isSubmitted.value
+                  ? AutovalidateMode.onUserInteraction
+                  : AutovalidateMode.disabled,
             ),
           ),
         ],

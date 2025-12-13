@@ -5,6 +5,12 @@
       "password": "amin",
       "userType": 2,
       "id": 1
+    },
+    {
+      "username": "aminmtz",
+      "password": "@Aa12345",
+      "userType": 1,
+      "id": 2
     }
   ]
 }

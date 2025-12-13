@@ -1,8 +1,5 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../shared/enums/user_type_enum.dart';
@@ -20,6 +17,7 @@ class RegisterPageController extends GetxController {
   final RxBool isObscureRepeat = true.obs;
   final RxBool isLoading = false.obs;
   final RxBool isRetry = false.obs;
+  final RxBool isSubmitted = false.obs;
 
   final List<UserViewModel> users = [];
 
@@ -30,58 +28,60 @@ class RegisterPageController extends GetxController {
       TextEditingController();
 
   Future<void> checkUserExist(BuildContext context) async {
-   if(formKey.currentState!.validate()){
-     isLoading(true);
-     isRetry(false);
-     users.clear();
-     final resultOrException = await _repository.getUser(
-       usernameController.text,
-     );
-     return resultOrException.fold(
-       ifLeft: (err) {
-         ToastWidget.show(context, err);
-         isRetry(true);
-         isLoading(false);
-       },
-       ifRight: (data) {
-         users.addAll(data);
-         ToastWidget.show(context, 'this username already exist');
-         isLoading(false);
-       },
-     );
-   }
+    if (formKey.currentState!.validate()) {
+      isLoading(true);
+      isRetry(false);
+      users.clear();
+      final resultOrException = await _repository.getUser(
+        usernameController.text,
+      );
+      return resultOrException.fold(
+        ifLeft: (err) {
+          ToastWidget.show(context, err);
+          isRetry(true);
+          isLoading(false);
+        },
+        ifRight: (data) {
+          users.addAll(data);
+          isLoading(false);
+        },
+      );
+    }
   }
 
   Future<void> addUser(BuildContext context) async {
-   if(formKey.currentState!.validate()){
-     if (passwordController.text != repeatPasswordController.text ||
-         passwordController.text.isEmpty ||
-         usernameController.text.isEmpty) {
-       ToastWidget.show(context, 'enter username and password');
-       return;
-     }
-     await checkUserExist(context);
-     if (users.isNotEmpty) {
-       return;
-     }
-     final resultOrException = await _repository.addNewUser(
-       UserDto(
-         username: usernameController.text,
-         password: passwordController.text,
-         userType: userType.value!,
-       ),
-     );
-     resultOrException.fold(
-       ifLeft: (exception) => ToastWidget.show(context, exception),
-       ifRight: (result) {
-         Get.back(result: result);
-         ToastWidget.show(
-           context,
-           LocaleKeys.shared_The_operation_was_successful.tr,
-         );
-       },
-     );
-   }
+    if (userType.value == null) {
+      ToastWidget.show(context, LocaleKeys.login_select_user_type.tr);
+      return;
+    }
+    if (formKey.currentState!.validate()) {
+      await checkUserExist(context);
+      if (users.isNotEmpty) {
+        if (users.isNotEmpty) {
+          ToastWidget.show(
+            context,
+            LocaleKeys.login_this_username_already_exist.tr,
+          );
+        }
+        return;
+      }
+      final resultOrException = await _repository.addNewUser(
+        UserDto(
+          username: usernameController.text,
+          password: passwordController.text,
+          userType: userType.value!,
+        ),
+      );
+      resultOrException.fold(
+        ifLeft: (exception) => ToastWidget.show(context, exception),
+        ifRight: (result) {
+          ToastWidget.show(
+            context,
+            LocaleKeys.shared_The_operation_was_successful.tr,
+          );
+        },
+      );
+    }
   }
 
   String? validateUsername(String? value) {
@@ -132,6 +132,9 @@ class RegisterPageController extends GetxController {
 
     if (!RegExp(r'[!@#$%^&*(),.?\":{}|<>]').hasMatch(value)) {
       return LocaleKeys.login_At_least_one_special_character_is_required.tr;
+    }
+    if (passwordController.text != repeatPasswordController.text) {
+      return LocaleKeys.login_password_did_not_match.tr;
     }
 
     final weak = ["123456", "password", "qwerty", "111111"];

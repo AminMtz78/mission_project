@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mission_project/src/pages/shared/enums/user_type_enum.dart';
 
+import '../../../../generated/locales.g.dart';
+import '../../../infrastructure/commons/app_controller.dart';
 import '../../../infrastructure/commons/storage_handler.dart';
 import '../../../infrastructure/routes/route_name.dart';
 import '../../shared/model/view_model/user_view_model.dart';
@@ -11,8 +14,11 @@ class LoginPageController extends GetxController {
   final String title = 'login page app bar ';
 
   UserViewModel? user;
+  final RxBool isObscure = true.obs;
+  final RxBool isLoading = false.obs;
 
-  RxBool isRememberUser = false.obs;
+  final RxBool isRememberUser = false.obs;
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   final LoginPageRepository _repository = LoginPageRepository();
 
@@ -41,23 +47,49 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> authenticate(BuildContext context) async {
-    final resultOrException = await _repository.getUserByUsernameAndPassword(
-      username: usernameController.text,
-      password: passwordController.text,
-    );
+    if (formKey.currentState!.validate()) {
+      isLoading(true);
+      final resultOrException = await _repository.getUserByUsernameAndPassword(
+        username: usernameController.text,
+        password: passwordController.text,
+      );
 
-    resultOrException.fold(
-      ifLeft: (err) => ToastWidget.show(context, err),
-      ifRight: (userList) {
-        if (userList.isNotEmpty) {
-          if (isRememberUser.value) {
-            StorageHandler.setRememberedUserId = userList.first.id;
+      resultOrException.fold(
+        ifLeft: (err) => ToastWidget.show(context, err),
+        ifRight: (userList) {
+          if (userList.isNotEmpty) {
+            if (isRememberUser.value) {
+              StorageHandler.setRememberedUserId = userList.first.id;
+            }
+            AppController().setUser = userList.first;
+            if (userList.first.userType == UserTypeEnum.admin) {
+              //todo: go to admin page
+            } else {
+              //todo: go to mission list for hunter
+            }
+          } else {
+            ToastWidget.show(
+              context,
+              LocaleKeys.login_invalid_username_or_password.tr,
+            );
           }
-          // TODO : go to admin home page or hunter home page
-        } else {
-          ToastWidget.show(context, 'invalid username or password');
-        }
-      },
-    );
+        },
+      );
+      isLoading(false);
+    }
+  }
+
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.login_Password_cannot_be_empty.tr;
+    }
+    return null;
+  }
+
+  String? validateUserName(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.login_Username_cannot_be_empty.tr;
+    }
+    return null;
   }
 }

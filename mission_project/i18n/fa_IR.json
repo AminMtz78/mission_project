@@ -16,7 +16,11 @@
     "At_least_one_uppercase_letter_is_required": "حداقل یک حرف بزرگ لازم است. ",
     "At_least_one_number_is_required": "حداقل یک عدد لازم است. ",
     "At_least_one_special_character_is_required": "حداقل یک کاراکتر خاص لازم است. ",
-    "Password_is_too_weak": "خیلی ساده است. "
+    "Password_is_too_weak": "خیلی ساده است. ",
+    "this_username_already_exist": "این نام کاربری قبلا ثبت شده",
+    "password_did_not_match": "رمز عبور با تکرار ان مطابقت ندارد",
+    "select_user_type": "نوع کاریر را انتخاب کنید",
+    "invalid_username_or_password": "نام کاربری یا رمز عبور اشتباه است"
   },
   "shared": {
     "server_communication_error": "خطای ارتباط با سرور",

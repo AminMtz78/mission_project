@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
+import 'package:mission_project/src/pages/shared/model/view_model/user_view_model.dart';
+
 import 'storage_handler.dart';
 
 class AppController {
@@ -9,6 +11,10 @@ class AppController {
   AppController._();
 
   static final AppController _instance = AppController._();
+
+  UserViewModel? currentUser;
+
+  set setUser(UserViewModel user) => currentUser = user;
 
   void changeLanguage() {
     if (StorageHandler.locale == 'en') {
