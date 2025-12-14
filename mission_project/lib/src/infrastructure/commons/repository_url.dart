@@ -5,4 +5,9 @@ class RepositoryUrls {
   static const String getUser = '$baseUrl/users';
 
   static String getUserById(int userId) => '$baseUrl/users/$userId';
+
+
+
+  // tag
+  static const String addTag = '$baseUrl/tags';
 }

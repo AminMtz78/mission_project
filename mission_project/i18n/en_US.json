@@ -26,6 +26,16 @@
     "server_communication_error": "server communication error",
     "admin": "admin",
     "hunter": "hunter",
-    "The_operation_was_successful": "The operation was successful."
+    "The_operation_was_successful": "The operation was successful.",
+    "free": "free",
+    "Pending_Approval": "Pending Approval ",
+    "In_progress": "In Progress ",
+    "Failed": "Failed",
+    "Done": "done",
+    "title": "title",
+    "description": "description",
+    "price": "price",
+    "deadLine": "deadline",
+    "tag": "tag"
   }
 }

@@ -26,6 +26,17 @@
     "server_communication_error": "خطای ارتباط با سرور",
     "admin": "ادمین ",
     "hunter": "شکارچی",
-    "The_operation_was_successful": "عملیات با موفقیت انجام شد"
+    "The_operation_was_successful": "عملیات با موفقیت انجام شد",
+    "free" : "آزاد",
+    "Pending_Approval": "در انتظار تایید",
+    "In_progress": "در حال انجام",
+    "Failed": "شکست خورده",
+    "Done": "انجام شده",
+    "title" : "عنوان",
+    "description" : "توضیحات",
+    "price": "قیمت",
+    "deadLine" : "اخرین مهلت",
+    "tag": "تگ"
+
   }
 }

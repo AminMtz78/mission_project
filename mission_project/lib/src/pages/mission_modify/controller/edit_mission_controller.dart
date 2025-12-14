@@ -1,7 +1,10 @@
-import 'package:mission_project/src/pages/mission_modify/controller/modify_mission_controller.dart';
+import 'modify_mission_controller.dart';
 
 class EditMissionController extends ModifyMissionController {
-  EditMissionController({required this.missionId});
+  // EditMissionController({required this.missionId});
+  //
+  // final int missionId;
 
-  final int missionId;
+  @override
+  String get title => 'edit';
 }

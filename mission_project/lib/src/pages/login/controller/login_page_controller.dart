@@ -41,7 +41,6 @@ class LoginPageController extends GetxController {
       ifRight: (user) {
         user = user;
         usernameController.text = user.username;
-
         passwordController.text = user.password;
       },
     );
@@ -60,13 +59,16 @@ class LoginPageController extends GetxController {
         ifRight: (userList) {
           if (userList.isNotEmpty) {
             if (isRememberUser.value) {
-              StorageHandler.setRememberedUserId = userList.first.id;
+              StorageHandler().setRememberedUserId(userList.first.id);
+              print(
+                'new user id add to storage. user id = ${StorageHandler().getUserId}',
+              );
             }
             AppController().setUser = userList.first;
             if (userList.first.userType == UserTypeEnum.admin) {
               Get.offNamed(RoutePath.adminHomePage);
             } else {
-              Get.offNamed(RoutePath.missionList);
+              Get.offNamed(RoutePath.hunterMissionList);
             }
           } else {
             ToastWidget.show(

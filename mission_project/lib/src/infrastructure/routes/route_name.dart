@@ -8,5 +8,11 @@ class RouteName {
       '${RoutePath.loginPage}${RoutePath.registerPage}';
 
   static const String adminHomePage = RoutePath.adminHomePage;
-  static const String missionList = RoutePath.missionList;
+  static const String hunterMissionList = RoutePath.hunterMissionList;
+
+  static const String addMission =
+      RoutePath.adminHomePage + RoutePath.addMission;
+
+  static const String editMission =
+      RoutePath.adminHomePage + RoutePath.editMission;
 }

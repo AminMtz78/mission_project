@@ -50,6 +50,16 @@ class LocaleKeys {
   static const shared_hunter = 'shared_hunter';
   static const shared_The_operation_was_successful =
       'shared_The_operation_was_successful';
+  static const shared_free = 'shared_free';
+  static const shared_Pending_Approval = 'shared_Pending_Approval';
+  static const shared_In_progress = 'shared_In_progress';
+  static const shared_Failed = 'shared_Failed';
+  static const shared_Done = 'shared_Done';
+  static const shared_title = 'shared_title';
+  static const shared_description = 'shared_description';
+  static const shared_price = 'shared_price';
+  static const shared_deadLine = 'shared_deadLine';
+  static const shared_tag = 'shared_tag';
 }
 
 class Locales {
@@ -85,6 +95,16 @@ class Locales {
     'shared_admin': 'admin',
     'shared_hunter': 'hunter',
     'shared_The_operation_was_successful': 'The operation was successful.',
+    'shared_free': 'free',
+    'shared_Pending_Approval': 'Pending Approval ',
+    'shared_In_progress': 'In Progress ',
+    'shared_Failed': 'Failed',
+    'shared_Done': 'done',
+    'shared_title': 'title',
+    'shared_description': 'description',
+    'shared_price': 'price',
+    'shared_deadLine': 'deadline',
+    'shared_tag': 'tag',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -119,5 +139,15 @@ class Locales {
     'shared_admin': 'ادمین ',
     'shared_hunter': 'شکارچی',
     'shared_The_operation_was_successful': 'عملیات با موفقیت انجام شد',
+    'shared_free': 'آزاد',
+    'shared_Pending_Approval': 'در انتظار تایید',
+    'shared_In_progress': 'در حال انجام',
+    'shared_Failed': 'شکست خورده',
+    'shared_Done': 'انجام شده',
+    'shared_title': 'عنوان',
+    'shared_description': 'توضیحات',
+    'shared_price': 'قیمت',
+    'shared_deadLine': 'اخرین مهلت',
+    'shared_tag': 'تگ',
   };
 }

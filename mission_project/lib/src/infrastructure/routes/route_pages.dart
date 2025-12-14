@@ -6,6 +6,9 @@ import '../../pages/login/common/login_page_binding.dart';
 import '../../pages/login/views/login_page.dart';
 import '../../pages/mission_list/common/mission_list_binding.dart';
 import '../../pages/mission_list/views/mission_list_page.dart';
+import '../../pages/mission_modify/common/add_mission_binding.dart';
+import '../../pages/mission_modify/common/edit_mission_binding.dart';
+import '../../pages/mission_modify/views/modify_mission_page.dart';
 import '../../pages/register/common/register_page_binding.dart';
 import '../../pages/register/views/register_page.dart';
 import '../../pages/splash/common/splash_page_binding.dart';
@@ -36,9 +39,21 @@ class RoutePages {
       name: RoutePath.adminHomePage,
       page: () => AdminHomePage(),
       binding: AdminHomeBinding(),
+      children: [
+        GetPage(
+          name: RoutePath.addMission,
+          page: () => ModifyMissionPage(),
+          binding: AddMissionBinding(),
+        ),
+        GetPage(
+          name: RoutePath.editMission,
+          page: () => ModifyMissionPage(),
+          binding: EditMissionBinding(),
+        ),
+      ],
     ),
     GetPage(
-      name: RoutePath.missionList,
+      name: RoutePath.hunterMissionList,
       page: () => MissionListPage(),
       binding: MissionListBinding(),
     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mission_project/src/components/grid_date_picker.dart';
 import 'package:mission_project/src/pages/shared/enums/breakpoint.dart';
+import 'package:mission_project/src/pages/shared/widgets/custom_flexible_widget.dart';
 import 'package:mission_project/src/pages/shared/widgets/my_button.dart';
 
 import '../../../../generated/locales.g.dart';
@@ -21,19 +21,11 @@ class LoginPage extends GetView<LoginPageController> {
           context,
           breakpoint: Breakpoint.phone,
           before: () => _body(context),
-          after: () => _forLargeSc(context),
+          after: () => CustomFlexibleWidget(widget: _body(context)),
         ),
       ),
     );
   }
-
-  Widget _forLargeSc(BuildContext context) => Row(
-    children: [
-      Flexible(fit: FlexFit.tight, child: SizedBox()),
-      Flexible(fit: FlexFit.tight, child: _body(context)),
-      Flexible(fit: FlexFit.tight, child: SizedBox()),
-    ],
-  );
 
   Widget _body(BuildContext context) {
     return Padding(
@@ -52,7 +44,7 @@ class LoginPage extends GetView<LoginPageController> {
                   onChanged: controller.isLoading.value
                       ? null
                       : (value) {
-                          controller.isRememberUser.value = value ?? false;
+                          controller.isRememberUser.value = value!;
                         },
                 ),
               ),

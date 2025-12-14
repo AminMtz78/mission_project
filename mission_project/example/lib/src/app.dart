@@ -11,11 +11,14 @@ class MyApp extends StatelessWidget {
     debugShowCheckedModeBanner: false,
     title: 'Flutter Demo',
     theme: ThemeData(
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.deepPurpleAccent.withValues(alpha: 0.3),
+      ),
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
     ),
     initialRoute: RoutePath.splashPage,
     getPages: RoutePages.pages,
-    locale: StorageHandler.locale == 'fa'
+    locale: StorageHandler().getLocale() == 'fa'
         ? const Locale('en', 'US')
         : const Locale('fa', 'IR'),
     translationsKeys: LocalizationService.keys,
