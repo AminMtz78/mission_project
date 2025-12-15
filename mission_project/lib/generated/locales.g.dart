@@ -60,6 +60,9 @@ class LocaleKeys {
   static const shared_price = 'shared_price';
   static const shared_deadLine = 'shared_deadLine';
   static const shared_tag = 'shared_tag';
+  static const shared_empty = 'shared_empty';
+  static const shared_registration = 'shared_registration';
+  static const shared_required_field = 'shared_required_field';
 }
 
 class Locales {
@@ -105,6 +108,9 @@ class Locales {
     'shared_price': 'price',
     'shared_deadLine': 'deadline',
     'shared_tag': 'tag',
+    'shared_empty': 'empty',
+    'shared_registration': 'registration',
+    'shared_required_field': 'required field',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -149,5 +155,8 @@ class Locales {
     'shared_price': 'قیمت',
     'shared_deadLine': 'اخرین مهلت',
     'shared_tag': 'تگ',
+    'shared_empty': 'هیچ رکوردی ثبت نشده است',
+    'shared_registration': 'ثبت',
+    'shared_required_field': 'این فیلد الزامی است',
   };
 }

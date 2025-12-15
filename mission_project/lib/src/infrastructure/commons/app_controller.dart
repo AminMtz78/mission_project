@@ -14,7 +14,7 @@ class AppController {
 
   UserViewModel? currentUser;
 
-  set setUser(UserViewModel user) => currentUser = user;
+  void setUser(UserViewModel user) => currentUser = user;
 
   void changeLanguage() {
     if (StorageHandler().getLocale() == 'en') {

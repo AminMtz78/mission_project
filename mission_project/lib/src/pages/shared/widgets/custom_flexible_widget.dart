@@ -10,7 +10,7 @@ class CustomFlexibleWidget extends StatelessWidget {
     return Row(
       children: [
         Flexible(fit: FlexFit.tight, child: SizedBox()),
-        Flexible(child: widget),
+        Flexible(flex: 2, child: widget),
         Flexible(fit: FlexFit.tight, child: SizedBox()),
       ],
     );

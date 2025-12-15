@@ -36,6 +36,9 @@
     "description": "description",
     "price": "price",
     "deadLine": "deadline",
-    "tag": "tag"
+    "tag": "tag",
+    "empty": "empty",
+    "registration": "registration",
+    "required_field": "required field"
   }
 }

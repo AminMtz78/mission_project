@@ -18,7 +18,7 @@ class SplashPageController extends GetxController {
 
   Future<void> checkLogin() async {
     await Future.delayed(Duration(seconds: 3));
-    final int?  userId = StorageHandler().getUserId();
+    final int? userId = StorageHandler().getUserId();
     print('user id  :::::: $userId');
 
     if (userId == null) {
@@ -52,7 +52,7 @@ class SplashPageController extends GetxController {
 
     result.fold(
       ifLeft: (_) => Get.snackbar('Error', 'Failed to load user'),
-      ifRight: (user) => AppController().setUser = user,
+      ifRight: (user) => AppController().setUser(user),
     );
   }
 }

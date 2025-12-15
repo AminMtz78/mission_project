@@ -6,8 +6,13 @@ class RepositoryUrls {
 
   static String getUserById(int userId) => '$baseUrl/users/$userId';
 
-
-
   // tag
   static const String addTag = '$baseUrl/tags';
+
+  static String getTagsByUserId(int userId) =>
+      '$baseUrl/tags?createdBy=$userId';
+
+  // missions
+
+  static const String addMission = '$baseUrl/missions';
 }

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
+import '../../../generated/locales.g.dart';
 
 class Utils {
   static const double tinySpace = 4;
@@ -46,4 +50,47 @@ class Utils {
   static const SizedBox xMediumHorizontalSpacer = SizedBox(width: xMediumSpace);
   static const SizedBox largeHorizontalSpacer = SizedBox(width: largeSpace);
   static const SizedBox giantHorizontalSpacer = SizedBox(width: giantSpace);
+
+  static final dateInputFormatter = FilteringTextInputFormatter.allow(
+    RegExp(r'^\d{0,4}-?\d{0,2}-?\d{0,2}$'),
+  );
+
+  static final doubleInputFormatter = FilteringTextInputFormatter.allow(
+    RegExp(r'^\d*\.?\d*$'),
+  );
+
+  static String? validateDate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Date is required / تاریخ الزامی است';
+    }
+
+    final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+    if (!regex.hasMatch(value)) {
+      return 'Invalid format (yyyy-MM-dd) / فرمت نادرست';
+    }
+
+    try {
+      final parts = value.split('-');
+      final year = int.parse(parts[0]);
+      final month = int.parse(parts[1]);
+      final day = int.parse(parts[2]);
+
+      final date = DateTime(year, month, day);
+
+      if (date.year != year || date.month != month || date.day != day) {
+        return 'Invalid date / تاریخ نامعتبر';
+      }
+    } catch (_) {
+      return LocaleKeys.shared_required_field.tr;
+    }
+
+    return null;
+  }
+
+  static String? validateEmpty(String? value) {
+    if (value == null || value.isEmpty) {
+      return LocaleKeys.shared_required_field.tr;
+    }
+    return null;
+  }
 }

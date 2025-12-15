@@ -13,5 +13,41 @@
       "id": 2
     }
   ],
-  "tags":[]
+  "missions": [
+    {
+      "title": "first mission",
+      "description": "first mission description",
+      "price": 1000,
+      "deadLine": "2026-08-20T00:00:00.000",
+      "tags": [
+        4
+      ],
+      "status": 1,
+      "createdBy": 1,
+      "assignedTo": null,
+      "id": 1
+    }
+  ],
+  "tags": [
+    {
+      "title": "g",
+      "createdBy": 1,
+      "id": 1
+    },
+    {
+      "title": "h",
+      "createdBy": 1,
+      "id": 2
+    },
+    {
+      "title": "t",
+      "createdBy": 1,
+      "id": 3
+    },
+    {
+      "title": "frd",
+      "createdBy": 1,
+      "id": 4
+    }
+  ]
 }

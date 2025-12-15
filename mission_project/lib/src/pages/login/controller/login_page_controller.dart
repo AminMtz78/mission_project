@@ -58,13 +58,17 @@ class LoginPageController extends GetxController {
         ifLeft: (err) => ToastWidget.show(context, err),
         ifRight: (userList) {
           if (userList.isNotEmpty) {
+            AppController().setUser(userList.first);
+            print(
+              ' user in app controller:  ${AppController().currentUser!.id}',
+            );
             if (isRememberUser.value) {
               StorageHandler().setRememberedUserId(userList.first.id);
               print(
                 'new user id add to storage. user id = ${StorageHandler().getUserId}',
               );
             }
-            AppController().setUser = userList.first;
+
             if (userList.first.userType == UserTypeEnum.admin) {
               Get.offNamed(RoutePath.adminHomePage);
             } else {

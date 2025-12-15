@@ -36,7 +36,10 @@
     "description" : "توضیحات",
     "price": "قیمت",
     "deadLine" : "اخرین مهلت",
-    "tag": "تگ"
+    "tag": "تگ",
+    "empty": "هیچ رکوردی ثبت نشده است",
+    "registration": "ثبت",
+    "required_field": "این فیلد الزامی است"
 
   }
 }
