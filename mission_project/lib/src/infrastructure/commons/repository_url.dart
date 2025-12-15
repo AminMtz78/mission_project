@@ -15,4 +15,6 @@ class RepositoryUrls {
   // missions
 
   static const String addMission = '$baseUrl/missions';
+
+  static String getMissions = '$baseUrl/missions';
 }
