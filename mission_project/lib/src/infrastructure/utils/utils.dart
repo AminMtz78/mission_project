@@ -51,6 +51,10 @@ class Utils {
   static const SizedBox largeHorizontalSpacer = SizedBox(width: largeSpace);
   static const SizedBox giantHorizontalSpacer = SizedBox(width: giantSpace);
 
+  static const roundedRadius = BorderRadius.all(
+    Radius.circular(Utils.smallSpace),
+  );
+
   static final dateInputFormatter = FilteringTextInputFormatter.allow(
     RegExp(r'^\d{0,4}-?\d{0,2}-?\d{0,2}$'),
   );
@@ -92,5 +96,13 @@ class Utils {
       return LocaleKeys.shared_required_field.tr;
     }
     return null;
+  }
+
+  static String formatDate(DateTime date) {
+    final year = date.year.toString().padLeft(4, '0');
+    final month = date.month.toString().padLeft(2, '0');
+    final day = date.day.toString().padLeft(2, '0');
+
+    return '$year-$month-$day';
   }
 }

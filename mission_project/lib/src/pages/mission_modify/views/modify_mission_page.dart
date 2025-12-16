@@ -60,8 +60,8 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
       children: [
         MyButton(
           isLoading: controller.isLoading.value,
-          onPressed: () => controller.addMission(context),
-          title: LocaleKeys.shared_registration.tr,
+          onPressed: () => controller.onSubmit(context),
+          title: LocaleKeys.shared_submit.tr,
         ),
       ],
     );

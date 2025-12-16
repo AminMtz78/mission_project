@@ -38,7 +38,7 @@
     "deadLine": "deadline",
     "tag": "tag",
     "empty": "empty",
-    "registration": "registration",
+    "submit": "submit",
     "required_field": "required field"
   }
 }

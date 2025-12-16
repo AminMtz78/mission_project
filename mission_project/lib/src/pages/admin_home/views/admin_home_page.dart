@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../infrastructure/utils/utils.dart';
 import '../../shared/widgets/custom_flexible_widget.dart';
 import '../../shared/widgets/empty_widget.dart';
+import '../../shared/widgets/retry_widget.dart';
 import '../controller/admin_home_controller.dart';
 import 'widgets/mission_list.dart';
 
@@ -14,7 +15,16 @@ class AdminHomePage extends GetView<AdminHomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(controller.title)),
-      body: _body(),
+      body: Obx(
+        () => controller.isRetry.value
+            ? RetryWidget(
+                onRetry: controller.getMissions,
+                isRetry: controller.isRetry.value,
+              )
+            : controller.isLoading.value
+            ? Center(child: CircularProgressIndicator())
+            : _body(),
+      ),
     );
   }
 
@@ -26,16 +36,17 @@ class AdminHomePage extends GetView<AdminHomeController> {
         Utils.mediumVerticalSpacer,
         _addMissionButton(),
         Utils.mediumVerticalSpacer,
-        Obx(
-          () => controller.missions.isEmpty
-              ? EmptyWidget()
-              : Column(children: [Expanded(child: MissionList())]),
+
+        Expanded(
+          child: Obx(
+            () => controller.missions.isEmpty ? EmptyWidget() : MissionList(),
+          ),
         ),
       ],
     ),
   );
 
-  CustomFlexibleWidget _addMissionButton() {
+  Widget _addMissionButton() {
     return CustomFlexibleWidget(
       widget: ElevatedButton(
         onPressed: controller.goToAddMissionPage,
@@ -54,7 +65,7 @@ class AdminHomePage extends GetView<AdminHomeController> {
     );
   }
 
-  Row _searchAndFilter() {
+  Widget _searchAndFilter() {
     return Row(
       children: [
         IconButton(onPressed: () {}, icon: Icon(Icons.tune)),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import '../../../../generated/locales.g.dart';
 
 enum MissionStatusEnum {
@@ -14,4 +15,19 @@ enum MissionStatusEnum {
 
   static MissionStatusEnum fromId(int id) => MissionStatusEnum.values
       .firstWhere((e) => e.id == id, orElse: () => MissionStatusEnum.free);
+
+  Color color() {
+    switch (this) {
+      case MissionStatusEnum.free:
+        return Colors.green.withValues(alpha: 0.4);
+      case MissionStatusEnum.pendingDoneApproval:
+        return Colors.orange.withValues(alpha: 0.4);
+      case MissionStatusEnum.inProgress:
+        return Colors.blue.withValues(alpha: 0.4);
+      case MissionStatusEnum.failed:
+        return Colors.red.withValues(alpha: 0.4);
+      case MissionStatusEnum.done:
+        return Colors.green.withValues(alpha: 0.4);
+    }
+  }
 }

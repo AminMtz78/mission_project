@@ -52,4 +52,12 @@ class AdminHomeController extends GetxController {
     final result = await Get.toNamed(RouteName.addMission);
     if (result != null) {}
   }
+
+  Future<void> goToEditMissionPage(int id) async {
+    final result = await Get.toNamed(
+      RouteName.editMission,
+      parameters: {'id': '$id'},
+    );
+    if (result != null) {}
+  }
 }

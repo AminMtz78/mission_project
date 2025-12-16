@@ -39,29 +39,7 @@ abstract class ModifyMissionController extends GetxController {
     }
   }
 
-  Future<void> addMission(BuildContext context) async {
-    if (formKey.currentState!.validate()) {
-      isLoading(true);
-      if (AppController().currentUser == null) {
-        ToastWidget.show(context, 'error in user in app controller');
-        return;
-      }
-      final resultOrException = await repository.addMission(dto());
-      resultOrException.fold(
-        ifLeft: (err) {
-          ToastWidget.show(
-            context,
-            LocaleKeys.shared_server_communication_error.tr,
-          );
-          isLoading(false);
-        },
-        ifRight: (data) {
-          isLoading(false);
-          tagEditingController.clear();
-        },
-      );
-    }
-  }
+  Future<void> onSubmit(BuildContext context) async {}
 
   Future<void> addTag(BuildContext context) async {
     if (tagFormKey.currentState!.validate()) {

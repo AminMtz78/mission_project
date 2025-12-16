@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mission_project/src/pages/shared/enums/breakpoint.dart';
 
-import '../../../shared/widgets/custom_grid_view.dart';
 import '../../controller/admin_home_controller.dart';
 import 'mission_item.dart';
 
@@ -12,10 +10,32 @@ class MissionList extends GetView<AdminHomeController> {
   @override
   Widget build(BuildContext context) {
     final double pageWidth = MediaQuery.sizeOf(context).width;
-    return CustomGridView(
-      itemBuilder: (context, mission, item) => MissionItem(item: mission),
-      items: controller.missions,
-      crossAxisCount: pageWidth < Breakpoint.phone.maxWidth ? 2 : 3,
+
+    int crossAxisCount = switch (pageWidth) {
+      < 600 => 1,
+      < 960 => 2,
+      < 1320 => 3,
+      _ => 4,
+    };
+
+    return RefreshIndicator(
+      onRefresh: controller.getMissions,
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          mainAxisExtent: 250,
+        ),
+        itemBuilder: (context, index) => MissionItem(
+          item: controller.missions[index],
+          onTap: (){},
+          onDelete: () {},
+          onEdit: () =>
+              controller.goToEditMissionPage(controller.missions[index].id),
+        ),
+        itemCount: controller.missions.length,
+      ),
     );
   }
 }
