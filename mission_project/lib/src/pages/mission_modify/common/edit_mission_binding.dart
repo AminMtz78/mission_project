@@ -9,7 +9,7 @@ class EditMissionBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<ModifyMissionController>(
       () => EditMissionController(
-        // missionId: int.tryParse(Get.parameters['id']!) ?? 0,   // missionId: int.tryParse(Get.parameters['id']!) ?? 0,
+        missionId: int.tryParse(Get.parameters['id']!) ?? 0, // missionId: int.tryParse(Get.parameters['id']!) ?? 0,
       ),
     );
   }

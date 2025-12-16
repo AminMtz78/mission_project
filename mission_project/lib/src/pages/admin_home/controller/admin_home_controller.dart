@@ -29,7 +29,7 @@ class AdminHomeController extends GetxController {
     missions.clear();
     isLoading(true);
     isRetry(false);
-    final resultOrException = await _repository.getUser(query: _query());
+    final resultOrException = await _repository.getMissions(query: _query());
 
     resultOrException.fold(
       ifLeft: (err) {

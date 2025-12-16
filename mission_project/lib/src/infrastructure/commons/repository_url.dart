@@ -9,6 +9,8 @@ class RepositoryUrls {
   // tag
   static const String addTag = '$baseUrl/tags';
 
+  static const String getTags = '$baseUrl/tags';
+
   static String getTagsByUserId(int userId) =>
       '$baseUrl/tags?createdBy=$userId';
 
@@ -17,4 +19,7 @@ class RepositoryUrls {
   static const String addMission = '$baseUrl/missions';
 
   static String getMissions = '$baseUrl/missions';
+
+  static String getMissionsById(int id) => '$baseUrl/missions/$id';
+  static String editMissionsById(int id) => '$baseUrl/missions/$id';
 }

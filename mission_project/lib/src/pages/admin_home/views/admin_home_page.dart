@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mission_project/mission_project.dart';
 
 import '../../../infrastructure/utils/utils.dart';
 import '../../shared/widgets/custom_flexible_widget.dart';
@@ -14,7 +15,13 @@ class AdminHomePage extends GetView<AdminHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(controller.title)),
+      appBar: AppBar(
+        title: Text(controller.title),
+        leading: IconButton(
+          onPressed: () => Get.offNamed(RouteName.loginPage),
+          icon: Icon(Icons.logout),
+        ),
+      ),
       body: Obx(
         () => controller.isRetry.value
             ? RetryWidget(

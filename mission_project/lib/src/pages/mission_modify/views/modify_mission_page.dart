@@ -7,8 +7,8 @@ import '../../shared/enums/breakpoint.dart';
 import '../../shared/widgets/custom_flexible_widget.dart';
 import '../../shared/widgets/empty_widget.dart';
 import '../../shared/widgets/my_button.dart';
+import '../../shared/widgets/retry_widget.dart';
 import '../controller/modify_mission_controller.dart';
-import 'widgets/tag_dialog.dart';
 import 'widgets/tag_item.dart';
 
 class ModifyMissionPage extends GetView<ModifyMissionController> {
@@ -18,16 +18,25 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(controller.title)),
-      body: Breakpoint.either(
-        context,
-        breakpoint: Breakpoint.phone,
-        before: () => _body(context),
-        after: () => CustomFlexibleWidget(widget: _body(context)),
+      body: Obx(
+        () => controller.isLoading.value
+            ? Center(child: CircularProgressIndicator())
+            : controller.isRetry.value
+            ? RetryWidget(
+                isRetry: controller.isRetry.value,
+                onRetry: controller.initData,
+              )
+            : Breakpoint.either(
+                context,
+                breakpoint: Breakpoint.phone,
+                before: () => _body(context),
+                after: () => CustomFlexibleWidget(widget: _body(context)),
+              ),
       ),
     );
   }
 
-  SingleChildScrollView _body(BuildContext context) {
+  Widget _body(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: Utils.smallPadding,
@@ -58,16 +67,18 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        MyButton(
-          isLoading: controller.isLoading.value,
-          onPressed: () => controller.onSubmit(context),
-          title: LocaleKeys.shared_submit.tr,
+        Obx(
+          () => MyButton(
+            isLoading: controller.isLoading.value,
+            onPressed: () => controller.onSubmit(),
+            title: LocaleKeys.shared_submit.tr,
+          ),
         ),
       ],
     );
   }
 
-  Column _deadline() {
+  Widget _deadline() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -117,7 +128,7 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
     );
   }
 
-  Column _title() {
+  Widget _title() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -143,12 +154,12 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        MyButton(
-          isLoading: false,
-          onPressed: () {
-            Get.dialog(TagDialog());
-          },
-          title: 'choose tag',
+        Obx(
+          () => MyButton(
+            isLoading: controller.isLoading.value,
+            onPressed: controller.goToTagDialog,
+            title: 'choose tag',
+          ),
         ),
         Utils.mediumVerticalSpacer,
         Obx(

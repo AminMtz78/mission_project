@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mission_project/src/pages/shared/widgets/retry_widget.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../infrastructure/utils/utils.dart';
@@ -11,15 +12,26 @@ import '../../controller/modify_mission_controller.dart';
 import 'tag_item.dart';
 
 class TagDialog extends GetView<ModifyMissionController> {
-  const TagDialog({super.key});
+  TagDialog({super.key});
+
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    return Breakpoint.either(
-      context,
-      breakpoint: Breakpoint.phone,
-      before: () => _body(context),
-      after: () => CustomFlexibleWidget(widget: _body(context)),
+    return Obx(
+      () => controller.isLoading.value
+          ? Center(child: CircularProgressIndicator())
+          : controller.isRetry.value
+          ? RetryWidget(
+              isRetry: controller.isRetry.value,
+              onRetry: controller.getTagsByUserId,
+            )
+          : Breakpoint.either(
+              context,
+              breakpoint: Breakpoint.phone,
+              before: () => _body(context),
+              after: () => CustomFlexibleWidget(widget: _body(context)),
+            ),
     );
   }
 
@@ -31,7 +43,7 @@ class TagDialog extends GetView<ModifyMissionController> {
       child: Padding(
         padding: Utils.mediumPadding,
         child: Form(
-          key: controller.tagFormKey,
+          key: formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -39,22 +51,11 @@ class TagDialog extends GetView<ModifyMissionController> {
               Utils.largeVerticalSpacer,
               _tagTextField(context),
               Utils.mediumVerticalSpacer,
-              Obx(
-                () => controller.tagList.isNotEmpty
-                    ? Wrap(
-                        children: controller.tagList
-                            .map(
-                              (e) => TagItem(
-                                item: e,
-                                isSelected: controller.selectedTag.contains(
-                                  e,
-                                ),
-                                onTap: () => controller.toggleTag(e),
-                              ),
-                            )
-                            .toList(),
-                      )
-                    : EmptyWidget(),
+              _tags(),
+              Utils.mediumVerticalSpacer,
+              ElevatedButton(
+                onPressed: () => controller.onDialogSubmitButton(),
+                child: Text(LocaleKeys.shared_submit.tr),
               ),
             ],
           ),
@@ -62,6 +63,26 @@ class TagDialog extends GetView<ModifyMissionController> {
       ),
     ),
   );
+
+  Obx _tags() {
+    return Obx(
+      () => controller.tagList.isNotEmpty
+          ? Wrap(
+              children: controller.tagList
+                  .map(
+                    (e) => Obx(
+                      () => TagItem(
+                        item: e,
+                        isSelected: controller.isTagSelected(e),
+                        onTap: () => controller.toggleTag(e),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            )
+          : EmptyWidget(),
+    );
+  }
 
   Widget _tagTextField(BuildContext context) {
     return Obx(
@@ -75,7 +96,11 @@ class TagDialog extends GetView<ModifyMissionController> {
                 hintText: LocaleKeys.shared_title.tr,
                 border: OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  onPressed: () => controller.addTag(context),
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      controller.addTag(context);
+                    }
+                  },
                   icon: Icon(Icons.add),
                 ),
               ),
@@ -89,10 +114,7 @@ class TagDialog extends GetView<ModifyMissionController> {
         Row(
           children: [
             IconButton(
-              onPressed: () {
-                controller.tagEditingController.clear();
-                Get.back();
-              },
+              onPressed: controller.onCloseDialogButton,
               icon: Icon(Icons.close),
             ),
           ],

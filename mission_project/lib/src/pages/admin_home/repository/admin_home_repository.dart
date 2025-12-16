@@ -7,7 +7,7 @@ import '../../shared/model/view_model/mission_view_model.dart';
 class AdminHomeRepository {
   final ApiClient _apiClient = ApiClient();
 
-  Future<Either<String, List<MissionViewModel>>> getUser({
+  Future<Either<String, List<MissionViewModel>>> getMissions({
     required Map<String, dynamic> query,
   }) async {
     final response = await _apiClient.get<List<dynamic>>(
