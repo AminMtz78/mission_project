@@ -69,7 +69,7 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
       children: [
         Obx(
           () => MyButton(
-            isLoading: controller.isLoading.value,
+            isLoading: controller.isSubmitLoading.value,
             onPressed: () => controller.onSubmit(),
             title: LocaleKeys.shared_submit.tr,
           ),
@@ -86,7 +86,7 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
         Utils.smallVerticalSpacer,
         TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: Utils.validateEmpty,
+          validator: Utils.validateDate,
           inputFormatters: [Utils.dateInputFormatter],
           controller: controller.deadlineController,
           decoration: _textFieldDecoration(hintText: 'yyyy-MM-dd'),
@@ -154,12 +154,10 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Obx(
-          () => MyButton(
-            isLoading: controller.isLoading.value,
-            onPressed: controller.goToTagDialog,
-            title: 'choose tag',
-          ),
+        MyButton(
+          isLoading: false,
+          onPressed: controller.goToTagDialog,
+          title: LocaleKeys.shared_tag.tr,
         ),
         Utils.mediumVerticalSpacer,
         Obx(

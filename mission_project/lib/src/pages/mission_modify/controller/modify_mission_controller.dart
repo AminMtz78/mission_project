@@ -26,6 +26,7 @@ abstract class ModifyMissionController extends GetxController {
   DateTime? selectedDate;
 
   RxBool isLoading = false.obs;
+  RxBool isSubmitLoading = false.obs;
   RxBool isRetry = false.obs;
   RxList<MissionTagViewModel> tagList = <MissionTagViewModel>[].obs;
   RxList<MissionTagViewModel> tempSelectedTag = <MissionTagViewModel>[].obs;
@@ -97,7 +98,6 @@ abstract class ModifyMissionController extends GetxController {
 
   MissionDto dto() {
     selectedDate = DateTime.parse(deadlineController.text);
-
     return MissionDto(
       title: titleController.text,
       description: descriptionController.text,

@@ -10,15 +10,15 @@ class AddMissionController extends ModifyMissionController {
   @override
   Future<void> onSubmit() async {
     if (formKey.currentState!.validate()) {
-      isLoading(true);
+      isSubmitLoading(true);
       final resultOrException = await repository.addMission(dto());
       resultOrException.fold(
         ifLeft: (err) {
           Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
-          isLoading(false);
+          isSubmitLoading(false);
         },
         ifRight: (data) {
-          isLoading(false);
+          isSubmitLoading(false);
           tagEditingController.clear();
           Get.back(result: true);
         },

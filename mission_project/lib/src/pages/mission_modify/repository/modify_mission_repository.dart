@@ -37,14 +37,9 @@ class ModifyMissionRepository {
   Future<Either<String, List<MissionTagViewModel>>> getTagsByIds(
     List<int> ids,
   ) async {
-    final Map<String, String> queryParams = {};
-    for (var i = 0; i < ids.length; i++) {
-      queryParams['id[$i]'] = '${ids[i]}}';
-    }
-
     final response = await _apiClient.get<List<dynamic>>(
       RepositoryUrls.getTags,
-      query: queryParams,
+      query: {'id': ids},
     );
 
     return response.fold(

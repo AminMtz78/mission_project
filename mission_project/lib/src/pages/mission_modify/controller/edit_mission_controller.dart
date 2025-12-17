@@ -36,7 +36,7 @@ class EditMissionController extends ModifyMissionController {
   @override
   Future<void> onSubmit() async {
     if (formKey.currentState!.validate()) {
-      isLoading(true);
+      isSubmitLoading(true);
       final resultOrException = await repository.editMission(
         id: missionId,
         mission: dto(),
@@ -47,10 +47,10 @@ class EditMissionController extends ModifyMissionController {
             'title',
             LocaleKeys.shared_server_communication_error.tr,
           );
-          isLoading(false);
+          isSubmitLoading(false);
         },
         ifRight: (data) {
-          isLoading(false);
+          isSubmitLoading(false);
           Get.back(result: true);
         },
       );
@@ -79,6 +79,7 @@ class EditMissionController extends ModifyMissionController {
     final resultOrException = await repository.getTagsByIds(
       currentMission!.tags,
     );
+    print('mission tags :  ${currentMission!.tags}');
     resultOrException.fold(
       ifLeft: (err) {
         Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
@@ -86,6 +87,7 @@ class EditMissionController extends ModifyMissionController {
         isLoading(false);
       },
       ifRight: (data) {
+        print('tags length  ${data.length}');
         selectedTag.addAll(data);
         isLoading(false);
       },
