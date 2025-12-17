@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mission_project/generated/locales.g.dart';
-import 'package:mission_project/src/pages/shared/enums/breakpoint.dart';
-import 'package:mission_project/src/pages/shared/enums/user_type_enum.dart';
-import 'package:mission_project/src/pages/shared/widgets/my_button.dart';
 
+import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/utils/utils.dart';
+import '../../shared/enums/breakpoint.dart';
+import '../../shared/enums/user_type_enum.dart';
+import '../../shared/widgets/my_button.dart';
 import '../controller/register_page_controller.dart';
 
 class RegisterPage extends GetView<RegisterPageController> {

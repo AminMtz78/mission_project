@@ -44,20 +44,22 @@ class TagDialog extends GetView<ModifyMissionController> {
         padding: Utils.mediumPadding,
         child: Form(
           key: formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _header(),
-              Utils.largeVerticalSpacer,
-              _tagTextField(context),
-              Utils.mediumVerticalSpacer,
-              _tags(),
-              Utils.mediumVerticalSpacer,
-              ElevatedButton(
-                onPressed: () => controller.onDialogSubmitButton(),
-                child: Text(LocaleKeys.shared_submit.tr),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _header(),
+                Utils.largeVerticalSpacer,
+                _tagTextField(context),
+                Utils.mediumVerticalSpacer,
+                _tags(),
+                Utils.mediumVerticalSpacer,
+                ElevatedButton(
+                  onPressed: () => controller.onDialogSubmitButton(),
+                  child: Text(LocaleKeys.shared_submit.tr),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -68,18 +70,18 @@ class TagDialog extends GetView<ModifyMissionController> {
     return Obx(
       () => controller.tagList.isNotEmpty
           ? Wrap(
-              children: controller.tagList
-                  .map(
-                    (e) => Obx(
-                      () => TagItem(
-                        item: e,
-                        isSelected: controller.isTagSelected(e),
-                        onTap: () => controller.toggleTag(e),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            )
+                  children: controller.tagList
+                      .map(
+                        (e) => Obx(
+                          () => TagItem(
+                            item: e,
+                            isSelected: controller.isTagSelected(e),
+                            onTap: () => controller.toggleTag(e),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                )
           : EmptyWidget(),
     );
   }

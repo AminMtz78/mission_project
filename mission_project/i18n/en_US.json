@@ -36,9 +36,11 @@
     "description": "description",
     "price": "price",
     "deadLine": "deadline",
-    "tag": "tag",
+    "tag": "category",
     "empty": "empty",
     "submit": "submit",
-    "required_field": "required field"
+    "required_field": "required field",
+    "price_range": "Price Range"
+
   }
 }

@@ -75,7 +75,10 @@ class AdminHomePage extends GetView<AdminHomeController> {
   Widget _searchAndFilter() {
     return Row(
       children: [
-        IconButton(onPressed: () {}, icon: Icon(Icons.tune)),
+        IconButton(
+          onPressed: controller.openFilterDialog,
+          icon: Icon(Icons.tune),
+        ),
         Flexible(
           fit: FlexFit.tight,
           child: Padding(

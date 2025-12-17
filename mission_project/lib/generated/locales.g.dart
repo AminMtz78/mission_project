@@ -63,6 +63,7 @@ class LocaleKeys {
   static const shared_empty = 'shared_empty';
   static const shared_submit = 'shared_submit';
   static const shared_required_field = 'shared_required_field';
+  static const shared_price_range = 'shared_price_range';
 }
 
 class Locales {
@@ -107,10 +108,11 @@ class Locales {
     'shared_description': 'description',
     'shared_price': 'price',
     'shared_deadLine': 'deadline',
-    'shared_tag': 'tag',
+    'shared_tag': 'category',
     'shared_empty': 'empty',
     'shared_submit': 'submit',
     'shared_required_field': 'required field',
+    'shared_price_range': 'Price Range',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -154,9 +156,10 @@ class Locales {
     'shared_description': 'توضیحات',
     'shared_price': 'قیمت',
     'shared_deadLine': 'اخرین مهلت',
-    'shared_tag': 'تگ',
+    'shared_tag': 'دسته بندی',
     'shared_empty': 'هیچ رکوردی ثبت نشده است',
     'shared_submit': 'ثبت',
     'shared_required_field': 'این فیلد الزامی است',
+    'shared_price_range': 'محدوده قیمت',
   };
 }
