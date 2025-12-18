@@ -22,9 +22,12 @@ class AdminHomeController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isRetry = false.obs;
 
+  Rxn<MissionTagViewModel> filterTagModel = Rxn();
+  Rxn<MissionTagViewModel> tempFilterTagModel = Rxn();
+
   RxList<MissionViewModel> missions = <MissionViewModel>[].obs;
   List<int> allTagIds = [];
-  List<MissionTagViewModel> allTags = [];
+  RxList<MissionTagViewModel> allUsedTags = <MissionTagViewModel>[].obs;
 
   // dialog
 
@@ -79,7 +82,7 @@ class AdminHomeController extends GetxController {
   }
 
   List<MissionTagViewModel> fetchTagsByMission(List<int> tagIds) {
-    List<MissionTagViewModel> currentMissionTags = allTags
+    List<MissionTagViewModel> currentMissionTags = allUsedTags
         .where((tag) => tagIds.contains(tag.id))
         .toList();
 
@@ -106,7 +109,7 @@ class AdminHomeController extends GetxController {
   }
 
   Future<void> getTagsByUserIdAndTagIds() async {
-    allTags.clear();
+    allUsedTags.clear();
     isLoading(true);
     isRetry(false);
     final int? userId = AppController().currentUser?.id;
@@ -123,7 +126,7 @@ class AdminHomeController extends GetxController {
         isLoading(false);
       },
       ifRight: (data) {
-        allTags.addAll(data);
+        allUsedTags.addAll(data);
         isLoading(false);
       },
     );
@@ -154,6 +157,9 @@ class AdminHomeController extends GetxController {
     if (sortDate.value != null) {
       query['_sort'] = 'deadLine';
       query['_order'] = sortDate.value == DateEnum.newest ? 'desc' : 'asc';
+    }
+    if (filterTagModel.value != null) {
+      query['tags_like'] = filterTagModel.value!.id;
     }
 
     if (searchController.text.isNotEmpty) {
@@ -190,6 +196,7 @@ class AdminHomeController extends GetxController {
   void applyFilters() {
     minSelectedPrice.value = tempMinPrice.value;
     maxSelectedPrice.value = tempMaxPrice.value;
+    filterTagModel.value = tempFilterTagModel.value;
     isExpired.value = tempIsExpired.value;
     isInProgress.value = tempIsInProgress.value;
     isDone.value = tempIsDone.value;
@@ -200,8 +207,7 @@ class AdminHomeController extends GetxController {
   void deleteFilter() {
     minSelectedPrice.value = 0;
     maxSelectedPrice.value = 0;
-    tempMinPrice.value = minPrice;
-    tempMaxPrice.value = maxPrice;
+    filterTagModel.value = null;
     isExpired.value = false;
     isInProgress.value = false;
     isDone.value = false;
@@ -219,9 +225,18 @@ class AdminHomeController extends GetxController {
         ? maxPrice
         : maxSelectedPrice.value;
 
+    tempFilterTagModel.value = filterTagModel.value;
     tempIsExpired.value = isExpired.value;
     tempIsInProgress.value = isInProgress.value;
     tempIsDone.value = isDone.value;
     tempSortDate.value = sortDate.value;
+  }
+
+  void onTagSelected(MissionTagViewModel tag) {
+    tempFilterTagModel.value = tag;
+  }
+
+  RxBool isTagSelected(MissionTagViewModel tag) {
+    return (tempFilterTagModel.value?.id == tag.id).obs;
   }
 }
