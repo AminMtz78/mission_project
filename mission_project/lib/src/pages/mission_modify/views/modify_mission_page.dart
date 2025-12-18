@@ -9,7 +9,6 @@ import '../../shared/widgets/empty_widget.dart';
 import '../../shared/widgets/my_button.dart';
 import '../../shared/widgets/retry_widget.dart';
 import '../controller/modify_mission_controller.dart';
-import 'widgets/tag_item.dart';
 
 class ModifyMissionPage extends GetView<ModifyMissionController> {
   const ModifyMissionPage({super.key});

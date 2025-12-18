@@ -20,5 +20,5 @@ class RouteName {
       RoutePath.adminHomePage + RoutePath.adminRequest;
 
   static const String hunterMissionDetail =
-      RoutePath.adminHomePage + RoutePath.hunterMissionDetail;
+      RoutePath.hunterMissionList + RoutePath.hunterMissionDetail;
 }

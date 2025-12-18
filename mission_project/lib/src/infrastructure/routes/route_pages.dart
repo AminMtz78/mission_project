@@ -45,7 +45,7 @@ class RoutePages {
       binding: AdminHomeBinding(),
       children: [
         GetPage(
-          name: RoutePath.hunterMissionDetail,
+          name: RoutePath.adminRequest,
           page: () => AdminRequestPage(),
           binding: AdminRequestBinding(),
         ),
@@ -69,7 +69,7 @@ class RoutePages {
         GetPage(
           name: RoutePath.hunterMissionDetail,
           page: () => HunterMissionDetailPage(),
-          binding: HunterMissionDetail(),
+          binding: HunterMissionDetailBinding(),
         ),
       ],
     ),

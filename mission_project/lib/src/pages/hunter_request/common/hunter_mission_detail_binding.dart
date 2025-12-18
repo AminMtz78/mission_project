@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../controller/hunter_mission_detail_controller.dart';
 
-class HunterMissionDetail extends Bindings {
+class HunterMissionDetailBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
