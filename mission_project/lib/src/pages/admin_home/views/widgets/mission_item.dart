@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../../generated/locales.g.dart';
 import '../../../../infrastructure/utils/utils.dart';
 import '../../../shared/enums/mission_status_enum.dart';
+import '../../../shared/model/view_model/mission_tag_view_model.dart';
 import '../../../shared/model/view_model/mission_view_model.dart';
 
 class MissionItem extends StatelessWidget {
@@ -13,12 +14,14 @@ class MissionItem extends StatelessWidget {
     required this.onEdit,
     required this.onDelete,
     required this.item,
+    required this.tags,
   });
 
   final VoidCallback onEdit;
   final VoidCallback onTap;
   final VoidCallback onDelete;
   final MissionViewModel item;
+  final List<MissionTagViewModel> tags;
 
   @override
   Widget build(BuildContext context) {
@@ -87,17 +90,17 @@ class MissionItem extends StatelessWidget {
     );
   }
 
-  SizedBox _tags() {
+  Widget _tags() {
     return SizedBox(
       height: 32,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: item.tags.length,
+        itemCount: tags.length,
         separatorBuilder: (_, _) => const SizedBox(width: 6),
         itemBuilder: (context, index) {
-          final tag = item.tags[index];
+          final tag = tags[index];
           return Chip(
-            label: Text('tag.title', style: const TextStyle(fontSize: 12)),
+            label: Text(tag.title, style: const TextStyle(fontSize: 12)),
             visualDensity: VisualDensity.compact,
           );
         },

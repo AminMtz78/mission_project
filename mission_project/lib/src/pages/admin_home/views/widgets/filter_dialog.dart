@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../../generated/locales.g.dart';
 import '../../../../infrastructure/utils/utils.dart';
 import '../../../shared/enums/date_enum.dart';
@@ -17,24 +18,40 @@ class FilterDialog extends GetView<AdminHomeController> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(LocaleKeys.shared_price_range.tr),
-            Obx(
-              () => RangeSlider(
-                min: controller.minPrice,
-                max: controller.maxPrice,
-                divisions: 20,
-                values: RangeValues(
-                  controller.tempMinPrice.value,
-                  controller.tempMaxPrice.value,
+            Column(
+              children: [
+                Obx(
+                  () => RangeSlider(
+                    min: controller.minPrice,
+                    max: controller.maxPrice,
+                    divisions: 20,
+                    values: RangeValues(
+                      controller.tempMinPrice.value,
+                      controller.tempMaxPrice.value,
+                    ),
+                    labels: RangeLabels(
+                      controller.tempMinPrice.value.toStringAsFixed(0),
+                      controller.tempMaxPrice.value.toStringAsFixed(0),
+                    ),
+                    onChanged: (values) {
+                      controller.tempMinPrice.value = values.start;
+                      controller.tempMaxPrice.value = values.end;
+                    },
+                  ),
                 ),
-                labels: RangeLabels(
-                  controller.tempMinPrice.value.toStringAsFixed(0),
-                  controller.tempMaxPrice.value.toStringAsFixed(0),
+                Padding(
+                  padding: EdgeInsetsGeometry.symmetric(
+                    horizontal: Utils.mediumSpace,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(controller.minPrice.toString()),
+                      Text(controller.maxPrice.toString()),
+                    ],
+                  ),
                 ),
-                onChanged: (values) {
-                  controller.tempMinPrice.value = values.start;
-                  controller.tempMaxPrice.value = values.end;
-                },
-              ),
+              ],
             ),
             Divider(),
             Obx(
@@ -82,15 +99,35 @@ class FilterDialog extends GetView<AdminHomeController> {
             ),
             Divider(),
             Utils.mediumVerticalSpacer,
-            ElevatedButton(
-              onPressed: () {
-                controller.applyFilters();
-              },
-              child: Text(LocaleKeys.shared_submit.tr),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _submitButton(),
+                Utils.smallHorizontalSpacer,
+                _deleteFilterButton(),
+              ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  ElevatedButton _submitButton() {
+    return ElevatedButton(
+      onPressed: () {
+        controller.applyFilters();
+      },
+      child: Text(LocaleKeys.shared_submit.tr),
+    );
+  }
+
+  ElevatedButton _deleteFilterButton() {
+    return ElevatedButton(
+      onPressed: () {
+        controller.deleteFilter();
+      },
+      child: Text(LocaleKeys.shared_delete.tr),
     );
   }
 }

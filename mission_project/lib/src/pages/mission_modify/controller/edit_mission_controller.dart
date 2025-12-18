@@ -79,7 +79,6 @@ class EditMissionController extends ModifyMissionController {
     final resultOrException = await repository.getTagsByIds(
       currentMission!.tags,
     );
-    print('mission tags :  ${currentMission!.tags}');
     resultOrException.fold(
       ifLeft: (err) {
         Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);

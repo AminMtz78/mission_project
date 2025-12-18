@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,7 +7,6 @@ import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/commons/app_controller.dart';
 import '../../shared/enums/mission_status_enum.dart';
 import '../../shared/model/view_model/mission_tag_view_model.dart';
-import '../../shared/widgets/toast_widget.dart';
 import '../model/dto/mission_dto.dart';
 import '../model/dto/mission_tag_dto.dart';
 import '../repository/modify_mission_repository.dart';
@@ -24,46 +25,41 @@ abstract class ModifyMissionController extends GetxController {
   final TextEditingController tagEditingController = TextEditingController();
 
   DateTime? selectedDate;
+  RxString searchText = ''.obs;
+
+  Timer? _debounce;
+  final FocusNode focusNode = FocusNode();
 
   RxBool isLoading = false.obs;
   RxBool isSubmitLoading = false.obs;
   RxBool isRetry = false.obs;
+  final RxBool showPopup = false.obs;
   RxList<MissionTagViewModel> tagList = <MissionTagViewModel>[].obs;
   RxList<MissionTagViewModel> tempSelectedTag = <MissionTagViewModel>[].obs;
   RxList<MissionTagViewModel> selectedTag = <MissionTagViewModel>[].obs;
-  final ModifyMissionRepository repository = ModifyMissionRepository();
 
+  final LayerLink layerLink = LayerLink();
+
+  final ModifyMissionRepository repository = ModifyMissionRepository();
 
   void initData() async {}
 
-  void toggleTag(MissionTagViewModel tag) {
-    if (tempSelectedTag.any((t) => t.id == tag.id)) {
-      tempSelectedTag.removeWhere((t) => t.id == tag.id);
-    } else {
-      tempSelectedTag.add(tag);
-    }
-  }
-
   Future<void> onSubmit() async {}
 
-  Future<void> addTag(BuildContext context) async {
+  Future<void> addTag() async {
     isLoading(true);
     if (AppController().currentUser == null) {
-      ToastWidget.show(context, 'error in user in app controller');
       return;
     }
     final resultOrException = await repository.addTag(
       MissionTagDto(
-        title: tagEditingController.text,
+        title: tagEditingController.text.trim(),
         createdBy: AppController().currentUser!.id,
       ),
     );
     resultOrException.fold(
       ifLeft: (err) {
-        ToastWidget.show(
-          context,
-          LocaleKeys.shared_server_communication_error.tr,
-        );
+        Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
         isLoading(false);
       },
       ifRight: (data) {
@@ -82,7 +78,10 @@ abstract class ModifyMissionController extends GetxController {
     if (userId == null) {
       return;
     }
-    final resultOrException = await repository.getTag(userId);
+    final resultOrException = await repository.getTag(
+      id: userId,
+      query: tagEditingController.text.trim(),
+    );
     resultOrException.fold(
       ifLeft: (err) {
         Get.snackbar('title', LocaleKeys.shared_server_communication_error.tr);
@@ -110,12 +109,13 @@ abstract class ModifyMissionController extends GetxController {
   }
 
   void goToTagDialog() async {
+    tagList.clear();
     tempSelectedTag
       ..clear()
       ..addAll(selectedTag);
 
     Get.dialog(TagDialog());
-    await getTagsByUserId();
+    // await getTagsByUserId();
   }
 
   void onDialogSubmitButton() {
@@ -125,6 +125,7 @@ abstract class ModifyMissionController extends GetxController {
       ..addAll(tempSelectedTag);
 
     tempSelectedTag.clear();
+    tagEditingController.clear();
   }
 
   void onCloseDialogButton() {
@@ -133,11 +134,32 @@ abstract class ModifyMissionController extends GetxController {
     tempSelectedTag.clear();
   }
 
-  bool isTagSelected(MissionTagViewModel tag) {
-    int index = tempSelectedTag.indexWhere((e) => e.id == tag.id);
-    if (index != -1) {
-      return true;
+  void onTextChanged(String value) async {
+    if (tagEditingController.text.trim().isNotEmpty) {
+      _debounce?.cancel();
+      _debounce = Timer(const Duration(milliseconds: 500), () async {
+        await getTagsByUserId();
+        showPopup.value = tagList.isNotEmpty;
+      });
     }
-    return false;
+  }
+
+  void selectTag(MissionTagViewModel tag) {
+    if (!tempSelectedTag.any((e) => e.id == tag.id)) {
+      tempSelectedTag.add(tag);
+    }
+    tagList.clear();
+    showPopup.value = false;
+    tagEditingController.clear();
+  }
+
+  @override
+  void onClose() {
+    tagEditingController.dispose();
+    titleController.dispose();
+    descriptionController.dispose();
+    deadlineController.dispose();
+
+    super.onClose();
   }
 }

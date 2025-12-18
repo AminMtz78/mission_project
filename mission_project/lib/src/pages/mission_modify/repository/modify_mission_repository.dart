@@ -22,9 +22,13 @@ class ModifyMissionRepository {
     );
   }
 
-  Future<Either<String, List<MissionTagViewModel>>> getTag(int id) async {
+  Future<Either<String, List<MissionTagViewModel>>> getTag({
+    required int id,
+    required String query,
+  }) async {
     final response = await _apiClient.get<List<dynamic>>(
       RepositoryUrls.getTagsByUserId(id),
+      query: {'q': query},
     );
 
     return response.fold(

@@ -29,8 +29,9 @@ class MissionList extends GetView<AdminHomeController> {
         ),
         itemBuilder: (context, index) => MissionItem(
           item: controller.missions[index],
-          onTap: (){},
+          onTap: () {},
           onDelete: () {},
+          tags: controller.fetchTagsByMission(controller.missions[index].tags),
           onEdit: () =>
               controller.goToEditMissionPage(controller.missions[index].id),
         ),

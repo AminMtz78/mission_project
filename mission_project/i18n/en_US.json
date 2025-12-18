@@ -40,7 +40,8 @@
     "empty": "empty",
     "submit": "submit",
     "required_field": "required field",
-    "price_range": "Price Range"
+    "price_range": "Price Range",
+    "delete": "delete"
 
   }
 }

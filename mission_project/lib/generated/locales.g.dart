@@ -64,6 +64,7 @@ class LocaleKeys {
   static const shared_submit = 'shared_submit';
   static const shared_required_field = 'shared_required_field';
   static const shared_price_range = 'shared_price_range';
+  static const shared_delete = 'shared_delete';
 }
 
 class Locales {
@@ -113,6 +114,7 @@ class Locales {
     'shared_submit': 'submit',
     'shared_required_field': 'required field',
     'shared_price_range': 'Price Range',
+    'shared_delete': 'delete',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -161,5 +163,6 @@ class Locales {
     'shared_submit': 'ثبت',
     'shared_required_field': 'این فیلد الزامی است',
     'shared_price_range': 'محدوده قیمت',
+    'shared_delete': 'حذف',
   };
 }

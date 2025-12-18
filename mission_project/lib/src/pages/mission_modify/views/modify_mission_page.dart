@@ -165,7 +165,15 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
               ? Wrap(
                   children: [
                     ...controller.selectedTag.map(
-                      (e) => TagItem(item: e, isSelected: false, onTap: null),
+                      (e) => Padding(
+                        padding: Utils.tinyPadding,
+                        child: Chip(
+                          label: Text(e.title),
+                          backgroundColor: Colors.deepPurpleAccent.withValues(
+                            alpha: 0.3,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 )
