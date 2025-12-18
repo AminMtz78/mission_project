@@ -15,4 +15,10 @@ class RouteName {
 
   static const String editMission =
       RoutePath.adminHomePage + RoutePath.editMission;
+
+  static const String adminRequest =
+      RoutePath.adminHomePage + RoutePath.adminRequest;
+
+  static const String hunterMissionDetail =
+      RoutePath.adminHomePage + RoutePath.hunterMissionDetail;
 }

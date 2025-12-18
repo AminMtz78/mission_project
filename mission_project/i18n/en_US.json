@@ -41,7 +41,9 @@
     "submit": "submit",
     "required_field": "required field",
     "price_range": "Price Range",
-    "delete": "delete"
+    "delete": "delete",
+    "request": "request",
+    "search": "search"
 
   }
 }

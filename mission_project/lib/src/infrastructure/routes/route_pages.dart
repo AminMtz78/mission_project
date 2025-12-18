@@ -2,10 +2,14 @@ import 'package:get/get.dart';
 
 import '../../pages/admin_home/common/admin_home_binding.dart';
 import '../../pages/admin_home/views/admin_home_page.dart';
+import '../../pages/admin_request/common/admin_request_binding.dart';
+import '../../pages/admin_request/views/admin_request_page.dart';
+import '../../pages/hunter_request/common/hunter_mission_detail_binding.dart';
+import '../../pages/hunter_request/views/hunter_mission_detail_page.dart';
 import '../../pages/login/common/login_page_binding.dart';
 import '../../pages/login/views/login_page.dart';
-import '../../pages/mission_list/common/mission_list_binding.dart';
-import '../../pages/mission_list/views/mission_list_page.dart';
+import '../../pages/mission_list/common/hunter_mission_list_binding.dart';
+import '../../pages/mission_list/views/hunter_mission_list_page.dart';
 import '../../pages/mission_modify/common/add_mission_binding.dart';
 import '../../pages/mission_modify/common/edit_mission_binding.dart';
 import '../../pages/mission_modify/views/modify_mission_page.dart';
@@ -41,6 +45,11 @@ class RoutePages {
       binding: AdminHomeBinding(),
       children: [
         GetPage(
+          name: RoutePath.hunterMissionDetail,
+          page: () => AdminRequestPage(),
+          binding: AdminRequestBinding(),
+        ),
+        GetPage(
           name: RoutePath.addMission,
           page: () => ModifyMissionPage(),
           binding: AddMissionBinding(),
@@ -54,8 +63,15 @@ class RoutePages {
     ),
     GetPage(
       name: RoutePath.hunterMissionList,
-      page: () => MissionListPage(),
-      binding: MissionListBinding(),
+      page: () => HunterMissionListPage(),
+      binding: HunterMissionListBinding(),
+      children: [
+        GetPage(
+          name: RoutePath.hunterMissionDetail,
+          page: () => HunterMissionDetailPage(),
+          binding: HunterMissionDetail(),
+        ),
+      ],
     ),
   ];
 }

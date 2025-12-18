@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/admin_home_controller.dart';
+import '../../controller/hunter_mission_list_controller.dart';
 import 'mission_item.dart';
 
-class MissionList extends GetView<AdminHomeController> {
-  const MissionList({super.key});
+class HunterMissionList extends GetView<HunterMissionListController> {
+  const HunterMissionList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,8 @@ class MissionList extends GetView<AdminHomeController> {
         itemBuilder: (context, index) => MissionItem(
           item: controller.missions[index],
           onTap: () =>
-              controller.goToAdminRequestPage(controller.missions[index].id),
-          onDelete: () {},
+              controller.goToHunterRequestPage(controller.missions[index].id),
           tags: controller.fetchTagsByMission(controller.missions[index].tags),
-          onEdit: () =>
-              controller.goToEditMissionPage(controller.missions[index].id),
         ),
         itemCount: controller.missions.length,
       ),

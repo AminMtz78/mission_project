@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mission_project/mission_project.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../infrastructure/routes/route_name.dart';
 import '../../../infrastructure/utils/utils.dart';
-import '../../shared/widgets/custom_flexible_widget.dart';
 import '../../shared/widgets/empty_widget.dart';
 import '../../shared/widgets/retry_widget.dart';
-import '../controller/admin_home_controller.dart';
-import 'widgets/mission_list.dart';
+import '../controller/hunter_mission_list_controller.dart';
+import 'widgets/hunter_mission_list.dart';
 
-class AdminHomePage extends GetView<AdminHomeController> {
-  const AdminHomePage({super.key});
+class HunterMissionListPage extends GetView<HunterMissionListController> {
+  const HunterMissionListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,36 +41,16 @@ class AdminHomePage extends GetView<AdminHomeController> {
       children: [
         _searchAndFilter(),
         Utils.mediumVerticalSpacer,
-        _addMissionButton(),
-        Utils.mediumVerticalSpacer,
-
         Expanded(
           child: Obx(
-            () => controller.missions.isEmpty ? EmptyWidget() : MissionList(),
+            () => controller.missions.isEmpty
+                ? EmptyWidget()
+                : HunterMissionList(),
           ),
         ),
       ],
     ),
   );
-
-  Widget _addMissionButton() {
-    return CustomFlexibleWidget(
-      widget: ElevatedButton(
-        onPressed: controller.goToAddMissionPage,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.add),
-            Padding(
-              padding: Utils.mediumPadding,
-              child: Text(style: TextStyle(fontWeight: FontWeight.bold), 'add'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _searchAndFilter() {
     return Row(

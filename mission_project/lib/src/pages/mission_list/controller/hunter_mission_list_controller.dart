@@ -4,22 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
-import '../../../infrastructure/commons/app_controller.dart';
 import '../../../infrastructure/routes/route_name.dart';
 import '../../shared/enums/date_enum.dart';
 import '../../shared/enums/mission_status_enum.dart';
 import '../../shared/model/view_model/mission_tag_view_model.dart';
 import '../../shared/model/view_model/mission_view_model.dart';
-import '../repository/admin_home_repository.dart';
-import '../views/widgets/filter_dialog.dart';
+import '../repository/hunter_mission_list_repository.dart';
+import '../views/widgets/hunter_filter_dialog.dart';
 
-class AdminHomeController extends GetxController {
-  final String title = 'admin mission app bar';
+class HunterMissionListController extends GetxController {
+  final String title = 'mission list page app bar';
 
-  final AdminHomeRepository _repository = AdminHomeRepository();
+  final HunterMissionListRepository _repository = HunterMissionListRepository();
 
   final TextEditingController searchController = TextEditingController();
-  final String searchText = '';
   Timer? _debounce;
 
   RxBool isLoading = false.obs;
@@ -122,13 +120,11 @@ class AdminHomeController extends GetxController {
     allUsedTags.clear();
     isLoading(true);
     isRetry(false);
-    final int? userId = AppController().currentUser?.id;
-    if (userId == null) {
-      return;
-    }
+
     final resultOrException = await _repository.getTag(
-      query: {'id': allTagIds, 'createdBy': userId},
+      query: {'id': allTagIds},
     );
+
     resultOrException.fold(
       ifLeft: (err) {
         Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
@@ -144,8 +140,6 @@ class AdminHomeController extends GetxController {
 
   Map<String, dynamic> _query() {
     final query = <String, dynamic>{};
-
-    query['createdBy'] = AppController().currentUser!.id.toString();
 
     final nowIso = DateTime.now().toIso8601String();
 
@@ -178,26 +172,9 @@ class AdminHomeController extends GetxController {
     return query;
   }
 
-  Future<void> goToAddMissionPage() async {
-    final result = await Get.toNamed(RouteName.addMission);
-    if (result != null) {
-      deleteFilter();
-    }
-  }
-
-  Future<void> goToEditMissionPage(int id) async {
-    final result = await Get.toNamed(
-      RouteName.editMission,
-      parameters: {'id': '$id'},
-    );
-    if (result != null) {
-      deleteFilter();
-    }
-  }
-
   void openFilterDialog() async {
     initialDialogData();
-    final result = await Get.dialog(FilterDialog());
+    final result = await Get.dialog(HunterFilterDialog());
     if (result != null) {
       getMissions();
     }
@@ -250,12 +227,11 @@ class AdminHomeController extends GetxController {
     return (tempFilterTagModel.value?.id == tag.id).obs;
   }
 
-  Future<void> goToAdminRequestPage(int missionId) async {
+  Future<void> goToHunterRequestPage(int missionId) async {
     final result = await Get.toNamed(
-      RouteName.adminRequest,
+      RouteName.hunterMissionDetail,
       parameters: {'missionId': '$missionId'},
     );
     if (result != null) {}
   }
-
 }

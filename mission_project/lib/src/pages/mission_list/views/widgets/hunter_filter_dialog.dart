@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import '../../../../../generated/locales.g.dart';
 import '../../../../infrastructure/utils/utils.dart';
 import '../../../shared/enums/date_enum.dart';
-import '../../controller/admin_home_controller.dart';
+import '../../controller/hunter_mission_list_controller.dart';
 import 'tag_item.dart';
 
-class FilterDialog extends GetView<AdminHomeController> {
-  const FilterDialog({super.key});
+class HunterFilterDialog extends GetView<HunterMissionListController> {
+  const HunterFilterDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

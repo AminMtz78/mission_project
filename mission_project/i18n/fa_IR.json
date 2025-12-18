@@ -41,7 +41,9 @@
     "submit": "ثبت",
     "required_field": "این فیلد الزامی است",
     "price_range": "محدوده قیمت",
-    "delete": "حذف"
+    "delete": "حذف",
+    "request": "درخواست",
+    "search": "جستجو"
 
   }
 }

@@ -78,7 +78,6 @@ class TagDialog extends GetView<ModifyMissionController> {
           ? CircularProgressIndicator()
           : TextFormField(
               autofocus: true,
-              // focusNode: controller.focusNode,
               onChanged: controller.onTextChanged,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: controller.tagEditingController,
