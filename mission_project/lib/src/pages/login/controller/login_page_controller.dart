@@ -26,6 +26,13 @@ class LoginPageController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+
+  @override
+  void onClose() {
+    usernameController.dispose();
+    passwordController.dispose();
+  }
+
   Future<void> goToRegisterPage(BuildContext context) async {
     final result = await Get.toNamed(RouteName.registerPage);
     if (result != null) {

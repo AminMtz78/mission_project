@@ -159,6 +159,7 @@ abstract class ModifyMissionController extends GetxController {
     titleController.dispose();
     descriptionController.dispose();
     deadlineController.dispose();
+    priceController.dispose();
 
     super.onClose();
   }

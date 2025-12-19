@@ -43,7 +43,16 @@
     "price_range": "محدوده قیمت",
     "delete": "حذف",
     "request": "درخواست",
-    "search": "جستجو"
+    "search": "جستجو",
+    "Something_went_wrong_Please_try_again": "مشکلی پیش امده. لطفا دوباره تلاش کنید",
+    "retry": "تلاش محدد",
+    "cancel": "انصراف"
 
+  },
+
+  "mission": {
+    "offer_price":"قیمت پیشنهادی",
+    "request_for_mission": "درخواست انجام مأموریت",
+    "request_uniqueness_error":"درخواست دیگری از طرف شما شما برای این ماموریت ثبت شده"
   }
 }

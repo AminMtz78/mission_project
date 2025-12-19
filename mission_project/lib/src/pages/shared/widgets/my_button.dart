@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../infrastructure/utils/utils.dart';
+
 class MyButton extends StatelessWidget {
   final bool isLoading;
   final VoidCallback onPressed;
@@ -19,7 +21,7 @@ class MyButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(96, 48),
 
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        shape: RoundedRectangleBorder(borderRadius: Utils.roundedRadius),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

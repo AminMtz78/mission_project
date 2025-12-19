@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../generated/locales.g.dart';
 
 class RetryWidget extends StatelessWidget {
   final bool isRetry;
@@ -9,7 +12,7 @@ class RetryWidget extends StatelessWidget {
     super.key,
     required this.isRetry,
     required this.onRetry,
-    this.message = 'Something went wrong. Please try again.',
+    this.message = LocaleKeys.shared_Something_went_wrong_Please_try_again,
   });
 
   @override
@@ -21,7 +24,7 @@ class RetryWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            message,
+            message.tr,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 14),
           ),
@@ -29,7 +32,7 @@ class RetryWidget extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: onRetry,
             icon: const Icon(Icons.refresh),
-            label: const Text('Retry'),
+            label: Text(LocaleKeys.shared_retry.tr),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             ),

@@ -86,7 +86,6 @@ class EditMissionController extends ModifyMissionController {
         isLoading(false);
       },
       ifRight: (data) {
-        print('tags length  ${data.length}');
         selectedTag.addAll(data);
         isLoading(false);
       },

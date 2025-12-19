@@ -67,6 +67,14 @@ class LocaleKeys {
   static const shared_delete = 'shared_delete';
   static const shared_request = 'shared_request';
   static const shared_search = 'shared_search';
+  static const shared_Something_went_wrong_Please_try_again =
+      'shared_Something_went_wrong_Please_try_again';
+  static const shared_retry = 'shared_retry';
+  static const shared_cancel = 'shared_cancel';
+  static const mission_offer_price = 'mission_offer_price';
+  static const mission_request_for_mission = 'mission_request_for_mission';
+  static const mission_request_uniqueness_error =
+      'mission_request_uniqueness_error';
 }
 
 class Locales {
@@ -119,6 +127,14 @@ class Locales {
     'shared_delete': 'delete',
     'shared_request': 'request',
     'shared_search': 'search',
+    'shared_Something_went_wrong_Please_try_again':
+        'Something went wrong. Please try again.',
+    'shared_retry': 'retry',
+    'shared_cancel': 'cancel',
+    'mission_offer_price': 'offer price',
+    'mission_request_for_mission': 'request for mission',
+    'mission_request_uniqueness_error':
+        'You have already submitted a request for this mission',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -170,5 +186,13 @@ class Locales {
     'shared_delete': 'حذف',
     'shared_request': 'درخواست',
     'shared_search': 'جستجو',
+    'shared_Something_went_wrong_Please_try_again':
+        'مشکلی پیش امده. لطفا دوباره تلاش کنید',
+    'shared_retry': 'تلاش محدد',
+    'shared_cancel': 'انصراف',
+    'mission_offer_price': 'قیمت پیشنهادی',
+    'mission_request_for_mission': 'درخواست انجام مأموریت',
+    'mission_request_uniqueness_error':
+        'درخواست دیگری از طرف شما شما برای این ماموریت ثبت شده',
   };
 }

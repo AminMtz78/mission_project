@@ -27,6 +27,13 @@ class RegisterPageController extends GetxController {
   final TextEditingController repeatPasswordController =
       TextEditingController();
 
+  @override
+  void onClose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    repeatPasswordController.dispose();
+  }
+
   Future<void> checkUserExist(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       isLoading(true);
