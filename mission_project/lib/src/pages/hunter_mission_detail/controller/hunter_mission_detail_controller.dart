@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/commons/app_controller.dart';
 import '../../../infrastructure/routes/route_name.dart';
+import '../../mission_modify/model/dto/mission_dto.dart';
+import '../../shared/enums/mission_status_enum.dart';
 import '../../shared/model/dto/mission_request_dto.dart';
 import '../../shared/model/view_model/mission_tag_view_model.dart';
 import '../../shared/model/view_model/mission_view_model.dart';
@@ -23,13 +25,19 @@ class HunterMissionDetailController extends GetxController {
 
   final RxBool isLoading = false.obs;
   final RxBool isRetry = false.obs;
+  RxBool isButtonLoading = false.obs;
+  final RxBool isDoneButtonLoading = false.obs;
+  final RxBool isFailedButtonLoading = false.obs;
   final RxBool isOffering = false.obs;
-  final RxBool isButtonLoading = false.obs;
 
   @override
   void onInit() {
     getMissionById();
     super.onInit();
+  }
+
+  bool isInProgressWithLoggedInUser(MissionViewModel mission) {
+    return AppController().currentUser!.id == mission.assignedTo;
   }
 
   Future<void> getMissionById() async {
@@ -118,6 +126,62 @@ class HunterMissionDetailController extends GetxController {
         isButtonLoading(false);
         Get.offNamed(RouteName.hunterMissionList);
         Get.snackbar('', LocaleKeys.shared_The_operation_was_successful.tr);
+      },
+    );
+  }
+
+  Future<void> submitMissionCompletion() async {
+    isDoneButtonLoading(true);
+    final resultOrException = await _repository.editMissionStatusToPendingDone(
+      missionId: model!.id,
+      mission: MissionDto(
+        title: model!.title,
+        description: model!.description,
+        price: model!.price,
+        deadLine: model!.deadLine,
+        tags: model!.tags,
+        status: MissionStatusEnum.pendingDoneApproval,
+        createdBy: model!.createdBy,
+        assignedTo: model!.assignedTo,
+      ),
+    );
+
+    resultOrException.fold(
+      ifLeft: (err) {
+        isDoneButtonLoading(false);
+        Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
+      },
+      ifRight: (data) {
+        isDoneButtonLoading(false);
+        Get.back(result: true);
+      },
+    );
+  }
+
+  Future<void> submitMissionFailure() async {
+    isFailedButtonLoading(true);
+    final resultOrException = await _repository.editMissionStatusToFailed(
+      missionId: model!.id,
+      mission: MissionDto(
+        title: model!.title,
+        description: model!.description,
+        price: model!.price,
+        deadLine: model!.deadLine,
+        tags: model!.tags,
+        status: MissionStatusEnum.failed,
+        createdBy: model!.createdBy,
+        assignedTo: model!.assignedTo,
+      ),
+    );
+
+    resultOrException.fold(
+      ifLeft: (err) {
+        isFailedButtonLoading(false);
+        Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
+      },
+      ifRight: (data) {
+        isFailedButtonLoading(false);
+        Get.back(result: true);
       },
     );
   }

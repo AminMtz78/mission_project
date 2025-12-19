@@ -26,4 +26,7 @@ class RepositoryUrls {
   static const String addRequest = '$baseUrl/requests';
   static const String getRequest = '$baseUrl/requests';
 
+  static String getRequestByMissionId(int missionId) =>
+      '$baseUrl/requests?missionId=$missionId';
+
 }

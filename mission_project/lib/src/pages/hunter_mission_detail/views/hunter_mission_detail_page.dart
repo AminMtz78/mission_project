@@ -9,41 +9,84 @@ import '../../shared/widgets/custom_flexible_widget.dart';
 import '../../shared/widgets/my_button.dart';
 import '../../shared/widgets/retry_widget.dart';
 import '../controller/hunter_mission_detail_controller.dart';
-import 'widgets/mission_header_card.dart';
+import 'widgets/mission_details_card.dart';
 
 class HunterMissionDetailPage extends GetView<HunterMissionDetailController> {
   const HunterMissionDetailPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(controller.title)),
-      body: Obx(
-        () => controller.isLoading.value
-            ? Center(child: CircularProgressIndicator())
-            : controller.isRetry.value
-            ? RetryWidget(
-                isRetry: controller.isRetry.value,
-                onRetry: controller.getMissionById,
-              )
-            : _body(context),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Text(controller.title)),
+    body: Obx(
+      () => controller.isLoading.value
+          ? Center(child: CircularProgressIndicator())
+          : controller.isRetry.value
+          ? RetryWidget(
+              isRetry: controller.isRetry.value,
+              onRetry: controller.getMissionById,
+            )
+          : _body(context),
+    ),
+  );
 
   Widget _body(BuildContext context) => Padding(
     padding: Utils.mediumPadding,
     child: SingleChildScrollView(
       child: Column(
         children: [
-          MissionHeaderCard(item: controller.model!, tags: controller.tagList),
+          MissionDetailsCard(
+            item: controller.model!,
+            tags: controller.tagList,
+            isInProgressWithLoggedInUser: controller
+                .isInProgressWithLoggedInUser(controller.model!),
+          ),
           Utils.mediumVerticalSpacer,
+          if (controller.isInProgressWithLoggedInUser(controller.model!) &&
+              controller.model!.status == MissionStatusEnum.inProgress)
+            Breakpoint.either(
+              context,
+              breakpoint: Breakpoint.phone,
+              before: () => Column(
+                children: [
+                  _submitCompletionButton(),
+                  Utils.mediumVerticalSpacer,
+                  _submitFailedButton(),
+                ],
+              ),
+              after: () => Row(
+                children: [
+                  _submitCompletionButton(),
+                  Utils.smallHorizontalSpacer,
+                  _submitFailedButton(),
+                ],
+              ),
+            ),
           if (controller.model!.status == MissionStatusEnum.free)
             _offerWidgets(context),
         ],
       ),
     ),
   );
+
+  MyButton _submitFailedButton() {
+    return MyButton(
+      isLoading: controller.isFailedButtonLoading.value,
+      onPressed: controller.isDoneButtonLoading.value
+          ? null
+          : controller.submitMissionFailure,
+      title: LocaleKeys.mission_submitMissionFailure.tr,
+    );
+  }
+
+  MyButton _submitCompletionButton() {
+    return MyButton(
+      isLoading: controller.isDoneButtonLoading.value,
+      onPressed: controller.isFailedButtonLoading.value
+          ? null
+          : controller.submitMissionCompletion,
+      title: LocaleKeys.mission_submitMissionCompletion.tr,
+    );
+  }
 
   Obx _offerWidgets(BuildContext context) => Obx(() {
     if (!controller.isOffering.value) {

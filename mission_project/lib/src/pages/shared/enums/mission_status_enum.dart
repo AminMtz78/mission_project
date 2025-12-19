@@ -19,15 +19,15 @@ enum MissionStatusEnum {
   Color color() {
     switch (this) {
       case MissionStatusEnum.free:
-        return Colors.green.withValues(alpha: 0.4);
+        return Colors.yellow.withValues(alpha: 0.2);
       case MissionStatusEnum.pendingDoneApproval:
-        return Colors.orange.withValues(alpha: 0.4);
+        return Colors.orange.withValues(alpha: 0.2);
       case MissionStatusEnum.inProgress:
-        return Colors.blue.withValues(alpha: 0.4);
+        return Colors.blue.withValues(alpha: 0.2);
       case MissionStatusEnum.failed:
-        return Colors.red.withValues(alpha: 0.4);
+        return Colors.red.withValues(alpha: 0.2);
       case MissionStatusEnum.done:
-        return Colors.green.withValues(alpha: 0.4);
+        return Colors.green.withValues(alpha: 0.2);
     }
   }
 }

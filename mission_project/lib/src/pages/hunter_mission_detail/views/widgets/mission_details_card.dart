@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mission_project/src/pages/shared/enums/mission_status_enum.dart';
 
+import '../../../../../generated/locales.g.dart';
 import '../../../../infrastructure/utils/utils.dart';
 import '../../../shared/enums/breakpoint.dart';
 import '../../../shared/model/view_model/mission_tag_view_model.dart';
 import '../../../shared/model/view_model/mission_view_model.dart';
 
-class MissionHeaderCard extends StatelessWidget {
-  const MissionHeaderCard({super.key, required this.item, required this.tags});
+class MissionDetailsCard extends StatelessWidget {
+  const MissionDetailsCard({
+    super.key,
+    required this.item,
+    required this.tags,
+    required this.isInProgressWithLoggedInUser,
+  });
 
   final MissionViewModel item;
   final List<MissionTagViewModel> tags;
+  final bool isInProgressWithLoggedInUser;
 
   @override
   Widget build(BuildContext context) => Card(
@@ -110,7 +118,12 @@ class MissionHeaderCard extends StatelessWidget {
       size: Utils.mSmallSpace,
       color: item.status.color(),
     ),
-    label: Text(item.status.title.tr),
+    label: Text(
+      isInProgressWithLoggedInUser &&
+              item.status == MissionStatusEnum.inProgress
+          ? LocaleKeys.mission_in_progress_by_logged_in_user.tr
+          : item.status.title.tr,
+    ),
   );
 
   Widget _tags() => Wrap(

@@ -27,15 +27,15 @@
     "admin": "ادمین ",
     "hunter": "شکارچی",
     "The_operation_was_successful": "عملیات با موفقیت انجام شد",
-    "free" : "آزاد",
+    "free": "آزاد",
     "Pending_Approval": "در انتظار تایید",
     "In_progress": "در حال انجام",
     "Failed": "شکست خورده",
     "Done": "انجام شده",
-    "title" : "عنوان",
-    "description" : "توضیحات",
+    "title": "عنوان",
+    "description": "توضیحات",
     "price": "قیمت",
-    "deadLine" : "اخرین مهلت",
+    "deadLine": "اخرین مهلت",
     "tag": "دسته بندی",
     "empty": "هیچ رکوردی ثبت نشده است",
     "submit": "ثبت",
@@ -46,13 +46,17 @@
     "search": "جستجو",
     "Something_went_wrong_Please_try_again": "مشکلی پیش امده. لطفا دوباره تلاش کنید",
     "retry": "تلاش محدد",
-    "cancel": "انصراف"
-
+    "cancel": "انصراف",
+    "accept": "پذیرفتن"
   },
-
   "mission": {
-    "offer_price":"قیمت پیشنهادی",
+    "offer_price": "قیمت پیشنهادی",
     "request_for_mission": "درخواست انجام مأموریت",
-    "request_uniqueness_error":"درخواست دیگری از طرف شما شما برای این ماموریت ثبت شده"
+    "request_uniqueness_error": "درخواست دیگری از طرف شما شما برای این ماموریت ثبت شده",
+    "user_profile": "پروفابل کاربر",
+    "requests": "درخواست ها",
+    "in_progress_by_logged_in_user": "در حال انحام توسط شما",
+    "submitMissionCompletion": "ثبت اتمام مأموریت",
+    "submitMissionFailure": "ثبت شکست مأموریت"
   }
 }

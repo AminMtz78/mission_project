@@ -71,10 +71,18 @@ class LocaleKeys {
       'shared_Something_went_wrong_Please_try_again';
   static const shared_retry = 'shared_retry';
   static const shared_cancel = 'shared_cancel';
+  static const shared_accept = 'shared_accept';
   static const mission_offer_price = 'mission_offer_price';
   static const mission_request_for_mission = 'mission_request_for_mission';
   static const mission_request_uniqueness_error =
       'mission_request_uniqueness_error';
+  static const mission_user_profile = 'mission_user_profile';
+  static const mission_requests = 'mission_requests';
+  static const mission_in_progress_by_logged_in_user =
+      'mission_in_progress_by_logged_in_user';
+  static const mission_submitMissionCompletion =
+      'mission_submitMissionCompletion';
+  static const mission_submitMissionFailure = 'mission_submitMissionFailure';
 }
 
 class Locales {
@@ -131,10 +139,16 @@ class Locales {
         'Something went wrong. Please try again.',
     'shared_retry': 'retry',
     'shared_cancel': 'cancel',
+    'shared_accept': 'accept',
     'mission_offer_price': 'offer price',
     'mission_request_for_mission': 'request for mission',
     'mission_request_uniqueness_error':
         'You have already submitted a request for this mission',
+    'mission_user_profile': 'user profile',
+    'mission_requests': 'request',
+    'mission_in_progress_by_logged_in_user': 'in progress by you',
+    'mission_submitMissionCompletion': 'submitMissionCompletion',
+    'mission_submitMissionFailure': 'submitMissionFailure',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -190,9 +204,15 @@ class Locales {
         'مشکلی پیش امده. لطفا دوباره تلاش کنید',
     'shared_retry': 'تلاش محدد',
     'shared_cancel': 'انصراف',
+    'shared_accept': 'پذیرفتن',
     'mission_offer_price': 'قیمت پیشنهادی',
     'mission_request_for_mission': 'درخواست انجام مأموریت',
     'mission_request_uniqueness_error':
         'درخواست دیگری از طرف شما شما برای این ماموریت ثبت شده',
+    'mission_user_profile': 'پروفابل کاربر',
+    'mission_requests': 'درخواست ها',
+    'mission_in_progress_by_logged_in_user': 'در حال انحام توسط شما',
+    'mission_submitMissionCompletion': 'ثبت اتمام مأموریت',
+    'mission_submitMissionFailure': 'ثبت شکست مأموریت',
   };
 }

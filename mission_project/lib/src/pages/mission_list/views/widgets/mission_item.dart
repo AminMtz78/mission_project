@@ -13,89 +13,38 @@ class MissionItem extends StatelessWidget {
     required this.onTap,
     required this.item,
     required this.tags,
+    required this.isInProgressWithLoggedInUser,
   });
 
   final VoidCallback onTap;
   final MissionViewModel item;
   final List<MissionTagViewModel> tags;
+  final bool isInProgressWithLoggedInUser;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
+    return Card(
+      elevation: 1.5,
       margin: Utils.smallPadding,
-      decoration: BoxDecoration(
-        borderRadius: Utils.roundedRadius,
-        color: Colors.deepPurpleAccent.withValues(alpha: 0.05),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: Utils.roundedRadius),
       child: InkWell(
+        borderRadius: Utils.roundedRadius,
         onTap: onTap,
         child: Padding(
-          padding: Utils.smallPadding,
+          padding: Utils.mediumPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _titleAndStatus(),
               Utils.smallVerticalSpacer,
               _description(),
-              Utils.smallVerticalSpacer,
-              _tags(),
-              Utils.smallVerticalSpacer,
+              if (tags.isNotEmpty) ...[Utils.smallVerticalSpacer, _tags()],
+              Utils.mediumVerticalSpacer,
               _priceAndDate(),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Row _priceAndDate() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        /// Price + Deadline
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '💰 ${item.price.toStringAsFixed(0)}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Utils.smallVerticalSpacer,
-            Text(
-              '${LocaleKeys.shared_deadLine.tr}: ${Utils.formatDate(item.deadLine)}',
-              style: const TextStyle(fontSize: 11),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _tags() {
-    return SizedBox(
-      height: 32,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: tags.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 6),
-        itemBuilder: (context, index) {
-          final tag = tags[index];
-          return Chip(
-            label: Text(tag.title, style: const TextStyle(fontSize: 12)),
-            visualDensity: VisualDensity.compact,
-          );
-        },
-      ),
-    );
-  }
-
-  Text _description() {
-    return Text(
-      item.description,
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-      style: const TextStyle(fontSize: 13),
     );
   }
 
@@ -110,16 +59,81 @@ class MissionItem extends StatelessWidget {
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
+        Utils.smallVerticalSpacer,
         _statusChip(item.status),
+      ],
+    );
+  }
+
+  Widget _description() {
+    return Text(
+      item.description,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(fontSize: 13, color: Colors.grey.shade700, height: 1.4),
+    );
+  }
+
+  Widget _tags() {
+    return SizedBox(
+      height: 30,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: tags.length,
+        separatorBuilder: (_, _) => Utils.xSmallHorizontalSpacer,
+        itemBuilder: (context, index) {
+          final tag = tags[index];
+          return Chip(
+            label: Text(tag.title, style: const TextStyle(fontSize: 11)),
+            backgroundColor: Colors.deepPurpleAccent.withValues(alpha: 0.08),
+            visualDensity: VisualDensity.compact,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _priceAndDate() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            const Icon(Icons.payments_outlined, size: 16),
+            Utils.smallVerticalSpacer,
+            Text(
+              item.price.toStringAsFixed(0),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            const Icon(Icons.schedule, size: 14),
+            Utils.smallVerticalSpacer,
+            Text(
+              Utils.formatDate(item.deadLine),
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
       ],
     );
   }
 
   Widget _statusChip(MissionStatusEnum status) {
     return Chip(
-      label: Text(status.title.tr, style: const TextStyle(fontSize: 11)),
+      label: Text(
+        (isInProgressWithLoggedInUser &&
+                item.status == MissionStatusEnum.inProgress)
+            ? LocaleKeys.mission_in_progress_by_logged_in_user.tr
+            : status.title.tr,
+        style: const TextStyle(fontSize: 11),
+      ),
       backgroundColor: status.color(),
       visualDensity: VisualDensity.compact,
+      side: BorderSide(color: status.color()),
     );
   }
 }

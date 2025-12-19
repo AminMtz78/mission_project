@@ -3,12 +3,12 @@ import 'package:dart_either/dart_either.dart';
 import '../../../infrastructure/commons/api_client.dart';
 import '../../../infrastructure/commons/repository_url.dart';
 import '../../mission_modify/model/dto/mission_dto.dart';
-import '../../shared/model/dto/mission_request_dto.dart';
 import '../../shared/model/view_model/mission_request_view_model.dart';
 import '../../shared/model/view_model/mission_tag_view_model.dart';
 import '../../shared/model/view_model/mission_view_model.dart';
+import '../../shared/model/view_model/user_view_model.dart';
 
-class HunterMissionRepository {
+class AdminRequestRepository {
   final ApiClient _apiClient = ApiClient();
 
   Future<Either<String, MissionViewModel>> getMissionById(int id) async {
@@ -39,25 +39,11 @@ class HunterMissionRepository {
     );
   }
 
-  Future<Either<String, int>> addRequest(MissionRequestDto request) async {
-    final response = await _apiClient.post<Map<String, dynamic>>(
-      RepositoryUrls.addRequest,
-      request.toJson(),
-    );
-
-    return response.fold(
-      ifLeft: Left.new,
-      ifRight: (data) {
-        return Right((MissionRequestViewModel.fromJson(data)).id);
-      },
-    );
-  }
-
-  Future<Either<String, List<MissionRequestViewModel>>>
-  getRequestByMissionIdAndUserId({required Map<String, dynamic> query}) async {
+  Future<Either<String, List<MissionRequestViewModel>>> getRequestByMissionId(
+    int id,
+  ) async {
     final response = await _apiClient.get<List<dynamic>>(
-      RepositoryUrls.getRequest,
-      query: query,
+      RepositoryUrls.getRequestByMissionId(id),
     );
 
     return response.fold(
@@ -67,7 +53,7 @@ class HunterMissionRepository {
     );
   }
 
-  Future<Either<String, MissionViewModel>> editMissionStatusToFailed({
+  Future<Either<String, MissionViewModel>> acceptUserRequestForMission({
     required int missionId,
     required MissionDto mission,
   }) async {
@@ -82,18 +68,18 @@ class HunterMissionRepository {
     );
   }
 
-  Future<Either<String, MissionViewModel>> editMissionStatusToPendingDone({
-    required int missionId,
-    required MissionDto mission,
+  Future<Either<String, List<UserViewModel>>> getUser({
+    required List<int> userIds,
   }) async {
-    final response = await _apiClient.patch<Map<String, dynamic>>(
-      RepositoryUrls.editMissionsById(missionId),
-      mission.toJson(),
+    final response = await _apiClient.get<List<dynamic>>(
+      RepositoryUrls.getUser,
+      query: {'id': userIds},
     );
 
     return response.fold(
       ifLeft: Left.new,
-      ifRight: (data) => Right(MissionViewModel.fromJson(data)),
+      ifRight: (data) =>
+          Right(data.map((e) => UserViewModel.fromJson(e)).toList()),
     );
   }
 }

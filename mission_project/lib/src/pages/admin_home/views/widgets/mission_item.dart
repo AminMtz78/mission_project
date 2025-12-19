@@ -25,29 +25,25 @@ class MissionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
+    return Card(
+      elevation: 2,
       margin: Utils.smallPadding,
-      decoration: BoxDecoration(
-        borderRadius: Utils.roundedRadius,
-        color: Colors.deepPurpleAccent.withValues(alpha: 0.05),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: Utils.roundedRadius),
       child: InkWell(
+        borderRadius: Utils.roundedRadius,
         onTap: onTap,
         child: Padding(
-          padding: Utils.smallPadding,
+          padding: Utils.mediumPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _titleAndStatus(),
               Utils.smallVerticalSpacer,
               _description(),
-              Utils.smallVerticalSpacer,
+              Utils.mediumVerticalSpacer,
               _tags(),
-              Utils.smallVerticalSpacer,
-              _priceAndDate(),
-              Utils.smallVerticalSpacer,
-              if (item.status == MissionStatusEnum.free) _deleteAndEditButton(),
+              Utils.mediumVerticalSpacer,
+              _footer(),
             ],
           ),
         ),
@@ -55,69 +51,7 @@ class MissionItem extends StatelessWidget {
     );
   }
 
-  Row _deleteAndEditButton() {
-    return Row(
-      children: [
-        IconButton(onPressed: onEdit, icon: const Icon(Icons.edit, size: 20)),
-        IconButton(
-          onPressed: onDelete,
-          icon: const Icon(Icons.delete, size: 20),
-        ),
-      ],
-    );
-  }
-
-  Row _priceAndDate() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        /// Price + Deadline
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '💰 ${item.price.toStringAsFixed(0)}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Utils.smallVerticalSpacer,
-            Text(
-              '${LocaleKeys.shared_deadLine.tr}: ${Utils.formatDate(item.deadLine)}',
-              style: const TextStyle(fontSize: 11),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _tags() {
-    return SizedBox(
-      height: 32,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: tags.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 6),
-        itemBuilder: (context, index) {
-          final tag = tags[index];
-          return Chip(
-            label: Text(tag.title, style: const TextStyle(fontSize: 12)),
-            visualDensity: VisualDensity.compact,
-          );
-        },
-      ),
-    );
-  }
-
-  Text _description() {
-    return Text(
-      item.description,
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-      style: const TextStyle(fontSize: 13),
-    );
-  }
-
-  Row _titleAndStatus() {
+  Widget _titleAndStatus() {
     return Row(
       children: [
         Expanded(
@@ -133,10 +67,81 @@ class MissionItem extends StatelessWidget {
     );
   }
 
+  Widget _description() {
+    return Text(
+      item.description,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
+    );
+  }
+
+  Widget _tags() {
+    if (tags.isEmpty) return const SizedBox.shrink();
+
+    return SizedBox(
+      height: 30,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: tags.length,
+        separatorBuilder: (_, _) => const SizedBox(width: 6),
+        itemBuilder: (context, index) {
+          final tag = tags[index];
+          return Chip(
+            label: Text(tag.title, style: const TextStyle(fontSize: 11)),
+            visualDensity: VisualDensity.compact,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _footer() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '💰 ${item.price.toStringAsFixed(0)}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Utils.smallVerticalSpacer,
+            Text(
+              '${LocaleKeys.shared_deadLine.tr}: ${Utils.formatDate(item.deadLine)}',
+              style: const TextStyle(fontSize: 11),
+            ),
+          ],
+        ),
+        if (item.status == MissionStatusEnum.free && item.assignedTo == null)
+          _actionButtons(),
+      ],
+    );
+  }
+
+  Widget _actionButtons() {
+    return Row(
+      children: [
+        IconButton(
+          tooltip: ' LocaleKeys.edit.tr',
+          onPressed: onEdit,
+          icon: const Icon(Icons.edit, size: 20),
+        ),
+        IconButton(
+          tooltip: LocaleKeys.shared_delete.tr,
+          onPressed: onDelete,
+          icon: const Icon(Icons.delete, size: 20),
+        ),
+      ],
+    );
+  }
+
   Widget _statusChip(MissionStatusEnum status) {
     return Chip(
       label: Text(status.title.tr, style: const TextStyle(fontSize: 11)),
       backgroundColor: status.color(),
+      avatar: Icon(Icons.circle, size: 10, color: status.color()),
       visualDensity: VisualDensity.compact,
     );
   }

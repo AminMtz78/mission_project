@@ -4,7 +4,7 @@ import '../../../infrastructure/utils/utils.dart';
 
 class MyButton extends StatelessWidget {
   final bool isLoading;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String title;
 
   const MyButton({

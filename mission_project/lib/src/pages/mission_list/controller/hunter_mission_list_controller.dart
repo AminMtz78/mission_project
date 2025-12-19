@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../infrastructure/commons/app_controller.dart';
 import '../../../infrastructure/routes/route_name.dart';
 import '../../shared/enums/date_enum.dart';
 import '../../shared/enums/mission_status_enum.dart';
@@ -58,6 +59,10 @@ class HunterMissionListController extends GetxController {
   @override
   void onClose() {
     searchController.dispose();
+  }
+
+  bool isInProgressWithLoggedInUser(MissionViewModel mission) {
+    return AppController().currentUser!.id == mission.assignedTo;
   }
 
   void onSearch(String value) async {
@@ -232,6 +237,8 @@ class HunterMissionListController extends GetxController {
       RouteName.hunterMissionDetail,
       parameters: {'missionId': '$missionId'},
     );
-    if (result != null) {}
+    if (result != null) {
+      initial();
+    }
   }
 }

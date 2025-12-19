@@ -36,4 +36,28 @@ class MissionViewModel {
       assignedTo: json['assignedTo'],
     );
   }
+
+  MissionViewModel copyWith({
+    int? id,
+    String? title,
+    String? description,
+    double? price,
+    DateTime? deadLine,
+    List<int>? tags,
+    MissionStatusEnum? status,
+    int? createdBy,
+    int? assignedTo,
+  }) {
+    return MissionViewModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      price: price ?? this.price,
+      deadLine: deadLine ?? this.deadLine,
+      tags: tags ?? this.tags,
+      status: status ?? this.status,
+      createdBy: createdBy ?? this.createdBy,
+      assignedTo: assignedTo ?? this.assignedTo,
+    );
+  }
 }

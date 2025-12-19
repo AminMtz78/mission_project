@@ -46,12 +46,18 @@
     "search": "search",
     "Something_went_wrong_Please_try_again": "Something went wrong. Please try again.",
     "retry": "retry",
-    "cancel": "cancel"
+    "cancel": "cancel",
+    "accept": "accept"
   },
 
   "mission": {
     "offer_price":"offer price",
     "request_for_mission": "request for mission",
-    "request_uniqueness_error":"You have already submitted a request for this mission"
+    "request_uniqueness_error":"You have already submitted a request for this mission",
+    "user_profile": "user profile",
+    "requests": "request",
+    "in_progress_by_logged_in_user": "in progress by you",
+    "submitMissionCompletion": "submitMissionCompletion",
+    "submitMissionFailure": "submitMissionFailure"
   }
 }

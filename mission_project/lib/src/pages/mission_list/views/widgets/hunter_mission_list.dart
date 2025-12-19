@@ -25,9 +25,12 @@ class HunterMissionList extends GetView<HunterMissionListController> {
           crossAxisCount: crossAxisCount,
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
-          mainAxisExtent: 250,
+          mainAxisExtent: 200,
         ),
         itemBuilder: (context, index) => MissionItem(
+          isInProgressWithLoggedInUser: controller.isInProgressWithLoggedInUser(
+            controller.missions[index],
+          ),
           item: controller.missions[index],
           onTap: () =>
               controller.goToHunterRequestPage(controller.missions[index].id),
