@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/commons/app_controller.dart';
-import '../../../infrastructure/routes/route_name.dart';
 import '../../../infrastructure/utils/utils.dart';
 import '../../shared/widgets/empty_widget.dart';
 import '../../shared/widgets/retry_widget.dart';
