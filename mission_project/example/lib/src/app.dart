@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     ),
     initialRoute: RoutePath.splashPage,
     getPages: RoutePages.pages,
-    locale: StorageHandler().getLocale() == 'fa'
+    locale: StorageHandler().getLocale() == 'en'
         ? const Locale('en', 'US')
         : const Locale('fa', 'IR'),
     translationsKeys: LocalizationService.keys,

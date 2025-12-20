@@ -10,7 +10,6 @@ class StorageHandler {
   static final GetStorage _storage = GetStorage();
 
   Future<void> init() async {
-    await GetStorage.init();
     await _storage.initStorage;
   }
 
@@ -19,7 +18,7 @@ class StorageHandler {
 
   int? getUserId() => _storage.read(_isRememberUser);
 
-  String getLocale() => _storage.read(_locale);
+  String getLocale() => _storage.read(_locale) ?? 'en';
 
   void setRememberedUserId(int? value) async {
     await _storage.write(_isRememberUser, value);

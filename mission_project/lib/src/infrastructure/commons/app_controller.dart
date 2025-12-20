@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import 'package:mission_project/src/pages/shared/model/view_model/user_view_model.dart';
 
+import '../../pages/shared/model/view_model/user_view_model.dart';
 import '../routes/route_name.dart';
 import 'storage_handler.dart';
 
@@ -18,7 +18,8 @@ class AppController {
   void setUser(UserViewModel user) => currentUser = user;
 
   void changeLanguage() {
-    if (StorageHandler().getLocale() == 'fa') {
+    final current = StorageHandler().getLocale();
+    if (current == 'fa') {
       StorageHandler().setLocale('en');
       Get.updateLocale(const Locale('en', 'US'));
     } else {

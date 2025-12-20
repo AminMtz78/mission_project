@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/commons/app_controller.dart';
 import '../../../infrastructure/commons/storage_handler.dart';
 import '../../../infrastructure/routes/route_path.dart';
@@ -14,12 +15,12 @@ class SplashPageController extends GetxController {
   void onReady() {
     super.onReady();
     checkLogin();
+
   }
 
   Future<void> checkLogin() async {
     await Future.delayed(Duration(seconds: 3));
     final int? userId = StorageHandler().getUserId();
-    print('user id  :::::: $userId');
 
     if (userId == null) {
       Get.offNamed(RoutePath.loginPage);
@@ -31,7 +32,7 @@ class SplashPageController extends GetxController {
     final user = AppController().currentUser;
 
     if (user == null) {
-      Get.snackbar('Error', 'User not found');
+      Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
       Get.offNamed(RoutePath.loginPage);
       return;
     }
@@ -51,7 +52,8 @@ class SplashPageController extends GetxController {
     final result = await _repository.getUser(id);
 
     result.fold(
-      ifLeft: (_) => Get.snackbar('Error', 'Failed to load user'),
+      ifLeft: (_) =>
+          Get.snackbar('', LocaleKeys.shared_server_communication_error.tr),
       ifRight: (user) => AppController().setUser(user),
     );
   }
