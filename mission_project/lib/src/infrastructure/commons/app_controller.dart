@@ -18,13 +18,12 @@ class AppController {
   void setUser(UserViewModel user) => currentUser = user;
 
   void changeLanguage() {
-    if (StorageHandler().getLocale() == 'en') {
-      StorageHandler().setLocale('fa');
-
-      Get.updateLocale(const Locale('fa', 'IR'));
-    } else {
+    if (StorageHandler().getLocale() == 'fa') {
       StorageHandler().setLocale('en');
       Get.updateLocale(const Locale('en', 'US'));
+    } else {
+      StorageHandler().setLocale('fa');
+      Get.updateLocale(const Locale('fa', 'IR'));
     }
   }
 

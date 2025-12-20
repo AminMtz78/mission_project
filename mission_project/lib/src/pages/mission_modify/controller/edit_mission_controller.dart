@@ -11,7 +11,7 @@ class EditMissionController extends ModifyMissionController {
   final int missionId;
 
   @override
-  String get title => LocaleKeys.mission_edit_mission.tr;
+  RxString get title => LocaleKeys.mission_edit_mission.tr.obs;
 
   MissionViewModel? currentMission;
 

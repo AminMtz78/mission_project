@@ -9,7 +9,7 @@ import '../model/user_dto.dart';
 import '../repository/register_page_repository.dart';
 
 class RegisterPageController extends GetxController {
-  String title = LocaleKeys.login_register.tr;
+
 
   final Rxn<UserTypeEnum> userType = Rxn();
   final GlobalKey<FormState> formKey = GlobalKey();

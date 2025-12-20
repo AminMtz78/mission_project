@@ -14,7 +14,7 @@ import '../repository/admin_home_repository.dart';
 import '../views/widgets/filter_dialog.dart';
 
 class AdminHomeController extends GetxController {
-  final String pageTitle = LocaleKeys.shared_admin_mission_page_title.tr;
+
 
   final AdminHomeRepository _repository = AdminHomeRepository();
 

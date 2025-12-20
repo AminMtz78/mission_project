@@ -14,7 +14,7 @@ import '../repository/hunter_mission_list_repository.dart';
 import '../views/widgets/hunter_filter_dialog.dart';
 
 class HunterMissionListController extends GetxController {
-  final String title = LocaleKeys.mission_mission_list.tr;
+
 
   final HunterMissionListRepository _repository = HunterMissionListRepository();
 

@@ -16,7 +16,13 @@ class HunterMissionListPage extends GetView<HunterMissionListController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(controller.title),
+        actions: [
+          IconButton(
+            onPressed: AppController().changeLanguage,
+            icon: Icon(Icons.language),
+          ),
+        ],
+        title: Text(LocaleKeys.mission_mission_list.tr),
         leading: IconButton(
           onPressed: AppController().logOut,
           icon: Icon(Icons.logout),

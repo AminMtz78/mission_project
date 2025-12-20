@@ -16,7 +16,7 @@ class AdminRequestPage extends GetView<AdminRequestController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(controller.title)),
+    appBar: AppBar(title: Text(LocaleKeys.mission_requests.tr)),
     body: Obx(
       () => controller.isLoading.value
           ? Center(child: CircularProgressIndicator())

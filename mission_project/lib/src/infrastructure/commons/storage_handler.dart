@@ -19,7 +19,7 @@ class StorageHandler {
 
   int? getUserId() => _storage.read(_isRememberUser);
 
-  String getLocale() => _storage.read(_locale) ?? 'en';
+  String getLocale() => _storage.read(_locale);
 
   void setRememberedUserId(int? value) async {
     await _storage.write(_isRememberUser, value);

@@ -14,7 +14,7 @@ class RegisterPage extends GetView<RegisterPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(controller.title)),
+      appBar: AppBar(title: Text(LocaleKeys.login_register.tr)),
       body: SingleChildScrollView(
         child: Padding(
           padding: Utils.largePadding,

@@ -14,7 +14,7 @@ class AdminRequestController extends GetxController {
   AdminRequestController({required this.missionId});
 
   final int missionId;
-  var title = LocaleKeys.mission_requests.tr;
+
 
   final AdminRequestRepository _repository = AdminRequestRepository();
 

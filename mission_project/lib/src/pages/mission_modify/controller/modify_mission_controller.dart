@@ -13,7 +13,7 @@ import '../repository/modify_mission_repository.dart';
 import '../views/widgets/tag_dialog.dart';
 
 abstract class ModifyMissionController extends GetxController {
-  String get title;
+  RxString get title;
 
   final GlobalKey<FormState> formKey = GlobalKey();
 

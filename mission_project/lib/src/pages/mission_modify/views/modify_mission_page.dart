@@ -16,7 +16,7 @@ class ModifyMissionPage extends GetView<ModifyMissionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(controller.title)),
+      appBar: AppBar(title: Obx(() => Text(controller.title.value))),
       body: Obx(
         () => controller.isLoading.value
             ? Center(child: CircularProgressIndicator())

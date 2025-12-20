@@ -5,7 +5,7 @@ import 'modify_mission_controller.dart';
 
 class AddMissionController extends ModifyMissionController {
   @override
-  String get title => LocaleKeys.mission_add_mission.tr;
+  RxString get title => LocaleKeys.mission_add_mission.tr.obs;
 
   @override
   Future<void> onSubmit() async {

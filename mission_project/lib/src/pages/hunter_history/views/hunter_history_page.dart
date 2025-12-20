@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/utils/utils.dart';
 import '../../shared/widgets/retry_widget.dart';
 import '../controller/hunter_history_controller.dart';
@@ -12,7 +13,7 @@ class HunterHistoryPage extends GetView<HunterHistoryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(controller.appBarTitle)),
+      appBar: AppBar(title: Text(LocaleKeys.shared_hunterHistoryPageTittle.tr)),
       body: _body(),
     );
   }

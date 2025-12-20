@@ -9,7 +9,7 @@ class HunterHistoryController extends GetxController {
   HunterHistoryController({required this.hunterId});
 
   final int hunterId;
-  final String appBarTitle = LocaleKeys.shared_hunterHistoryPageTittle.tr;
+
 
   final HunterHistoryRepository _repository = HunterHistoryRepository();
 

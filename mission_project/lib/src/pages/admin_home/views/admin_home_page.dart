@@ -17,7 +17,13 @@ class AdminHomePage extends GetView<AdminHomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(controller.pageTitle),
+        actions: [
+          IconButton(
+            onPressed: AppController().changeLanguage,
+            icon: Icon(Icons.language),
+          ),
+        ],
+        title: Text(LocaleKeys.shared_admin_mission_page_title.tr),
         leading: Tooltip(
           message: LocaleKeys.shared_Logout.tr,
           child: IconButton(

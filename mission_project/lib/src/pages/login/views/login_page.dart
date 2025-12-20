@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../infrastructure/commons/app_controller.dart';
 import '../../../infrastructure/utils/utils.dart';
 import '../../shared/enums/breakpoint.dart';
 import '../../shared/widgets/custom_flexible_widget.dart';
@@ -14,7 +15,14 @@ class LoginPage extends GetView<LoginPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(controller.title)),
+      appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: AppController().changeLanguage,
+              icon: Icon(Icons.language),
+            ),
+          ],
+          title: Text(LocaleKeys.login_login.tr)),
 
       body: SingleChildScrollView(
         child: Breakpoint.either(

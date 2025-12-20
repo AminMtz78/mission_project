@@ -16,7 +16,7 @@ class HunterMissionDetailPage extends GetView<HunterMissionDetailController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(controller.title)),
+    appBar: AppBar(title: Text(LocaleKeys.mission_mission_details.tr)),
     body: Obx(
       () => controller.isLoading.value
           ? Center(child: CircularProgressIndicator())
