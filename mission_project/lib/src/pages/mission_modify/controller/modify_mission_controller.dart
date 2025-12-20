@@ -37,6 +37,7 @@ abstract class ModifyMissionController extends GetxController {
   RxList<MissionTagViewModel> tagList = <MissionTagViewModel>[].obs;
   RxList<MissionTagViewModel> tempSelectedTag = <MissionTagViewModel>[].obs;
   RxList<MissionTagViewModel> selectedTag = <MissionTagViewModel>[].obs;
+  RxList<MissionTagViewModel> repeatTag = <MissionTagViewModel>[].obs;
 
   final LayerLink layerLink = LayerLink();
 
@@ -47,7 +48,14 @@ abstract class ModifyMissionController extends GetxController {
   Future<void> onSubmit() async {}
 
   Future<void> addTag() async {
+    showPopup(false);
     isLoading(true);
+    await getTagsByTitle();
+    if (repeatTag.isNotEmpty) {
+      Get.back();
+      Get.snackbar('', LocaleKeys.mission_duplicate_tag_error.tr);
+      return;
+    }
     if (AppController().currentUser == null) {
       return;
     }
@@ -63,9 +71,9 @@ abstract class ModifyMissionController extends GetxController {
         isLoading(false);
       },
       ifRight: (data) {
+        tagEditingController.clear();
         tagList.add(data);
         isLoading(false);
-        tagEditingController.clear();
       },
     );
   }
@@ -105,6 +113,31 @@ abstract class ModifyMissionController extends GetxController {
       tags: selectedTag.map((e) => e.id).toList(),
       status: MissionStatusEnum.free,
       createdBy: AppController().currentUser!.id,
+    );
+  }
+
+  Future<void> getTagsByTitle() async {
+    repeatTag.clear();
+    isLoading(true);
+    isRetry(false);
+    final int? userId = AppController().currentUser?.id;
+    if (userId == null) {
+      return;
+    }
+    final resultOrException = await repository.getTagByTitle(
+      id: userId,
+      tagTitle: tagEditingController.text.trim(),
+    );
+    resultOrException.fold(
+      ifLeft: (err) {
+        Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
+        isRetry(true);
+        isLoading(false);
+      },
+      ifRight: (data) {
+        repeatTag.addAll(data);
+        isLoading(false);
+      },
     );
   }
 

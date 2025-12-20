@@ -37,6 +37,21 @@ class ModifyMissionRepository {
           Right(data.map((e) => MissionTagViewModel.fromJson(e)).toList()),
     );
   }
+  Future<Either<String, List<MissionTagViewModel>>> getTagByTitle({
+    required int id,
+    required String tagTitle,
+  }) async {
+    final response = await _apiClient.get<List<dynamic>>(
+      RepositoryUrls.getTagsByUserIdAndTitle(id,tagTitle),
+    );
+
+    return response.fold(
+      ifLeft: Left.new,
+      ifRight: (data) =>
+          Right(data.map((e) => MissionTagViewModel.fromJson(e)).toList()),
+    );
+  }
+
 
   Future<Either<String, List<MissionTagViewModel>>> getTagsByIds(
     List<int> ids,

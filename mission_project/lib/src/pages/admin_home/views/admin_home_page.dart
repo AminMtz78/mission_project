@@ -21,7 +21,7 @@ class AdminHomePage extends GetView<AdminHomeController> {
         leading: Tooltip(
           message: LocaleKeys.shared_Logout.tr,
           child: IconButton(
-            onPressed: () => Get.offNamed(RouteName.loginPage),
+            onPressed: AppController().logOut,
             icon: Icon(Icons.logout),
           ),
         ),

@@ -72,6 +72,7 @@
     "add_mission": "add mission",
     "edit_mission": "edit mission",
     "mission_list": "mission list",
-    "mission_details": "mission details"
+    "mission_details": "mission details",
+    "duplicate_tag_error":"A tag with this name already exists."
   }
 }

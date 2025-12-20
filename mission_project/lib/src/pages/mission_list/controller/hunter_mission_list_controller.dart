@@ -88,7 +88,7 @@ class HunterMissionListController extends GetxController {
       tempMaxPrice.value = maxPrice;
 
       allTagIds = missions.expand((e) => e.tags).toSet().toList();
-      await getTagsByUserIdAndTagIds();
+      await getTagsByTagIds();
     }
 
     isLoading(false);
@@ -121,7 +121,7 @@ class HunterMissionListController extends GetxController {
     );
   }
 
-  Future<void> getTagsByUserIdAndTagIds() async {
+  Future<void> getTagsByTagIds() async {
     allUsedTags.clear();
     isLoading(true);
     isRetry(false);

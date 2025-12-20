@@ -14,6 +14,9 @@ class RepositoryUrls {
   static String getTagsByUserId(int userId) =>
       '$baseUrl/tags?createdBy=$userId';
 
+  static String getTagsByUserIdAndTitle(int userId, String title) =>
+      '$baseUrl/tags?createdBy=$userId&title=$title';
+
   // missions
   static const String addMission = '$baseUrl/missions';
   static String getMissions = '$baseUrl/missions';
@@ -23,6 +26,9 @@ class RepositoryUrls {
   static String editMissionsById(int id) => '$baseUrl/missions/$id';
 
   static String deleteMission(int id) => '$baseUrl/missions/$id';
+
+  static String getMissionByAssignedUserId(int assignedUserId) =>
+      '$baseUrl/missions/?assignedTo=$assignedUserId';
 
   // request
   static const String addRequest = '$baseUrl/requests';

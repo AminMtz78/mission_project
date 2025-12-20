@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:get/get.dart';
 import 'package:mission_project/src/pages/shared/model/view_model/user_view_model.dart';
 
+import '../routes/route_name.dart';
 import 'storage_handler.dart';
 
 class AppController {
@@ -25,5 +26,10 @@ class AppController {
       StorageHandler().setLocale('en');
       Get.updateLocale(const Locale('en', 'US'));
     }
+  }
+
+  void logOut() {
+    Get.offNamed(RouteName.loginPage);
+    StorageHandler().setRememberedUserId(null);
   }
 }

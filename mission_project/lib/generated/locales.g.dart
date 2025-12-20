@@ -99,6 +99,7 @@ class LocaleKeys {
   static const mission_edit_mission = 'mission_edit_mission';
   static const mission_mission_list = 'mission_mission_list';
   static const mission_mission_details = 'mission_mission_details';
+  static const mission_duplicate_tag_error = 'mission_duplicate_tag_error';
 }
 
 class Locales {
@@ -179,6 +180,7 @@ class Locales {
     'mission_edit_mission': 'edit mission',
     'mission_mission_list': 'mission list',
     'mission_mission_details': 'mission details',
+    'mission_duplicate_tag_error': 'A tag with this name already exists.',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -258,5 +260,6 @@ class Locales {
     'mission_edit_mission': 'ویرایش ماموریت',
     'mission_mission_list': 'لیست ماموریت ها',
     'mission_mission_details': 'جزئیات ماموریت',
+    'mission_duplicate_tag_error': 'امکان ثبت دسته بندی با نام تکراری نیست',
   };
 }

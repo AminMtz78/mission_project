@@ -71,6 +71,7 @@
     "add_mission": "افزودن ماموریت",
     "edit_mission": "ویرایش ماموریت",
     "mission_list": "لیست ماموریت ها",
-    "mission_details": "جزئیات ماموریت"
+    "mission_details": "جزئیات ماموریت",
+    "duplicate_tag_error":"امکان ثبت دسته بندی با نام تکراری نیست"
   }
 }
