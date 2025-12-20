@@ -6,8 +6,9 @@ import '../../../../infrastructure/utils/utils.dart';
 import '../../../shared/enums/mission_status_enum.dart';
 import '../../../shared/model/view_model/mission_tag_view_model.dart';
 import '../../../shared/model/view_model/mission_view_model.dart';
+import '../../controller/admin_home_controller.dart';
 
-class MissionItem extends StatelessWidget {
+class MissionItem extends GetView<AdminHomeController> {
   const MissionItem({
     super.key,
     required this.onTap,
@@ -124,14 +125,26 @@ class MissionItem extends StatelessWidget {
     return Row(
       children: [
         IconButton(
-          tooltip: ' LocaleKeys.edit.tr',
+          color: Colors.lightBlue,
+          tooltip: LocaleKeys.shared_edit.tr,
           onPressed: onEdit,
           icon: const Icon(Icons.edit, size: 20),
         ),
-        IconButton(
-          tooltip: LocaleKeys.shared_delete.tr,
-          onPressed: onDelete,
-          icon: const Icon(Icons.delete, size: 20),
+        Utils.giantHorizontalSpacer,
+        SizedBox(
+          child: Obx(
+            () => controller.isDeleteLoadingMap[item.id] ?? false
+                ? Transform.scale(
+                    scale: 0.5,
+                    child: CircularProgressIndicator(),
+                  )
+                : IconButton(
+                    color: Colors.red.shade200,
+                    tooltip: LocaleKeys.shared_delete.tr,
+                    onPressed: onDelete,
+                    icon: const Icon(Icons.delete, size: 20),
+                  ),
+          ),
         ),
       ],
     );

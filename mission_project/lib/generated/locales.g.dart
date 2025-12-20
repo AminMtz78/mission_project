@@ -72,6 +72,17 @@ class LocaleKeys {
   static const shared_retry = 'shared_retry';
   static const shared_cancel = 'shared_cancel';
   static const shared_accept = 'shared_accept';
+  static const shared_edit = 'shared_edit';
+  static const shared_add = 'shared_add';
+  static const shared_Logout = 'shared_Logout';
+  static const shared_hunterHistoryPageTittle =
+      'shared_hunterHistoryPageTittle';
+  static const shared_admin_mission_page_title =
+      'shared_admin_mission_page_title';
+  static const shared_expired = 'shared_expired';
+  static const shared_newest = 'shared_newest';
+  static const shared_oldest = 'shared_oldest';
+  static const shared_sort_by = 'shared_sort_by';
   static const mission_offer_price = 'mission_offer_price';
   static const mission_request_for_mission = 'mission_request_for_mission';
   static const mission_request_uniqueness_error =
@@ -83,6 +94,11 @@ class LocaleKeys {
   static const mission_submitMissionCompletion =
       'mission_submitMissionCompletion';
   static const mission_submitMissionFailure = 'mission_submitMissionFailure';
+  static const mission_chose_tag_error = 'mission_chose_tag_error';
+  static const mission_add_mission = 'mission_add_mission';
+  static const mission_edit_mission = 'mission_edit_mission';
+  static const mission_mission_list = 'mission_mission_list';
+  static const mission_mission_details = 'mission_mission_details';
 }
 
 class Locales {
@@ -140,15 +156,29 @@ class Locales {
     'shared_retry': 'retry',
     'shared_cancel': 'cancel',
     'shared_accept': 'accept',
+    'shared_edit': 'edit',
+    'shared_add': 'add',
+    'shared_Logout': 'log out',
+    'shared_hunterHistoryPageTittle': 'user\'s missions history',
+    'shared_admin_mission_page_title': 'my missions',
+    'shared_expired': 'expired',
+    'shared_newest': 'newest',
+    'shared_oldest': 'oldest',
+    'shared_sort_by': 'sort by',
     'mission_offer_price': 'offer price',
     'mission_request_for_mission': 'request for mission',
     'mission_request_uniqueness_error':
         'You have already submitted a request for this mission',
     'mission_user_profile': 'user profile',
-    'mission_requests': 'request',
+    'mission_requests': 'requests',
     'mission_in_progress_by_logged_in_user': 'in progress by you',
     'mission_submitMissionCompletion': 'submitMissionCompletion',
     'mission_submitMissionFailure': 'submitMissionFailure',
+    'mission_chose_tag_error': 'at least choose one tag',
+    'mission_add_mission': 'add mission',
+    'mission_edit_mission': 'edit mission',
+    'mission_mission_list': 'mission list',
+    'mission_mission_details': 'mission details',
   };
   static const fa_IR = {
     'login_enter': 'ورود',
@@ -205,6 +235,15 @@ class Locales {
     'shared_retry': 'تلاش محدد',
     'shared_cancel': 'انصراف',
     'shared_accept': 'پذیرفتن',
+    'shared_edit': 'ویرایش',
+    'shared_add': 'افزودن',
+    'shared_Logout': 'خروج از حساب کاربری',
+    'shared_hunterHistoryPageTittle': 'تاریخچه ماموریت های کاربر',
+    'shared_admin_mission_page_title': 'ماموریت های من',
+    'shared_expired': 'منقضی شده',
+    'shared_newest': 'جدیدترین',
+    'shared_oldest': 'قدیمی ترین',
+    'shared_sort_by': 'مرتب ساری بر اساس',
     'mission_offer_price': 'قیمت پیشنهادی',
     'mission_request_for_mission': 'درخواست انجام مأموریت',
     'mission_request_uniqueness_error':
@@ -214,5 +253,10 @@ class Locales {
     'mission_in_progress_by_logged_in_user': 'در حال انحام توسط شما',
     'mission_submitMissionCompletion': 'ثبت اتمام مأموریت',
     'mission_submitMissionFailure': 'ثبت شکست مأموریت',
+    'mission_chose_tag_error': 'حداقل یک دسته بندی انتخاب کنید',
+    'mission_add_mission': 'افزودن ماموریت',
+    'mission_edit_mission': 'ویرایش ماموریت',
+    'mission_mission_list': 'لیست ماموریت ها',
+    'mission_mission_details': 'جزئیات ماموریت',
   };
 }

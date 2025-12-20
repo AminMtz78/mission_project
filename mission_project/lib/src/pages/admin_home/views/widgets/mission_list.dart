@@ -31,10 +31,12 @@ class MissionList extends GetView<AdminHomeController> {
           item: controller.missions[index],
           onTap: () =>
               controller.goToAdminRequestPage(controller.missions[index].id),
-          onDelete: () {},
+          onDelete: () =>
+              controller.deleteMission(controller.missions[index].id),
           tags: controller.fetchTagsByMission(controller.missions[index].tags),
           onEdit: () =>
               controller.goToEditMissionPage(controller.missions[index].id),
+
         ),
         itemCount: controller.missions.length,
       ),

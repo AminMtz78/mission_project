@@ -82,4 +82,20 @@ class AdminRequestRepository {
           Right(data.map((e) => UserViewModel.fromJson(e)).toList()),
     );
   }
+
+  Future<Either<String, MissionViewModel>> editMissionStatusDone({
+    required int missionId,
+    required MissionDto mission,
+  }) async {
+    final response = await _apiClient.patch<Map<String, dynamic>>(
+      RepositoryUrls.editMissionsById(missionId),
+      mission.toJson(),
+    );
+
+    return response.fold(
+      ifLeft: Left.new,
+      ifRight: (data) => Right(MissionViewModel.fromJson(data)),
+    );
+  }
+
 }

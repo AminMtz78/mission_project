@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../infrastructure/routes/route_name.dart';
 import '../../mission_modify/model/dto/mission_dto.dart';
 import '../../shared/enums/mission_status_enum.dart';
 import '../../shared/model/view_model/mission_request_view_model.dart';
@@ -13,13 +14,15 @@ class AdminRequestController extends GetxController {
   AdminRequestController({required this.missionId});
 
   final int missionId;
-  var title = 'admin request page';
+  var title = LocaleKeys.mission_requests.tr;
 
   final AdminRequestRepository _repository = AdminRequestRepository();
 
   MissionViewModel? model;
+
   final List<MissionTagViewModel> tagList = [];
-  final RxList<MissionRequestViewModel> requests = <MissionRequestViewModel>[].obs;
+  final RxList<MissionRequestViewModel> requests =
+      <MissionRequestViewModel>[].obs;
   final List<int> userIds = [];
   List<UserViewModel> users = [];
 
@@ -28,8 +31,8 @@ class AdminRequestController extends GetxController {
   final RxBool isButtonLoading = false.obs;
 
   @override
-  void onInit() {
-    getMissionById();
+  void onInit() async {
+    await getMissionById();
     super.onInit();
   }
 
@@ -59,14 +62,19 @@ class AdminRequestController extends GetxController {
         isRetry(true);
         isLoading(false);
       },
-      ifRight: (data) {
+      ifRight: (data) async {
         tagList.addAll(data);
-        getRequestByMissionId();
+        if (model!.status == MissionStatusEnum.free) {
+          await getRequestByMissionId();
+        } else {
+          isLoading(false);
+        }
       },
     );
   }
 
   Future<void> getRequestByMissionId() async {
+    requests.clear();
     isLoading(true);
     final resultOrException = await _repository.getRequestByMissionId(
       missionId,
@@ -77,16 +85,15 @@ class AdminRequestController extends GetxController {
         isLoading(false);
         Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
       },
-      ifRight: (data) {
+      ifRight: (data) async {
+        await getUsers();
         requests.addAll(data);
         userIds.addAll(requests.map((e) => e.userId).toList());
-        getUsers();
       },
     );
   }
 
   Future<void> getUsers() async {
-    isLoading(true);
     final resultOrException = await _repository.getUser(userIds: userIds);
     resultOrException.fold(
       ifLeft: (err) {
@@ -125,11 +132,43 @@ class AdminRequestController extends GetxController {
       },
       ifRight: (data) {
         isLoading(false);
+        Get.back(result: true);
       },
     );
   }
 
-  UserViewModel findUserForRequest(MissionRequestViewModel request) {
+  Future<void> submitMissionCompletion() async {
+    isButtonLoading(true);
+    final resultOrException = await _repository.editMissionStatusDone(
+      missionId: model!.id,
+      mission: MissionDto(
+        title: model!.title,
+        description: model!.description,
+        price: model!.price,
+        deadLine: model!.deadLine,
+        tags: model!.tags,
+        status: MissionStatusEnum.done,
+        createdBy: model!.createdBy,
+        assignedTo: model!.assignedTo,
+      ),
+    );
+
+    resultOrException.fold(
+      ifLeft: (err) {
+        isButtonLoading(false);
+        Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
+      },
+      ifRight: (data) {
+        Get.back(result: true);
+        isButtonLoading(false);
+      },
+    );
+  }
+
+  void goToHunterHistoryPage(int userId) =>
+      Get.toNamed(RouteName.hunterHistory, parameters: {'id': '$userId'});
+
+  UserViewModel fetchUserToRequest(MissionRequestViewModel request) {
     final item = users.firstWhere((e) => e.id == request.userId);
     return item;
   }

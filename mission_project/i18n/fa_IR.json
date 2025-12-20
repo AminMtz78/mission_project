@@ -47,7 +47,16 @@
     "Something_went_wrong_Please_try_again": "مشکلی پیش امده. لطفا دوباره تلاش کنید",
     "retry": "تلاش محدد",
     "cancel": "انصراف",
-    "accept": "پذیرفتن"
+    "accept": "پذیرفتن",
+    "edit": "ویرایش",
+    "add": "افزودن",
+    "Logout": "خروج از حساب کاربری",
+    "hunterHistoryPageTittle": "تاریخچه ماموریت های کاربر",
+    "admin_mission_page_title" : "ماموریت های من",
+    "expired": "منقضی شده",
+    "newest": "جدیدترین",
+    "oldest": "قدیمی ترین",
+    "sort_by": "مرتب ساری بر اساس"
   },
   "mission": {
     "offer_price": "قیمت پیشنهادی",
@@ -57,6 +66,11 @@
     "requests": "درخواست ها",
     "in_progress_by_logged_in_user": "در حال انحام توسط شما",
     "submitMissionCompletion": "ثبت اتمام مأموریت",
-    "submitMissionFailure": "ثبت شکست مأموریت"
+    "submitMissionFailure": "ثبت شکست مأموریت",
+    "chose_tag_error": "حداقل یک دسته بندی انتخاب کنید",
+    "add_mission": "افزودن ماموریت",
+    "edit_mission": "ویرایش ماموریت",
+    "mission_list": "لیست ماموریت ها",
+    "mission_details": "جزئیات ماموریت"
   }
 }

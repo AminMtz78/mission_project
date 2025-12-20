@@ -11,20 +11,26 @@
       "password": "am",
       "userType": 2,
       "id": 2
+    },
+    {
+      "username": "ami",
+      "password": "ami",
+      "userType": 2,
+      "id": 3
     }
   ],
   "missions": [
     {
-      "title": "misssfds sp[odf pospodf sdf snjf psnf psojnf psonfpnos npsnod npofsnpof pnspndfnpg spgpo aspg hipashipg phisphig hpispidhfg hpispdhig hpsdpghhpis hpphspdhig pisdhg spidg pishipdghpi sdhpigh pispidhghpsdhgpishpi hpis hpidghpisdhpighpisdghp hshghsdpion 1",
+      "title": "mission 1",
       "description": "desfjjdo sjfdpsf's sd'pkfjgpjsa' kgp['sdfngm psnfpngp['sdadfng kskp; gn'p;ksnfgps p['ng'psdnfgp sdp'kfng psdpfk'gn ['pksng'pn [psdfng[ps ndf[ gpiksdnfg p['sp'fgn p['sanfgp 'naspgn ['psafnfksdfg[pjsjg opsd;lgsdfg psd'pkfg'psdfg' sf'p;ljgpsdgf'p;klsfpog psogpasp'ogpsafgposajfpgas jpasojgpasopjg jsd[iopfgh i[pfghn [sip[gip[spi[go [spgjpsadpofg jsaipf[gijn jfipgahnsfgpia poaso sog iopsopigjopsjgo paspgjjpoasp npa]sp]ngnoa]psg nopn]asop[gon[asno[pg o[sao[jgj[osj[ag [asg[osgj[ogp' naspgnpeofmgmsmseooergnmnmm osnmfnmsdof nmmfg[omwmp[oopdfogp oenfsnodfognm o[sdogso[ngdo s[odgnm[sondg s[odgnmo[sdgn s[dopgno[psdog ssg[nosndo[gonsgpo[sng1 ",
       "price": 10,
       "deadLine": "2026-02-28T00:00:00.000",
       "tags": [
         1
       ],
-      "status": 1,
+      "status": 5,
       "createdBy": 1,
-      "assignedTo": null,
+      "assignedTo": 2,
       "id": 1
     },
     {
@@ -38,7 +44,7 @@
         3,
         25
       ],
-      "status": 2,
+      "status": 5,
       "createdBy": 1,
       "assignedTo": 2,
       "id": 2
@@ -52,9 +58,9 @@
         3,
         37
       ],
-      "status": 1,
+      "status": 4,
       "createdBy": 1,
-      "assignedTo": null,
+      "assignedTo": 2,
       "id": 3
     },
     {
@@ -65,23 +71,18 @@
       "tags": [
         38
       ],
-      "status": 1,
+      "status": 3,
       "createdBy": 1,
-      "assignedTo": null,
+      "assignedTo": 3,
       "id": 4
     },
     {
-      "title": "final mission by amin",
-      "description": "description",
-      "price": 2000,
-      "deadLine": "2028-12-30T00:00:00.000",
+      "title": "sdf3454s",
+      "description": "sdf52",
+      "price": 4663433,
+      "deadLine": "2026-04-12T00:00:00.000",
       "tags": [
-        21,
-        26,
-        39,
-        30,
-        31,
-        9
+        10
       ],
       "status": 1,
       "createdBy": 1,
@@ -304,6 +305,24 @@
       "userId": 2,
       "price": 500,
       "id": 3
+    },
+    {
+      "missionId": 4,
+      "userId": 3,
+      "price": 345,
+      "id": 4
+    },
+    {
+      "missionId": 4,
+      "userId": 2,
+      "price": 320,
+      "id": 5
+    },
+    {
+      "missionId": 5,
+      "userId": 2,
+      "price": 43,
+      "id": 6
     }
   ]
 }

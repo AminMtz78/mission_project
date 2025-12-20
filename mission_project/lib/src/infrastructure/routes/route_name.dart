@@ -21,4 +21,9 @@ class RouteName {
 
   static const String hunterMissionDetail =
       RoutePath.hunterMissionList + RoutePath.hunterMissionDetail;
+
+  static const String hunterHistory =
+      RoutePath.hunterMissionList +
+      RoutePath.hunterMissionDetail +
+      RoutePath.hunterHistory;
 }

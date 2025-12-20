@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mission_project/src/pages/shared/enums/mission_status_enum.dart';
 
 import '../../../../../generated/locales.g.dart';
 import '../../../../infrastructure/utils/utils.dart';
 import '../../../shared/enums/breakpoint.dart';
+import '../../../shared/enums/mission_status_enum.dart';
 import '../../../shared/model/view_model/mission_tag_view_model.dart';
 import '../../../shared/model/view_model/mission_view_model.dart';
 

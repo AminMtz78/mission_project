@@ -8,11 +8,10 @@ import '../../../infrastructure/routes/route_name.dart';
 import '../../../infrastructure/routes/route_path.dart';
 import '../../shared/enums/user_type_enum.dart';
 import '../../shared/model/view_model/user_view_model.dart';
-import '../../shared/widgets/toast_widget.dart';
 import '../repository/login_page_repository.dart';
 
 class LoginPageController extends GetxController {
-  final String title = 'login page app bar ';
+  final String title = LocaleKeys.login_login.tr;
 
   UserViewModel? user;
   final RxBool isObscure = true.obs;
@@ -26,25 +25,25 @@ class LoginPageController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-
   @override
   void onClose() {
     usernameController.dispose();
     passwordController.dispose();
   }
 
-  Future<void> goToRegisterPage(BuildContext context) async {
+  Future<void> goToRegisterPage() async {
     final result = await Get.toNamed(RouteName.registerPage);
     if (result != null) {
-      getUserById(context, result);
+      getUserById(result);
     }
   }
 
-  Future<void> getUserById(BuildContext context, int id) async {
+  Future<void> getUserById(int id) async {
     final resultOrException = await _repository.getUser(id);
 
     resultOrException.fold(
-      ifLeft: (err) => ToastWidget.show(context, err),
+      ifLeft: (err) =>
+          Get.snackbar('', LocaleKeys.shared_server_communication_error.tr),
       ifRight: (user) {
         user = user;
         usernameController.text = user.username;
@@ -53,7 +52,7 @@ class LoginPageController extends GetxController {
     );
   }
 
-  Future<void> authenticate(BuildContext context) async {
+  Future<void> authenticate() async {
     if (formKey.currentState!.validate()) {
       isLoading(true);
       final resultOrException = await _repository.getUserByUsernameAndPassword(
@@ -62,30 +61,21 @@ class LoginPageController extends GetxController {
       );
 
       resultOrException.fold(
-        ifLeft: (err) => ToastWidget.show(context, err),
+        ifLeft: (err) =>
+            Get.snackbar('', LocaleKeys.shared_server_communication_error.tr),
         ifRight: (userList) {
           if (userList.isNotEmpty) {
             AppController().setUser(userList.first);
-            print(
-              ' user in app controller:  ${AppController().currentUser!.id}',
-            );
             if (isRememberUser.value) {
               StorageHandler().setRememberedUserId(userList.first.id);
-              print(
-                'new user id add to storage. user id = ${StorageHandler().getUserId}',
-              );
             }
-
             if (userList.first.userType == UserTypeEnum.admin) {
               Get.offNamed(RoutePath.adminHomePage);
             } else {
               Get.offNamed(RoutePath.hunterMissionList);
             }
           } else {
-            ToastWidget.show(
-              context,
-              LocaleKeys.login_invalid_username_or_password.tr,
-            );
+            Get.snackbar('', LocaleKeys.login_invalid_username_or_password.tr);
           }
         },
       );

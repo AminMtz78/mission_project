@@ -14,7 +14,7 @@ import '../repository/admin_home_repository.dart';
 import '../views/widgets/filter_dialog.dart';
 
 class AdminHomeController extends GetxController {
-  final String title = 'admin mission app bar';
+  final String pageTitle = LocaleKeys.shared_admin_mission_page_title.tr;
 
   final AdminHomeRepository _repository = AdminHomeRepository();
 
@@ -31,6 +31,8 @@ class AdminHomeController extends GetxController {
   RxList<MissionViewModel> missions = <MissionViewModel>[].obs;
   List<int> allTagIds = [];
   RxList<MissionTagViewModel> allUsedTags = <MissionTagViewModel>[].obs;
+
+  final RxMap<int, bool> isDeleteLoadingMap = <int, bool>{}.obs;
 
   // dialog
 
@@ -255,7 +257,23 @@ class AdminHomeController extends GetxController {
       RouteName.adminRequest,
       parameters: {'missionId': '$missionId'},
     );
-    if (result != null) {}
+    if (result != null) {
+      initial();
+    }
   }
 
+  Future<void> deleteMission(int id) async {
+    isDeleteLoadingMap[id] = true;
+    final resultOrException = await _repository.deleteMission(id: id);
+    isDeleteLoadingMap[id] = false;
+    resultOrException.fold(
+      ifLeft: (err) {
+        Get.snackbar('title', LocaleKeys.shared_server_communication_error.tr);
+      },
+      ifRight: (data) {
+        Get.snackbar('', LocaleKeys.shared_The_operation_was_successful.tr);
+        missions.removeWhere((e) => e.id == id);
+      },
+    );
+  }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mission_project/src/pages/shared/enums/breakpoint.dart';
-import 'package:mission_project/src/pages/shared/widgets/custom_flexible_widget.dart';
-import 'package:mission_project/src/pages/shared/widgets/my_button.dart';
 
 import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/utils/utils.dart';
+import '../../shared/enums/breakpoint.dart';
+import '../../shared/widgets/custom_flexible_widget.dart';
+import '../../shared/widgets/my_button.dart';
 import '../controller/login_page_controller.dart';
 
 class LoginPage extends GetView<LoginPageController> {
@@ -104,12 +104,12 @@ class LoginPage extends GetView<LoginPageController> {
           MyButton(
             isLoading: controller.isLoading.value,
             title: LocaleKeys.login_enter.tr,
-            onPressed: () => controller.authenticate(context),
+            onPressed: () => controller.authenticate(),
           ),
           TextButton(
             onPressed: controller.isLoading.value
                 ? null
-                : () => controller.goToRegisterPage(context),
+                : () => controller.goToRegisterPage(),
             child: Text(LocaleKeys.login_register.tr),
           ),
         ],

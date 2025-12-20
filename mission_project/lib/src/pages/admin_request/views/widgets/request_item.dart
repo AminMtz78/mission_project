@@ -12,6 +12,7 @@ class RequestItem extends StatelessWidget {
     required this.user,
     required this.onAccept,
     required this.onUserProfile,
+
     super.key,
   });
 
@@ -38,7 +39,7 @@ class RequestItem extends StatelessWidget {
                   child: InkWell(
                     onTap: onUserProfile,
                     borderRadius: BorderRadius.circular(20),
-                    child: CircleAvatar( child: const FlutterLogo()),
+                    child: CircleAvatar(child: const FlutterLogo()),
                   ),
                 ),
                 Utils.mediumHorizontalSpacer,

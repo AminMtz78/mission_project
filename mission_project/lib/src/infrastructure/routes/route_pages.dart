@@ -4,6 +4,8 @@ import '../../pages/admin_home/common/admin_home_binding.dart';
 import '../../pages/admin_home/views/admin_home_page.dart';
 import '../../pages/admin_request/common/admin_request_binding.dart';
 import '../../pages/admin_request/views/admin_request_page.dart';
+import '../../pages/hunter_history/common/hunter_history_binding.dart';
+import '../../pages/hunter_history/views/hunter_history_page.dart';
 import '../../pages/hunter_mission_detail/common/hunter_mission_detail_binding.dart';
 import '../../pages/hunter_mission_detail/views/hunter_mission_detail_page.dart';
 import '../../pages/login/common/login_page_binding.dart';
@@ -70,6 +72,13 @@ class RoutePages {
           name: RoutePath.hunterMissionDetail,
           page: () => HunterMissionDetailPage(),
           binding: HunterMissionDetailBinding(),
+          children: [
+            GetPage(
+              name: RoutePath.hunterHistory,
+              page: () => HunterHistoryPage(),
+              binding: HunterHistoryBinding(),
+            ),
+          ],
         ),
       ],
     ),

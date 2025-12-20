@@ -8,4 +8,5 @@ class RoutePath {
   static const String editMission = '/edit-mission';
   static const String adminRequest = '/admin_request';
   static const String hunterMissionDetail = '/mission-detail';
+  static const String hunterHistory = '/history';
 }

@@ -1,4 +1,4 @@
-import 'package:mission_project/src/pages/shared/enums/user_type_enum.dart';
+import '../../enums/user_type_enum.dart';
 
 class UserViewModel {
   final int id;

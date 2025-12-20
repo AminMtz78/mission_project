@@ -33,10 +33,13 @@ class RequestList extends GetView<AdminRequestController> {
           onAccept: () => controller.acceptUserRequestForMission(
             controller.requests[index],
           ),
-          onUserProfile: () {},
+          onUserProfile: () => controller.goToHunterHistoryPage(
+            controller.requests[index].userId,
+          ),
           item: controller.requests[index],
-          user: controller.findUserForRequest(controller.requests[index]),
+          user: controller.fetchUserToRequest(controller.requests[index]),
         ),
+
         itemCount: controller.requests.length,
       ),
     );

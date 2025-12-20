@@ -5,10 +5,14 @@ import 'modify_mission_controller.dart';
 
 class AddMissionController extends ModifyMissionController {
   @override
-  String get title => 'add mission app bar';
+  String get title => LocaleKeys.mission_add_mission.tr;
 
   @override
   Future<void> onSubmit() async {
+    if (selectedTag.isEmpty) {
+      Get.snackbar('', LocaleKeys.mission_chose_tag_error.tr);
+      return;
+    }
     if (formKey.currentState!.validate()) {
       isSubmitLoading(true);
       final resultOrException = await repository.addMission(dto());

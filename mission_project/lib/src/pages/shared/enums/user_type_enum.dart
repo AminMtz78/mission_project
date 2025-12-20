@@ -1,4 +1,4 @@
-import 'package:mission_project/generated/locales.g.dart';
+import '../../../../generated/locales.g.dart';
 
 enum UserTypeEnum {
   admin(1, LocaleKeys.shared_admin),

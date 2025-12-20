@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../infrastructure/routes/route_name.dart';
 import '../../shared/enums/user_type_enum.dart';
 import '../../shared/model/view_model/user_view_model.dart';
-import '../../shared/widgets/toast_widget.dart';
 import '../model/user_dto.dart';
 import '../repository/register_page_repository.dart';
 
 class RegisterPageController extends GetxController {
-  String title = 'register page app bar ';
+  String title = LocaleKeys.login_register.tr;
 
   final Rxn<UserTypeEnum> userType = Rxn();
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -44,7 +44,7 @@ class RegisterPageController extends GetxController {
       );
       return resultOrException.fold(
         ifLeft: (err) {
-          ToastWidget.show(context, err);
+          Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
           isRetry(true);
           isLoading(false);
         },
@@ -57,18 +57,17 @@ class RegisterPageController extends GetxController {
   }
 
   Future<void> addUser(BuildContext context) async {
+    isSubmitted(true);
     if (userType.value == null) {
-      ToastWidget.show(context, LocaleKeys.login_select_user_type.tr);
+      Get.snackbar('', LocaleKeys.login_select_user_type.tr);
       return;
     }
+
     if (formKey.currentState!.validate()) {
       await checkUserExist(context);
       if (users.isNotEmpty) {
         if (users.isNotEmpty) {
-          ToastWidget.show(
-            context,
-            LocaleKeys.login_this_username_already_exist.tr,
-          );
+          Get.snackbar('', LocaleKeys.login_this_username_already_exist.tr);
         }
         return;
       }
@@ -80,12 +79,11 @@ class RegisterPageController extends GetxController {
         ),
       );
       resultOrException.fold(
-        ifLeft: (exception) => ToastWidget.show(context, exception),
+        ifLeft: (exception) =>
+            Get.snackbar('', LocaleKeys.shared_server_communication_error.tr),
         ifRight: (result) {
-          ToastWidget.show(
-            context,
-            LocaleKeys.shared_The_operation_was_successful.tr,
-          );
+          Get.snackbar('', LocaleKeys.shared_The_operation_was_successful.tr);
+          Get.offNamed(RouteName.loginPage);
         },
       );
     }

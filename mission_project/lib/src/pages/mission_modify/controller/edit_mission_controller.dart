@@ -11,7 +11,8 @@ class EditMissionController extends ModifyMissionController {
   final int missionId;
 
   @override
-  String get title => 'edit';
+  String get title => LocaleKeys.mission_edit_mission.tr;
+
   MissionViewModel? currentMission;
 
   @override
@@ -35,6 +36,11 @@ class EditMissionController extends ModifyMissionController {
 
   @override
   Future<void> onSubmit() async {
+    if (selectedTag.isEmpty) {
+      Get.snackbar('', LocaleKeys.mission_chose_tag_error.tr);
+      return;
+    }
+
     if (formKey.currentState!.validate()) {
       isSubmitLoading(true);
       final resultOrException = await repository.editMission(

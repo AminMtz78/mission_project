@@ -15,7 +15,7 @@ class HunterMissionDetailController extends GetxController {
   HunterMissionDetailController({required this.missionId});
 
   final int missionId;
-  var title = 'hunter mission details page';
+  var title = LocaleKeys.mission_mission_details.tr;
 
   final HunterMissionRepository _repository = HunterMissionRepository();
   MissionViewModel? model;

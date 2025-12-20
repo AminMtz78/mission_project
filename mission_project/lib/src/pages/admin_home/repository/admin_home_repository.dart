@@ -24,11 +24,11 @@ class AdminHomeRepository {
   }
 
   Future<Either<String, List<MissionTagViewModel>>> getTag({
-    required Map<String,dynamic> query,
+    required Map<String, dynamic> query,
   }) async {
     final response = await _apiClient.get<List<dynamic>>(
       RepositoryUrls.getTags,
-      query: query
+      query: query,
     );
 
     return response.fold(
@@ -36,5 +36,13 @@ class AdminHomeRepository {
       ifRight: (data) =>
           Right(data.map((e) => MissionTagViewModel.fromJson(e)).toList()),
     );
+  }
+
+  Future<Either<String, bool>> deleteMission({required int id}) async {
+    final response = await _apiClient.delete<dynamic>(
+      RepositoryUrls.deleteMission(id),
+    );
+
+    return response.fold(ifLeft: Left.new, ifRight: (data) => Right(true));
   }
 }

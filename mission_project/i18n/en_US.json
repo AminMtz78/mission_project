@@ -47,7 +47,16 @@
     "Something_went_wrong_Please_try_again": "Something went wrong. Please try again.",
     "retry": "retry",
     "cancel": "cancel",
-    "accept": "accept"
+    "accept": "accept",
+    "edit": "edit",
+    "add": "add",
+    "Logout": "log out",
+    "hunterHistoryPageTittle": "user's missions history",
+    "admin_mission_page_title" : "my missions",
+    "expired": "expired",
+    "newest": "newest",
+    "oldest": "oldest",
+    "sort_by": "sort by"
   },
 
   "mission": {
@@ -55,9 +64,14 @@
     "request_for_mission": "request for mission",
     "request_uniqueness_error":"You have already submitted a request for this mission",
     "user_profile": "user profile",
-    "requests": "request",
+    "requests": "requests",
     "in_progress_by_logged_in_user": "in progress by you",
     "submitMissionCompletion": "submitMissionCompletion",
-    "submitMissionFailure": "submitMissionFailure"
+    "submitMissionFailure": "submitMissionFailure",
+    "chose_tag_error": "at least choose one tag",
+    "add_mission": "add mission",
+    "edit_mission": "edit mission",
+    "mission_list": "mission list",
+    "mission_details": "mission details"
   }
 }

@@ -22,11 +22,12 @@ class RepositoryUrls {
 
   static String editMissionsById(int id) => '$baseUrl/missions/$id';
 
+  static String deleteMission(int id) => '$baseUrl/missions/$id';
+
   // request
   static const String addRequest = '$baseUrl/requests';
   static const String getRequest = '$baseUrl/requests';
 
   static String getRequestByMissionId(int missionId) =>
       '$baseUrl/requests?missionId=$missionId';
-
 }

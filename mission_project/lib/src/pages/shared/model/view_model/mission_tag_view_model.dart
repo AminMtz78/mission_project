@@ -1,5 +1,3 @@
-
-
 class MissionTagViewModel {
   final int id;
   final String title;

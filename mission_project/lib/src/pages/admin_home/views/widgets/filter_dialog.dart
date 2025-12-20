@@ -57,21 +57,21 @@ class FilterDialog extends GetView<AdminHomeController> {
             Divider(),
             Obx(
               () => CheckboxListTile(
-                title: Text('Expired'),
+                title: Text(LocaleKeys.shared_expired.tr),
                 value: controller.tempIsExpired.value,
                 onChanged: (v) => controller.tempIsExpired.value = v!,
               ),
             ),
             Obx(
               () => CheckboxListTile(
-                title: Text('In Progress'),
+                title: Text(LocaleKeys.shared_In_progress.tr),
                 value: controller.tempIsInProgress.value,
                 onChanged: (v) => controller.tempIsInProgress.value = v!,
               ),
             ),
             Obx(
               () => CheckboxListTile(
-                title: Text('Done'),
+                title: Text(LocaleKeys.shared_Done.tr),
                 value: controller.tempIsDone.value,
                 onChanged: (v) => controller.tempIsDone.value = v!,
               ),
@@ -85,14 +85,16 @@ class FilterDialog extends GetView<AdminHomeController> {
                 },
                 child: Column(
                   children: [
+                    Text(LocaleKeys.shared_sort_by.tr),
+                    Utils.mediumVerticalSpacer,
                     RadioListTile<DateEnum>(
                       value: DateEnum.newest,
-                      title: Text('newest'),
+                      title: Text(LocaleKeys.shared_newest.tr),
                     ),
                     Utils.smallVerticalSpacer,
                     RadioListTile<DateEnum>(
                       value: DateEnum.oldest,
-                      title: Text('oldest'),
+                      title: Text(LocaleKeys.shared_oldest.tr),
                     ),
                   ],
                 ),

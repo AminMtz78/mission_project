@@ -6,9 +6,11 @@ class MyButton extends StatelessWidget {
   final bool isLoading;
   final VoidCallback? onPressed;
   final String title;
+  final Color? color;
 
   const MyButton({
     super.key,
+    this.color,
     required this.isLoading,
     required this.onPressed,
     required this.title,
@@ -19,6 +21,7 @@ class MyButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isLoading ? null : onPressed,
       style: ElevatedButton.styleFrom(
+        backgroundColor: color,
         minimumSize: const Size(96, 48),
 
         shape: RoundedRectangleBorder(borderRadius: Utils.roundedRadius),

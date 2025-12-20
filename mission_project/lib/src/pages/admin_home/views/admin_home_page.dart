@@ -17,10 +17,13 @@ class AdminHomePage extends GetView<AdminHomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(controller.title),
-        leading: IconButton(
-          onPressed: () => Get.offNamed(RouteName.loginPage),
-          icon: Icon(Icons.logout),
+        title: Text(controller.pageTitle),
+        leading: Tooltip(
+          message: LocaleKeys.shared_Logout.tr,
+          child: IconButton(
+            onPressed: () => Get.offNamed(RouteName.loginPage),
+            icon: Icon(Icons.logout),
+          ),
         ),
       ),
       body: Obx(
@@ -65,7 +68,10 @@ class AdminHomePage extends GetView<AdminHomeController> {
             Icon(Icons.add),
             Padding(
               padding: Utils.mediumPadding,
-              child: Text(style: TextStyle(fontWeight: FontWeight.bold), 'add'),
+              child: Text(
+                style: TextStyle(fontWeight: FontWeight.bold),
+                LocaleKeys.shared_add.tr,
+              ),
             ),
           ],
         ),
