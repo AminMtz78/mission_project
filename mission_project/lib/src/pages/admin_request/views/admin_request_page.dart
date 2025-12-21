@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../generated/locales.g.dart';
 import '../../../infrastructure/utils/utils.dart';
 import '../../shared/enums/mission_status_enum.dart';
+import '../../shared/widgets/custom_flexible_widget.dart';
 import '../../shared/widgets/empty_widget.dart';
 import '../../shared/widgets/my_button.dart';
 import '../../shared/widgets/retry_widget.dart';
@@ -50,6 +51,8 @@ class AdminRequestPage extends GetView<AdminRequestController> {
           if (controller.model!.status == MissionStatusEnum.pendingDoneApproval)
             _doneMissionButton(),
           if (controller.model!.status == MissionStatusEnum.free) _requests(),
+
+          if (controller.missionHunter != null) _hunterInfo(),
         ],
       ),
     ),
@@ -66,4 +69,34 @@ class AdminRequestPage extends GetView<AdminRequestController> {
 
   Widget _requests() =>
       Obx(() => controller.requests.isNotEmpty ? RequestList() : EmptyWidget());
+
+  Widget _hunterInfo() => CustomFlexibleWidget(
+    widget: Card(
+      elevation: 3,
+      child: Padding(
+        padding: Utils.smallPadding,
+        child: Row(
+          children: [
+            Tooltip(
+              message: LocaleKeys.mission_user_profile.tr,
+              child: InkWell(
+                onTap: () => controller.goToHunterHistoryPage(
+                  controller.missionHunter!.id,
+                ),
+                borderRadius: BorderRadius.circular(20),
+                child: CircleAvatar(child: const FlutterLogo()),
+              ),
+            ),
+            Utils.mediumHorizontalSpacer,
+            Text(
+              controller.missionHunter?.username ?? '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

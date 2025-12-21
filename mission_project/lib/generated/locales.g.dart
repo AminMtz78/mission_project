@@ -83,6 +83,11 @@ class LocaleKeys {
   static const shared_newest = 'shared_newest';
   static const shared_oldest = 'shared_oldest';
   static const shared_sort_by = 'shared_sort_by';
+  static const shared_date_required = 'shared_date_required';
+  static const shared_invalid_date_format = 'shared_invalid_date_format';
+  static const shared_invalid_date = 'shared_invalid_date';
+  static const shared_cannot_enter_a_date_earlier_than_today =
+      'shared_cannot_enter_a_date_earlier_than_today';
   static const mission_offer_price = 'mission_offer_price';
   static const mission_request_for_mission = 'mission_request_for_mission';
   static const mission_request_uniqueness_error =
@@ -166,6 +171,11 @@ class Locales {
     'shared_newest': 'newest',
     'shared_oldest': 'oldest',
     'shared_sort_by': 'sort by',
+    'shared_date_required': 'Date is required',
+    'shared_invalid_date_format': 'Invalid format (yyyy-MM-dd)',
+    'shared_invalid_date': 'Invalid date',
+    'shared_cannot_enter_a_date_earlier_than_today':
+        'You cannot enter a date earlier than today',
     'mission_offer_price': 'offer price',
     'mission_request_for_mission': 'request for mission',
     'mission_request_uniqueness_error':
@@ -246,6 +256,11 @@ class Locales {
     'shared_newest': 'جدیدترین',
     'shared_oldest': 'قدیمی ترین',
     'shared_sort_by': 'مرتب ساری بر اساس',
+    'shared_date_required': 'تاریخ الزامی است',
+    'shared_invalid_date_format': '(yyyy-MM-dd) فرمت نادرست',
+    'shared_invalid_date': 'تاریخ نامعتبر',
+    'shared_cannot_enter_a_date_earlier_than_today':
+        'امکان ثبت تاریخ قبل از امروز وجود ندارد',
     'mission_offer_price': 'قیمت پیشنهادی',
     'mission_request_for_mission': 'درخواست انجام مأموریت',
     'mission_request_uniqueness_error':

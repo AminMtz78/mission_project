@@ -65,12 +65,12 @@ class Utils {
 
   static String? validateDate(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Date is required / تاریخ الزامی است';
+      return LocaleKeys.shared_date_required.tr;
     }
 
     final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
     if (!regex.hasMatch(value)) {
-      return 'Invalid format (yyyy-MM-dd) / فرمت نادرست';
+      return LocaleKeys.shared_invalid_date_format.tr;
     }
 
     try {
@@ -82,7 +82,11 @@ class Utils {
       final date = DateTime(year, month, day);
 
       if (date.year != year || date.month != month || date.day != day) {
-        return 'Invalid date / تاریخ نامعتبر';
+        return LocaleKeys.shared_invalid_date.tr;
+      }
+
+      if (date.isBefore(DateTime.now())) {
+        return LocaleKeys.shared_cannot_enter_a_date_earlier_than_today.tr;
       }
     } catch (_) {
       return LocaleKeys.shared_required_field.tr;

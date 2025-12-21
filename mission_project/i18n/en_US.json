@@ -56,7 +56,11 @@
     "expired": "expired",
     "newest": "newest",
     "oldest": "oldest",
-    "sort_by": "sort by"
+    "sort_by": "sort by",
+    "date_required": "Date is required",
+    "invalid_date_format": "Invalid format (yyyy-MM-dd)",
+    "invalid_date": "Invalid date",
+    "cannot_enter_a_date_earlier_than_today": "You cannot enter a date earlier than today"
   },
 
   "mission": {
@@ -74,5 +78,6 @@
     "mission_list": "mission list",
     "mission_details": "mission details",
     "duplicate_tag_error":"A tag with this name already exists."
+
   }
 }

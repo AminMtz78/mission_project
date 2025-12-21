@@ -56,7 +56,11 @@
     "expired": "منقضی شده",
     "newest": "جدیدترین",
     "oldest": "قدیمی ترین",
-    "sort_by": "مرتب ساری بر اساس"
+    "sort_by": "مرتب ساری بر اساس",
+    "date_required": "تاریخ الزامی است",
+    "invalid_date_format": "(yyyy-MM-dd) فرمت نادرست",
+    "invalid_date": "تاریخ نامعتبر",
+    "cannot_enter_a_date_earlier_than_today": "امکان ثبت تاریخ قبل از امروز وجود ندارد"
   },
   "mission": {
     "offer_price": "قیمت پیشنهادی",

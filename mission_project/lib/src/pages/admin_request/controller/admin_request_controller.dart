@@ -15,10 +15,11 @@ class AdminRequestController extends GetxController {
 
   final int missionId;
 
-
   final AdminRequestRepository _repository = AdminRequestRepository();
 
   MissionViewModel? model;
+
+  UserViewModel? missionHunter;
 
   final List<MissionTagViewModel> tagList = [];
   final RxList<MissionRequestViewModel> requests =
@@ -64,6 +65,10 @@ class AdminRequestController extends GetxController {
       },
       ifRight: (data) async {
         tagList.addAll(data);
+
+        if (model!.assignedTo != null) {
+          await getUserById(model!.assignedTo!);
+        }
         if (model!.status == MissionStatusEnum.free) {
           await getRequestByMissionId();
         } else {
@@ -94,7 +99,7 @@ class AdminRequestController extends GetxController {
   }
 
   Future<void> getUsers() async {
-    final resultOrException = await _repository.getUser(userIds: userIds);
+    final resultOrException = await _repository.getUsers(userIds: userIds);
     resultOrException.fold(
       ifLeft: (err) {
         Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
@@ -102,6 +107,22 @@ class AdminRequestController extends GetxController {
       },
       ifRight: (data) {
         users = data;
+        isLoading(false);
+      },
+    );
+  }
+
+  Future<void> getUserById(int id) async {
+    isLoading(true);
+    final resultOrException = await _repository.getUserById(id);
+    resultOrException.fold(
+      ifLeft: (err) {
+        Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
+        isRetry(true);
+        isLoading(false);
+      },
+      ifRight: (user) {
+        missionHunter = user;
         isLoading(false);
       },
     );

@@ -68,7 +68,7 @@ class AdminRequestRepository {
     );
   }
 
-  Future<Either<String, List<UserViewModel>>> getUser({
+  Future<Either<String, List<UserViewModel>>> getUsers({
     required List<int> userIds,
   }) async {
     final response = await _apiClient.get<List<dynamic>>(
@@ -98,4 +98,14 @@ class AdminRequestRepository {
     );
   }
 
+  Future<Either<String, UserViewModel>> getUserById(int id) async {
+    final response = await _apiClient.get<Map<String, dynamic>>(
+      RepositoryUrls.getUserById(id),
+    );
+
+    return response.fold(
+      ifLeft: Left.new,
+      ifRight: (data) => Right(UserViewModel.fromJson(data)),
+    );
+  }
 }
