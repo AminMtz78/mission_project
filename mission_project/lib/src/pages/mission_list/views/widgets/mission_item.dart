@@ -14,12 +14,14 @@ class MissionItem extends StatelessWidget {
     required this.item,
     required this.tags,
     required this.isInProgressWithLoggedInUser,
+    required this.isExpired,
   });
 
   final VoidCallback onTap;
   final MissionViewModel item;
   final List<MissionTagViewModel> tags;
   final bool isInProgressWithLoggedInUser;
+  final bool isExpired;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,8 @@ class MissionItem extends StatelessWidget {
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
-        Utils.smallVerticalSpacer,
+        if (isExpired) _expiredChip(),
+        Utils.smallHorizontalSpacer,
         _statusChip(item.status),
       ],
     );
@@ -134,6 +137,17 @@ class MissionItem extends StatelessWidget {
       backgroundColor: status.color(),
       visualDensity: VisualDensity.compact,
       side: BorderSide(color: status.color()),
+    );
+  }
+
+  Widget _expiredChip() {
+    return Chip(
+      label: Text(
+        LocaleKeys.shared_expired.tr,
+        style: const TextStyle(fontSize: 11),
+      ),
+      backgroundColor: Colors.red.shade100,
+      visualDensity: VisualDensity.compact,
     );
   }
 }

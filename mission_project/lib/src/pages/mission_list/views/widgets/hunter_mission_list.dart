@@ -28,6 +28,7 @@ class HunterMissionList extends GetView<HunterMissionListController> {
           mainAxisExtent: 200,
         ),
         itemBuilder: (context, index) => MissionItem(
+          isExpired: controller.isMissionExpired(controller.missions[index]),
           isInProgressWithLoggedInUser: controller.isInProgressWithLoggedInUser(
             controller.missions[index],
           ),

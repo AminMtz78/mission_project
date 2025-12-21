@@ -16,6 +16,7 @@ class MissionItem extends GetView<AdminHomeController> {
     required this.onDelete,
     required this.item,
     required this.tags,
+    required this.isExpired,
   });
 
   final VoidCallback onEdit;
@@ -23,6 +24,7 @@ class MissionItem extends GetView<AdminHomeController> {
   final VoidCallback onDelete;
   final MissionViewModel item;
   final List<MissionTagViewModel> tags;
+  final bool isExpired;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +65,10 @@ class MissionItem extends GetView<AdminHomeController> {
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
+        if(isExpired) _expiredChip(),
+        Utils.smallHorizontalSpacer,
         _statusChip(item.status),
+
       ],
     );
   }
@@ -158,4 +163,16 @@ class MissionItem extends GetView<AdminHomeController> {
       visualDensity: VisualDensity.compact,
     );
   }
+
+  Widget _expiredChip() {
+    return Chip(
+      label: Text(
+        LocaleKeys.shared_expired.tr,
+        style: const TextStyle(fontSize: 11),
+      ),
+      backgroundColor: Colors.red.shade100,
+      visualDensity: VisualDensity.compact,
+    );
+  }
+
 }

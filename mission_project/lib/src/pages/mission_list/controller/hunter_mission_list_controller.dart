@@ -14,8 +14,6 @@ import '../repository/hunter_mission_list_repository.dart';
 import '../views/widgets/hunter_filter_dialog.dart';
 
 class HunterMissionListController extends GetxController {
-
-
   final HunterMissionListRepository _repository = HunterMissionListRepository();
 
   final TextEditingController searchController = TextEditingController();
@@ -59,6 +57,11 @@ class HunterMissionListController extends GetxController {
   @override
   void onClose() {
     searchController.dispose();
+  }
+
+  bool isMissionExpired(MissionViewModel mission) {
+    bool isExpired = mission.deadLine.isBefore(DateTime.now());
+    return isExpired;
   }
 
   bool isInProgressWithLoggedInUser(MissionViewModel mission) {
@@ -117,6 +120,9 @@ class HunterMissionListController extends GetxController {
       ifRight: (data) {
         isLoading(false);
         missions.addAll(data);
+        if (isExpired.value) {
+          missions.removeWhere((e) => e.deadLine.isAfter(DateTime.now()));
+        }
       },
     );
   }

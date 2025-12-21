@@ -14,8 +14,6 @@ import '../repository/admin_home_repository.dart';
 import '../views/widgets/filter_dialog.dart';
 
 class AdminHomeController extends GetxController {
-
-
   final AdminHomeRepository _repository = AdminHomeRepository();
 
   final TextEditingController searchController = TextEditingController();
@@ -62,6 +60,11 @@ class AdminHomeController extends GetxController {
   @override
   void onClose() {
     searchController.dispose();
+  }
+
+  bool isMissionExpired(MissionViewModel mission) {
+    bool isExpired = mission.deadLine.isBefore(DateTime.now());
+    return isExpired;
   }
 
   void onSearch(String value) async {
@@ -116,6 +119,9 @@ class AdminHomeController extends GetxController {
       ifRight: (data) {
         isLoading(false);
         missions.addAll(data);
+        if (isExpired.value) {
+          missions.removeWhere((e) => e.deadLine.isAfter(DateTime.now()));
+        }
       },
     );
   }
@@ -149,7 +155,13 @@ class AdminHomeController extends GetxController {
 
     query['createdBy'] = AppController().currentUser!.id.toString();
 
-    final nowIso = DateTime.now().toIso8601String();
+    final nowIso = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+    ).toIso8601String();
+
+    print(nowIso);
 
     if (minSelectedPrice.value > 0) {
       query['price_gte'] = minSelectedPrice.value.toInt().toString();

@@ -28,6 +28,7 @@ class MissionList extends GetView<AdminHomeController> {
           mainAxisExtent: 250,
         ),
         itemBuilder: (context, index) => MissionItem(
+          isExpired: controller.isMissionExpired(controller.missions[index]),
           item: controller.missions[index],
           onTap: () =>
               controller.goToAdminRequestPage(controller.missions[index].id),
@@ -36,7 +37,6 @@ class MissionList extends GetView<AdminHomeController> {
           tags: controller.fetchTagsByMission(controller.missions[index].tags),
           onEdit: () =>
               controller.goToEditMissionPage(controller.missions[index].id),
-
         ),
         itemCount: controller.missions.length,
       ),
