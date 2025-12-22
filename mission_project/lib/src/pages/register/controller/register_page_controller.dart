@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
-import '../../../infrastructure/routes/route_name.dart';
 import '../../shared/enums/user_type_enum.dart';
 import '../../shared/model/view_model/user_view_model.dart';
 import '../model/user_dto.dart';
 import '../repository/register_page_repository.dart';
 
 class RegisterPageController extends GetxController {
-
-
   final Rxn<UserTypeEnum> userType = Rxn();
   final GlobalKey<FormState> formKey = GlobalKey();
   final RxBool isObscure = true.obs;
   final RxBool isObscureRepeat = true.obs;
-  final RxBool isLoading = false.obs;
-  final RxBool isRetry = false.obs;
+
   final RxBool isSubmitted = false.obs;
 
   final List<UserViewModel> users = [];
@@ -36,8 +32,6 @@ class RegisterPageController extends GetxController {
 
   Future<void> checkUserExist(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      isLoading(true);
-      isRetry(false);
       users.clear();
       final resultOrException = await _repository.getUser(
         usernameController.text,
@@ -45,45 +39,49 @@ class RegisterPageController extends GetxController {
       return resultOrException.fold(
         ifLeft: (err) {
           Get.snackbar('', LocaleKeys.shared_server_communication_error.tr);
-          isRetry(true);
-          isLoading(false);
+          isSubmitted(false);
         },
         ifRight: (data) {
           users.addAll(data);
-          isLoading(false);
         },
       );
     }
   }
 
   Future<void> addUser(BuildContext context) async {
-    isSubmitted(true);
     if (userType.value == null) {
       Get.snackbar('', LocaleKeys.login_select_user_type.tr);
       return;
     }
 
     if (formKey.currentState!.validate()) {
+      isSubmitted(true);
       await checkUserExist(context);
+
       if (users.isNotEmpty) {
-        if (users.isNotEmpty) {
-          Get.snackbar('', LocaleKeys.login_this_username_already_exist.tr);
-        }
+        Get.snackbar('', LocaleKeys.login_this_username_already_exist.tr);
+        isSubmitted(false);
         return;
       }
-      final resultOrException = await _repository.addNewUser(
-        UserDto(
-          username: usernameController.text,
-          password: passwordController.text,
-          userType: userType.value!,
-        ),
+
+      final userDto = UserDto(
+        username: usernameController.text,
+        password: passwordController.text,
+        userType: userType.value!,
       );
+      final resultOrException = await _repository.addNewUser(userDto);
       resultOrException.fold(
         ifLeft: (exception) =>
             Get.snackbar('', LocaleKeys.shared_server_communication_error.tr),
         ifRight: (result) {
           Get.snackbar('', LocaleKeys.shared_The_operation_was_successful.tr);
-          Get.offNamed(RouteName.loginPage);
+          isSubmitted(false);
+          Get.back(
+            result: {
+              'username': usernameController.text,
+              'password': passwordController.text,
+            },
+          );
         },
       );
     }

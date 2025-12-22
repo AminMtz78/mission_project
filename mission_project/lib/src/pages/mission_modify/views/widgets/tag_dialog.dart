@@ -74,25 +74,27 @@ class TagDialog extends GetView<ModifyMissionController> {
 
   Widget _tagTextField() {
     return Obx(
-      () => controller.isLoading.value
-          ? CircularProgressIndicator()
-          : TextFormField(
-              autofocus: true,
-              onChanged: controller.onTextChanged,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              controller: controller.tagEditingController,
-              decoration: InputDecoration(
-                hintText: LocaleKeys.shared_title.tr,
-                border: OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  onPressed: () =>
-                      controller.tagEditingController.text.trim().isEmpty
-                      ? null
-                      : controller.addTag(),
-                  icon: Icon(Icons.add),
-                ),
-              ),
-            ),
+      () => TextFormField(
+        autofocus: true,
+        onChanged: controller.onTextChanged,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        controller: controller.tagEditingController,
+        decoration: InputDecoration(
+          hintText: LocaleKeys.shared_title.tr,
+          border: OutlineInputBorder(),
+          suffixIcon: IconButton(
+            onPressed: () => controller.tagEditingController.text.trim().isEmpty
+                ? null
+                : controller.addTag(),
+            icon: controller.isLoading.value
+                ? Transform.scale(
+                    scale: 0.5,
+                    child: CircularProgressIndicator(),
+                  )
+                : Icon(Icons.add),
+          ),
+        ),
+      ),
     );
   }
 

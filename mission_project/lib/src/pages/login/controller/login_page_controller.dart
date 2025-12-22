@@ -34,22 +34,9 @@ class LoginPageController extends GetxController {
   Future<void> goToRegisterPage() async {
     final result = await Get.toNamed(RouteName.registerPage);
     if (result != null) {
-      getUserById(result);
+      usernameController.text = result['username'];
+      passwordController.text = result['password'];
     }
-  }
-
-  Future<void> getUserById(int id) async {
-    final resultOrException = await _repository.getUser(id);
-
-    resultOrException.fold(
-      ifLeft: (err) =>
-          Get.snackbar('', LocaleKeys.shared_server_communication_error.tr),
-      ifRight: (user) {
-        user = user;
-        usernameController.text = user.username;
-        passwordController.text = user.password;
-      },
-    );
   }
 
   Future<void> authenticate() async {
@@ -70,9 +57,9 @@ class LoginPageController extends GetxController {
               StorageHandler().setRememberedUserId(userList.first.id);
             }
             if (userList.first.userType == UserTypeEnum.admin) {
-              Get.offNamed(RoutePath.adminHomePage);
-            } else {
-              Get.offNamed(RoutePath.hunterMissionList);
+              Get.offAndToNamed(RoutePath.adminHomePage);
+            } else if (userList.first.userType == UserTypeEnum.hunter) {
+              Get.offAndToNamed(RoutePath.hunterMissionList);
             }
           } else {
             Get.snackbar('', LocaleKeys.login_invalid_username_or_password.tr);

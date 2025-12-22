@@ -8,7 +8,7 @@ import '../model/user_dto.dart';
 class RegisterPageRepository {
   final ApiClient _apiClient = ApiClient();
 
-  Future<Either<String, int>> addNewUser(UserDto user) async {
+  Future<Either<String, UserViewModel>> addNewUser(UserDto user) async {
     final response = await _apiClient.post<Map<String, dynamic>>(
       RepositoryUrls.postUser,
       user.toJson(),
@@ -17,7 +17,7 @@ class RegisterPageRepository {
     return response.fold(
       ifLeft: Left.new,
       ifRight: (data) {
-        return Right((UserViewModel.fromJson(data)).id);
+        return Right((UserViewModel.fromJson(data)));
       },
     );
   }

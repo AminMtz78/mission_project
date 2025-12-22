@@ -32,16 +32,7 @@ class AdminHomePage extends GetView<AdminHomeController> {
           ),
         ),
       ),
-      body: Obx(
-        () => controller.isRetry.value
-            ? RetryWidget(
-                onRetry: controller.getMissions,
-                isRetry: controller.isRetry.value,
-              )
-            : controller.isLoading.value
-            ? Center(child: CircularProgressIndicator())
-            : _body(),
-      ),
+      body: _body(),
     );
   }
 
@@ -54,10 +45,21 @@ class AdminHomePage extends GetView<AdminHomeController> {
         _addMissionButton(),
         Utils.mediumVerticalSpacer,
 
-        Expanded(
-          child: Obx(
-            () => controller.missions.isEmpty ? EmptyWidget() : MissionList(),
-          ),
+        Obx(
+          () => controller.isRetry.value
+              ? RetryWidget(
+                  onRetry: controller.getMissions,
+                  isRetry: controller.isRetry.value,
+                )
+              : controller.isLoading.value
+              ? Center(child: CircularProgressIndicator())
+              : Expanded(
+                  child: Obx(
+                    () => controller.missions.isEmpty
+                        ? EmptyWidget()
+                        : MissionList(),
+                  ),
+                ),
         ),
       ],
     ),

@@ -149,7 +149,7 @@ class RegisterPage extends GetView<RegisterPageController> {
   Widget _registerButton(BuildContext context) {
     return Obx(
       () => MyButton(
-        isLoading: controller.isLoading.value,
+        isLoading: controller.isSubmitted.value,
         title: LocaleKeys.login_register.tr,
         onPressed: () => controller.addUser(context),
       ),

@@ -54,6 +54,7 @@ abstract class ModifyMissionController extends GetxController {
     if (repeatTag.isNotEmpty) {
       Get.back();
       Get.snackbar('', LocaleKeys.mission_duplicate_tag_error.tr);
+      isLoading(false);
       return;
     }
     if (AppController().currentUser == null) {
@@ -73,6 +74,7 @@ abstract class ModifyMissionController extends GetxController {
       ifRight: (data) {
         tagEditingController.clear();
         tagList.add(data);
+        tempSelectedTag.add(data);
         isLoading(false);
       },
     );
@@ -136,7 +138,6 @@ abstract class ModifyMissionController extends GetxController {
       },
       ifRight: (data) {
         repeatTag.addAll(data);
-        isLoading(false);
       },
     );
   }

@@ -28,16 +28,7 @@ class HunterMissionListPage extends GetView<HunterMissionListController> {
           icon: Icon(Icons.logout),
         ),
       ),
-      body: Obx(
-        () => controller.isRetry.value
-            ? RetryWidget(
-                onRetry: controller.getMissions,
-                isRetry: controller.isRetry.value,
-              )
-            : controller.isLoading.value
-            ? Center(child: CircularProgressIndicator())
-            : _body(),
-      ),
+      body: _body(),
     );
   }
 
@@ -47,12 +38,21 @@ class HunterMissionListPage extends GetView<HunterMissionListController> {
       children: [
         _searchAndFilter(),
         Utils.mediumVerticalSpacer,
-        Expanded(
-          child: Obx(
-            () => controller.missions.isEmpty
-                ? EmptyWidget()
-                : HunterMissionList(),
-          ),
+        Obx(
+          () => controller.isRetry.value
+              ? RetryWidget(
+                  onRetry: controller.getMissions,
+                  isRetry: controller.isRetry.value,
+                )
+              : controller.isLoading.value
+              ? Center(child: CircularProgressIndicator())
+              : Expanded(
+                  child: Obx(
+                    () => controller.missions.isEmpty
+                        ? EmptyWidget()
+                        : HunterMissionList(),
+                  ),
+                ),
         ),
       ],
     ),

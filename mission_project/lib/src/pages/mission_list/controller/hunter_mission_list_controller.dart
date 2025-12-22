@@ -77,7 +77,7 @@ class HunterMissionListController extends GetxController {
 
   Future<void> initial() async {
     isLoading(true);
-
+    missions.clear();
     await getMissions();
 
     if (missions.isNotEmpty) {

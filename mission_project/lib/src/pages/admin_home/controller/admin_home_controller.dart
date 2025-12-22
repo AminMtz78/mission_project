@@ -161,8 +161,6 @@ class AdminHomeController extends GetxController {
       DateTime.now().day,
     ).toIso8601String();
 
-    print(nowIso);
-
     if (minSelectedPrice.value > 0) {
       query['price_gte'] = minSelectedPrice.value.toInt().toString();
     }
@@ -195,7 +193,7 @@ class AdminHomeController extends GetxController {
   Future<void> goToAddMissionPage() async {
     final result = await Get.toNamed(RouteName.addMission);
     if (result != null) {
-      deleteFilter();
+      deleteData();
     }
   }
 
@@ -205,7 +203,7 @@ class AdminHomeController extends GetxController {
       parameters: {'id': '$id'},
     );
     if (result != null) {
-      deleteFilter();
+      deleteData();
     }
   }
 
@@ -237,6 +235,17 @@ class AdminHomeController extends GetxController {
     isDone.value = false;
     sortDate.value = null;
     Get.back();
+    initial();
+  }
+
+  void deleteData() {
+    minSelectedPrice.value = 0;
+    maxSelectedPrice.value = 0;
+    filterTagModel.value = null;
+    isExpired.value = false;
+    isInProgress.value = false;
+    isDone.value = false;
+    sortDate.value = null;
     initial();
   }
 
@@ -284,7 +293,7 @@ class AdminHomeController extends GetxController {
       },
       ifRight: (data) {
         Get.snackbar('', LocaleKeys.shared_The_operation_was_successful.tr);
-        missions.removeWhere((e) => e.id == id);
+        initial();
       },
     );
   }

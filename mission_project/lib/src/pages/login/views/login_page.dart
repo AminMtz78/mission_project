@@ -16,13 +16,14 @@ class LoginPage extends GetView<LoginPageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: AppController().changeLanguage,
-              icon: Icon(Icons.language),
-            ),
-          ],
-          title: Text(LocaleKeys.login_login.tr)),
+        actions: [
+          IconButton(
+            onPressed: AppController().changeLanguage,
+            icon: Icon(Icons.language),
+          ),
+        ],
+        title: Text(LocaleKeys.login_login.tr),
+      ),
 
       body: SingleChildScrollView(
         child: Breakpoint.either(
@@ -117,7 +118,7 @@ class LoginPage extends GetView<LoginPageController> {
           TextButton(
             onPressed: controller.isLoading.value
                 ? null
-                : () => controller.goToRegisterPage(),
+                : controller.goToRegisterPage,
             child: Text(LocaleKeys.login_register.tr),
           ),
         ],

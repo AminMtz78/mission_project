@@ -31,5 +31,6 @@ class AppController {
   void logOut() {
     Get.offNamed(RouteName.loginPage);
     StorageHandler().setRememberedUserId(null);
+    currentUser = null;
   }
 }
