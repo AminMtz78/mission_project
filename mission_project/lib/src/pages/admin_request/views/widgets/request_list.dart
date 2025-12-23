@@ -30,6 +30,7 @@ class RequestList extends GetView<AdminRequestController> {
           mainAxisExtent: 165,
         ),
         itemBuilder: (_, index) => RequestItem(
+          isExpired: controller.isMissionExpired(),
           onAccept: () => controller.acceptUserRequestForMission(
             controller.requests[index],
           ),

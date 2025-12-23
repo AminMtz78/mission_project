@@ -12,6 +12,7 @@ class RequestItem extends StatelessWidget {
     required this.user,
     required this.onAccept,
     required this.onUserProfile,
+    required this.isExpired,
 
     super.key,
   });
@@ -20,6 +21,7 @@ class RequestItem extends StatelessWidget {
   final UserViewModel user;
   final VoidCallback onAccept;
   final VoidCallback onUserProfile;
+  final bool isExpired;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,7 @@ class RequestItem extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                onPressed: onAccept,
+                onPressed: isExpired ? null : onAccept,
                 icon: const Icon(Icons.check),
                 label: Text(LocaleKeys.shared_accept.tr),
               ),

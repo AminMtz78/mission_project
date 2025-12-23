@@ -37,6 +37,10 @@ class AdminRequestController extends GetxController {
     super.onInit();
   }
 
+  bool isMissionExpired() {
+    return model?.deadLine.isBefore(DateTime.now()) ?? true;
+  }
+
   Future<void> getMissionById() async {
     isLoading(true);
     isRetry(false);

@@ -30,7 +30,7 @@ class RegisterPageController extends GetxController {
     repeatPasswordController.dispose();
   }
 
-  Future<void> checkUserExist(BuildContext context) async {
+  Future<void> checkUserExist() async {
     if (formKey.currentState!.validate()) {
       users.clear();
       final resultOrException = await _repository.getUser(
@@ -48,7 +48,7 @@ class RegisterPageController extends GetxController {
     }
   }
 
-  Future<void> addUser(BuildContext context) async {
+  Future<void> addUser() async {
     if (userType.value == null) {
       Get.snackbar('', LocaleKeys.login_select_user_type.tr);
       return;
@@ -56,7 +56,7 @@ class RegisterPageController extends GetxController {
 
     if (formKey.currentState!.validate()) {
       isSubmitted(true);
-      await checkUserExist(context);
+      await checkUserExist();
 
       if (users.isNotEmpty) {
         Get.snackbar('', LocaleKeys.login_this_username_already_exist.tr);
@@ -74,14 +74,14 @@ class RegisterPageController extends GetxController {
         ifLeft: (exception) =>
             Get.snackbar('', LocaleKeys.shared_server_communication_error.tr),
         ifRight: (result) {
-          Get.snackbar('', LocaleKeys.shared_The_operation_was_successful.tr);
-          isSubmitted(false);
           Get.back(
             result: {
               'username': usernameController.text,
               'password': passwordController.text,
             },
           );
+          isSubmitted(false);
+          Get.snackbar('', LocaleKeys.shared_The_operation_was_successful.tr);
         },
       );
     }

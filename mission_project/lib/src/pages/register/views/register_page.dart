@@ -151,7 +151,7 @@ class RegisterPage extends GetView<RegisterPageController> {
       () => MyButton(
         isLoading: controller.isSubmitted.value,
         title: LocaleKeys.login_register.tr,
-        onPressed: () => controller.addUser(context),
+        onPressed: controller.addUser,
       ),
     );
   }

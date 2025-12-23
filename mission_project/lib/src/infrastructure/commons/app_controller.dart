@@ -29,7 +29,7 @@ class AppController {
   }
 
   void logOut() {
-    Get.offNamed(RouteName.loginPage);
+    Get.offAndToNamed(RouteName.loginPage);
     StorageHandler().setRememberedUserId(null);
     currentUser = null;
   }

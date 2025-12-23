@@ -82,6 +82,11 @@ class HunterMissionDetailController extends GetxController {
     isOffering.value = false;
   }
 
+  bool isMissionExpired() {
+    return model?.deadLine.isBefore(DateTime.now()) ?? true;
+  }
+
+
   Future<void> checkMissionRequestUniqueness() async {
     isButtonLoading(true);
     final userId = AppController().currentUser?.id;

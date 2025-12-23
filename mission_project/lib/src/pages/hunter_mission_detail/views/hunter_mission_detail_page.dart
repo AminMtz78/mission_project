@@ -61,7 +61,8 @@ class HunterMissionDetailPage extends GetView<HunterMissionDetailController> {
                 ],
               ),
             ),
-          if (controller.model!.status == MissionStatusEnum.free)
+          if (controller.model!.status == MissionStatusEnum.free &&
+              !controller.isMissionExpired())
             _offerWidgets(context),
         ],
       ),
